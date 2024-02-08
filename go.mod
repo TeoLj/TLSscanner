@@ -1,3 +1,3 @@
-module github.com/TeoLj/TLSscanner.git
+module github.com/TeoLj/TLSscanner_FP.git
 
 go 1.18
