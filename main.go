@@ -2,32 +2,33 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"strings"
-	"sync"
+	"time"
 )
 
 func main() {
-	// default value is empty string, third argument is the description of the flag
-	domainsList := flag.String("domains", "", "A comma-separated list of domains to scan for TLS cipher suite support")
-	flag.Parse()
+	start := time.Now()
+	fmt.Println("Start:", start.Format("2006-01-02 15:04:05"))
 
-	if *domainsList == "" {
+	opts := ParseFlags()
+
+	flag.Parse() // execute the command-line parsing
+
+	if opts.DomainsList == "" {
 		println("Please specify a list of domains")
 		return
 	}
 
-	domains := strings.Split(*domainsList, ",")
-	var wg sync.WaitGroup
-	for _, d := range domains {
-		domain := strings.TrimSpace(d) // Trim any whitespace from the domain
-		if domain == "" {
-			continue // Skip empty entries
-		}
-		wg.Add(1)
-		go func(domain string) {
-			defer wg.Done()
-			ScanDomain(domain)
-		}(domain)
+	domains := strings.Split(opts.DomainsList, ",")
+	for i, domain := range domains {
+		domains[i] = strings.TrimSpace(domain) // Trim spaces from each domain
 	}
-	wg.Wait()
+
+	scanner := NewScanner(domains, opts.Concurrency, opts.Timeout)
+	scanner.StartScanner()
+
+	end := time.Now()
+	fmt.Println("End: %, Duration: %", end.Format("15:04:05"), end.Sub(start))
+
 }
