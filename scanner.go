@@ -12,7 +12,7 @@ func ScanDomain(domain string) {
 	for _, cipher := range tls.CipherSuites() {
 		config := &tls.Config{
 			CipherSuites: []uint16{cipher.ID},
-			MinVersion:   tls.VersionTLS12,
+			MinVersion:   tls.VersionTLS12, // program will not work with TLS 1.0 or 1.1
 			MaxVersion:   tls.VersionTLS13,
 		}
 

@@ -2,34 +2,32 @@ package main
 
 import (
 	"flag"
+	"strings"
 	"sync"
 )
 
 func main() {
-	domain := flag.String("domain", "", "Domain to scan for TLS cipher suite support")
+	// default value is empty string, third argument is the description of the flag
+	domainsList := flag.String("domains", "", "A comma-separated list of domains to scan for TLS cipher suite support")
 	flag.Parse()
 
-	if *domain == "" {
-		println("Please specify a domain")
+	if *domainsList == "" {
+		println("Please specify a list of domains")
 		return
 	}
 
-	domains := []string{*domain}
-
+	domains := strings.Split(*domainsList, ",")
 	var wg sync.WaitGroup
 	for _, d := range domains {
+		domain := strings.TrimSpace(d) // Trim any whitespace from the domain
+		if domain == "" {
+			continue // Skip empty entries
+		}
 		wg.Add(1)
 		go func(domain string) {
 			defer wg.Done()
 			ScanDomain(domain)
-		}(d)
+		}(domain)
 	}
 	wg.Wait()
 }
-
-// ### TO DO###
-/*
-1. Look up authenticate go.sum private repos
-2. go.mod vs go.sum
-3. Adapt chat to take into account private repository
-*/
