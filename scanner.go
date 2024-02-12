@@ -12,13 +12,17 @@ type Scanner struct {
 	Domains     []string
 	Concurrency int
 	Timeout     time.Duration
+	EntriesToScan int
+	CSVFilePath string
 }
 
-func NewScanner(domains []string, concurrency int, timeout time.Duration) *Scanner {
+func NewScanner(domains []string, concurrency int, timeout time.Duration, entries int, csvPath string) *Scanner {
 	return &Scanner{
 		Domains:     domains,
 		Concurrency: concurrency,
 		Timeout:     timeout,
+		EntriesToScan: entries,
+		CSVFilePath: csvPath,
 	}
 }
 
