@@ -33,7 +33,7 @@ func main() {
             return
         }
     } else if opts.DomainsList != "" {
-        domains = parseDomainsList(opts.DomainsList)
+        domains = strings.Split(opts.DomainsList, ",")
     }
 	
 
@@ -102,6 +102,3 @@ func extractDomain(field string) (string, error) {
     return "", fmt.Errorf("invalid domain format")
 }
 
-func parseDomainsList(domainsList string) []string {
-    return strings.Split(domainsList, ",")
-}
