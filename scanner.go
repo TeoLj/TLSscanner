@@ -5,24 +5,18 @@ import (
 	"fmt"
 	"net"
 	"sync"
-	"time"
+	//"time"
 )
 
 type Scanner struct {
 	Domains     []string
-	Concurrency int
-	Timeout     time.Duration
-	EntriesToScan int
-	CSVFilePath string
+	opts *Options
 }
 
-func NewScanner(domains []string, concurrency int, timeout time.Duration, entries int, csvPath string) *Scanner {
+func NewScanner(domains []string, opts *Options) *Scanner {
 	return &Scanner{
 		Domains:     domains,
-		Concurrency: concurrency,
-		Timeout:     timeout,
-		EntriesToScan: entries,
-		CSVFilePath: csvPath,
+		opts: opts,
 	}
 }
 
@@ -32,7 +26,7 @@ func (s *Scanner) StartScanner() {
 	// create a buffered channel with a capacity of s.Concurrency
 	// limit the number of goroutines that can run at the same time
 	// channel defined as empty struct cos it takes no memory
-	sem := make(chan struct{}, s.Concurrency) 
+	sem := make(chan struct{}, s.opts.Concurrency) 
 
 	for _, domain := range s.Domains {
 		wg.Add(1) // new goroutine
@@ -57,7 +51,7 @@ func (s *Scanner) scanDomain(domain string) {
 		}
 
 		// establish a connection to the domain
-		dialer := net.Dialer{Timeout: s.Timeout}
+		dialer := net.Dialer{Timeout: s.opts.Timeout}
 		// 443 is the default port for HTTPS
 		conn, err := tls.DialWithDialer(&dialer, "tcp", domain+":443", config)
 		if err == nil {
