@@ -35,10 +35,10 @@ func main() {
     }
 	
 
-scanner := NewScanner(domains, opts)
-scanner.StartScanner()
+    scanner := NewScanner(domains, opts) //[]string{} for ScannedCiphers
+    scanner.StartScanner()
 
-end := time.Now()
+    end := time.Now()
 	fmt.Println("\033[1;35mEnd:", end.Format("15:04:05"), "Duration:", end.Sub(start), "\033[0m")
 
 }
