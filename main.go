@@ -8,9 +8,7 @@ import (
 	"os"
 	"strings"
 	"time"
-	
 
-	//"github.com/dchest/validator"
 )
 
 func main() {
@@ -68,8 +66,6 @@ func readCSV(filePath string, entriesToScan int) ([]string, error) {
             domain, err := extractDomain(field)
 			if err != nil {	
 				fmt.Printf("\033[1;31mError for: %s %v\033[0m\n", field, err)
-			
-
 			}
             if err == nil && domain != "" {
                 domains = append(domains, domain)

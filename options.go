@@ -14,12 +14,14 @@ type Options struct {
 	Timeout     time.Duration
     EntriesToScan int
 	CSVFilePath string
+    SaveResults bool
 }
 
 // Initializes and parses the flags, returning an Options struct.
 func ParseFlags() *Options {
     opts := &Options{}
     flag.StringVar(&opts.DomainsList, "domains", "", "Comma-separated list of domains to scan")
+    flag.BoolVar(&opts.SaveResults, "save", false, "Save results to a csv file")
     flag.StringVar(&opts.CSVFilePath, "csv", "", "Path to a CSV file containing domains to scan")
     flag.IntVar(&opts.EntriesToScan, "entries", -1, "Number of entries from the CSV file to scan; -1 for all")
     opts.Concurrency = runtime.GOMAXPROCS(0) // Set concurrency to the number of CPUs
