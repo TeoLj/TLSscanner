@@ -50,9 +50,20 @@ func (s *Scanner) StartScanner() {
 		if s.opts.SaveResultsDirectory != "" {
 			os.Chdir(s.opts.SaveResultsDirectory)
 			s.saveResultsToCSV(s.opts.SaveResultsDirectory + "/output.csv")
-		}else{
+		} else {
+			// filename := "output.csv"
+			// file, err := os.Create(filename)
+			// if err != nil {
+			// 	fmt.Println("Error creating CSV file:", err)
+			// 	return
+			// }
+			// defer file.Close()
+
+			// Overwrite the old content of output.csv
+			// file.Truncate(0)
+
 			s.saveResultsToCSV("output.csv")
-		}	
+		}
 	}
 }
 
@@ -88,8 +99,6 @@ func (s *Scanner) scanDomain(domain string) {
 }
 
 // - method of Scanner struct through (s *Scanner), changes made to Scanner interface will be reflected in the struct
-// - takes struct as function argument -> makes it possitble to filter the list of ciphers in a specific
-// way before writing to a file
 func (s *Scanner) saveResultsToCSV(filename string) {
 
 	s.Mutex.Lock()
@@ -97,6 +106,8 @@ func (s *Scanner) saveResultsToCSV(filename string) {
 
 	// open the file for writing
 	file, err := os.Create(filename)
+	file.Truncate(0) // Overwrite the old content of output.csv
+
 	if err != nil {
 		fmt.Println("Error creating CSV file:", err)
 		return
