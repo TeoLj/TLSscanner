@@ -35,7 +35,7 @@ func main() {
     }
 	
 
-    scanner := NewScanner(domains, opts) //[]string{} for ScannedCiphers
+    scanner := NewScanner(domains, opts) 
     scanner.StartScanner()
 
     end := time.Now()

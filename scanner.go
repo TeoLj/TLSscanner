@@ -8,23 +8,22 @@ import (
 	"os"
 	"sync"
 	"strings"
-	
-	//"time"
+
 )
 
 type Scanner struct {
 	Domains     []string
 	ScannedCiphers []string
-	opts *Options // pointer to the Options struct: TimeOut, Concurrency, SaveResults
-	Mutex *sync.Mutex // check if the mutex is neeeded here
+	opts *Options 
+	Mutex *sync.Mutex  // fine grained locking
 }
 
 func NewScanner(domains []string,  opts *Options) *Scanner {
 	return &Scanner{
 		Domains:     domains,
-		ScannedCiphers: make([]string, 0),
+		ScannedCiphers: make([]string, 0), // create slice of strings with 0 length
 		opts: opts,
-		Mutex: &sync.Mutex{}, //initialize the mutex
+		Mutex: &sync.Mutex{}, //initialize the mutex; & creates a pointer to the mutex
 	}
 }
 
@@ -55,7 +54,7 @@ func (s *Scanner) StartScanner() {
 func (s *Scanner) scanDomain(domain string) {
 	var supportedCiphers []string
 
-	fmt.Printf("Scanning domain: %s\n", domain)
+	fmt.Printf("Scanning domain: %s \n", domain)
 	for _, cipher := range tls.CipherSuites() {
 		config := &tls.Config{
 			CipherSuites: []uint16{cipher.ID},
@@ -69,7 +68,7 @@ func (s *Scanner) scanDomain(domain string) {
 		// 443 is the default port for HTTPS
 		conn, err := tls.DialWithDialer(&dialer, "tcp", domain+":443", config)
 		if err == nil {
-			fmt.Printf("%s: Cipher Suite Supported: %s\n", domain, cipher.Name)
+			//fmt.Printf("%s: Cipher Suite Supported: %s\n", domain, cipher.Name)
 			supportedCiphers = append(supportedCiphers, cipher.Name)
 			conn.Close()
 		} else {
@@ -77,6 +76,7 @@ func (s *Scanner) scanDomain(domain string) {
 		}
 	}
 
+	fmt.Printf("%s: \n %s\n", domain, strings.Join(supportedCiphers, ";"))
 
 	s.Mutex.Lock()
 	s.ScannedCiphers = append(s.ScannedCiphers, domain+": "+strings.Join(supportedCiphers, ";"))
@@ -106,6 +106,4 @@ func (s *Scanner) saveResultsToCSV(filename string) {
 		parts:= strings.Split(cipher, ":")
 		writer.Write([]string{parts[0], parts[1]})
 	}
-
-	
 }
