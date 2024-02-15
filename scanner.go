@@ -68,7 +68,6 @@ func (s *Scanner) scanDomain(domain string) {
 		// 443 is the default port for HTTPS
 		conn, err := tls.DialWithDialer(&dialer, "tcp", domain+":443", config)
 		if err == nil {
-			//fmt.Printf("%s: Cipher Suite Supported: %s\n", domain, cipher.Name)
 			supportedCiphers = append(supportedCiphers, cipher.Name)
 			conn.Close()
 		} else {
