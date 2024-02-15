@@ -71,20 +71,20 @@ func (s *Scanner) scanDomain(domain string) {
 	var supportedCiphers []string
 
 	fmt.Printf("Scanning domain: %s \n", domain)
+
 	for _, cipher := range tls.CipherSuites() {
 		config := &tls.Config{
 			CipherSuites: []uint16{cipher.ID},
 			MinVersion:   tls.VersionTLS12,
 			MaxVersion:   tls.VersionTLS13,
 		}
-
 		// establish a connection to the domain
 		dialer := net.Dialer{Timeout: s.opts.Timeout}
 
 		// 443 is the default port for HTTPS
 		conn, err := tls.DialWithDialer(&dialer, "tcp", domain+":443", config)
 		if err == nil {
-			supportedCiphers = append(supportedCiphers, cipher.Name)
+			supportedCiphers = append(supportedCiphers, cipher.Name) // lock not put here due to performance overhead(release mutex for every cipher)
 			conn.Close()
 		} else {
 			fmt.Printf("%s: Connection error type: %s\n", domain, err)
@@ -93,12 +93,14 @@ func (s *Scanner) scanDomain(domain string) {
 
 	fmt.Printf("%s: \n %s\n", domain, strings.Join(supportedCiphers, ";"))
 
+	// outside of loop to prevent lock contention
 	s.Mutex.Lock()
 	s.ScannedCiphers = append(s.ScannedCiphers, domain+": "+strings.Join(supportedCiphers, ";"))
 	s.Mutex.Unlock()
 }
 
 // - method of Scanner struct through (s *Scanner), changes made to Scanner interface will be reflected in the struct
+
 func (s *Scanner) saveResultsToCSV(filename string) {
 
 	s.Mutex.Lock()
