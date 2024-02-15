@@ -6,24 +6,23 @@ import (
 	"fmt"
 	"net"
 	"os"
-	"sync"
 	"strings"
-
+	"sync"
 )
 
 type Scanner struct {
-	Domains     []string
+	Domains        []string
 	ScannedCiphers []string
-	opts *Options 
-	Mutex *sync.Mutex  // fine grained locking
+	opts           *Options
+	Mutex          *sync.Mutex // fine grained locking
 }
 
-func NewScanner(domains []string,  opts *Options) *Scanner {
+func NewScanner(domains []string, opts *Options) *Scanner {
 	return &Scanner{
-		Domains:     domains,
+		Domains:        domains,
 		ScannedCiphers: make([]string, 0), // create slice of strings with 0 length
-		opts: opts,
-		Mutex: &sync.Mutex{}, //initialize the mutex; & creates a pointer to the mutex
+		opts:           opts,
+		Mutex:          &sync.Mutex{}, //initialize the mutex; & creates a pointer to the mutex
 	}
 }
 
@@ -33,21 +32,27 @@ func (s *Scanner) StartScanner() {
 	// create a buffered channel with a capacity of s.Concurrency
 	// limit the number of goroutines that can run at the same time
 	// channel defined as empty struct cos it takes no memory
-	sem := make(chan struct{}, s.opts.Concurrency) 
+	sem := make(chan struct{}, s.opts.Concurrency)
 
 	for _, domain := range s.Domains {
-		wg.Add(1) // new goroutine
-		sem <- struct{}{} // will block if the channel is full, routine sends struct to take slot in the channel
+		wg.Add(1)                // new goroutine
+		sem <- struct{}{}        // will block if the channel is full, routine sends struct to take slot in the channel
 		go func(domain string) { // closure function
 			defer wg.Done() // decrease the counter when the goroutine completes
 			s.scanDomain(domain)
 			<-sem // release a slot in the channel
-		}(domain) 
+		}(domain)
 	}
 
 	wg.Wait() // wait for all goroutines to complete
+	
 	if s.opts.SaveResults {
-		s.saveResultsToCSV("scanned_ciphers.csv")
+		if s.opts.SaveResultsDirectory != "" {
+			os.Chdir(s.opts.SaveResultsDirectory)
+			s.saveResultsToCSV(s.opts.SaveResultsDirectory + "/output.csv")
+		}else{
+			s.saveResultsToCSV("output.csv")
+		}	
 	}
 }
 
@@ -71,7 +76,7 @@ func (s *Scanner) scanDomain(domain string) {
 			supportedCiphers = append(supportedCiphers, cipher.Name)
 			conn.Close()
 		} else {
-			fmt.Printf("%s: Connection error: %s\n", domain, err)
+			fmt.Printf("%s: Connection error type: %s\n", domain, err)
 		}
 	}
 
@@ -83,7 +88,7 @@ func (s *Scanner) scanDomain(domain string) {
 }
 
 // - method of Scanner struct through (s *Scanner), changes made to Scanner interface will be reflected in the struct
-// - takes struct as function argument -> makes it possitble to filter the list of ciphers in a specific 
+// - takes struct as function argument -> makes it possitble to filter the list of ciphers in a specific
 // way before writing to a file
 func (s *Scanner) saveResultsToCSV(filename string) {
 
@@ -98,11 +103,11 @@ func (s *Scanner) saveResultsToCSV(filename string) {
 	}
 	defer file.Close()
 
-	writer:= csv.NewWriter(file)
+	writer := csv.NewWriter(file)
 	defer writer.Flush()
 
-	for _,cipher:= range s.ScannedCiphers{
-		parts:= strings.Split(cipher, ":")
+	for _, cipher := range s.ScannedCiphers {
+		parts := strings.Split(cipher, ":")
 		writer.Write([]string{parts[0], parts[1]})
 	}
 }
