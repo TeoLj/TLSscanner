@@ -32,7 +32,7 @@ func (s *Scanner) StartScanner() {
 	// create a buffered channel with a capacity of s.Concurrency
 	// limit the number of goroutines that can run at the same time
 	// channel defined as empty struct cos it takes no memory
-	sem := make(chan struct{}, s.opts.Concurrency)
+	sem := make(chan struct{}, s.opts.Concurrency) //  limiting the number of goroutines that can actively perform work at the same time
 
 	for _, domain := range s.Domains {
 		wg.Add(1)                // new goroutine
@@ -51,19 +51,13 @@ func (s *Scanner) StartScanner() {
 			os.Chdir(s.opts.SaveResultsDirectory)
 			s.saveResultsToCSV(s.opts.SaveResultsDirectory + "/output.csv")
 		} else {
-			// filename := "output.csv"
-			// file, err := os.Create(filename)
-			// if err != nil {
-			// 	fmt.Println("Error creating CSV file:", err)
-			// 	return
-			// }
-			// defer file.Close()
-
-			// Overwrite the old content of output.csv
-			// file.Truncate(0)
-
 			s.saveResultsToCSV("output.csv")
 		}
+	}
+
+	if s.opts.AnalyseCipher {
+		analyzer := NewAnalyzer(*s)
+		analyzer.AnalyseCiphers()
 	}
 }
 
