@@ -46,6 +46,11 @@ func (s *Scanner) StartScanner() {
 
 	wg.Wait() // wait for all goroutines to complete
 	
+	if s.opts.AnalyseCipher {
+		analyzer := NewAnalyzer(*s)
+		analyzer.Run()
+	}
+	
 	if s.opts.SaveResults {
 		if s.opts.SaveResultsDirectory != "" {
 			os.Chdir(s.opts.SaveResultsDirectory)
@@ -55,10 +60,7 @@ func (s *Scanner) StartScanner() {
 		}
 	}
 
-	if s.opts.AnalyseCipher {
-		analyzer := NewAnalyzer(*s)
-		analyzer.AnalyseCiphers()
-	}
+	
 }
 
 func (s *Scanner) scanDomain(domain string) {
@@ -81,7 +83,7 @@ func (s *Scanner) scanDomain(domain string) {
 			supportedCiphers = append(supportedCiphers, cipher.Name) // lock not put here due to performance overhead(release mutex for every cipher)
 			conn.Close()
 		} else {
-			fmt.Printf("%s: Connection error type: %s\n", domain, err)
+			fmt.Printf("%s: Connection error type: %s for %s\n", domain, err, cipher.Name)
 		}
 	}
 
@@ -93,7 +95,6 @@ func (s *Scanner) scanDomain(domain string) {
 	s.Mutex.Unlock()
 }
 
-// - method of Scanner struct through (s *Scanner), changes made to Scanner interface will be reflected in the struct
 
 func (s *Scanner) saveResultsToCSV(filename string) {
 
@@ -117,4 +118,7 @@ func (s *Scanner) saveResultsToCSV(filename string) {
 		parts := strings.Split(cipher, ":")
 		writer.Write([]string{parts[0], parts[1]})
 	}
+ 
+
 }
+

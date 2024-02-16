@@ -17,6 +17,7 @@ type Options struct {
     SaveResults bool
     SaveResultsDirectory string
     AnalyseCipher bool 
+    PlotResults bool 
 }
 
 // Initializes and parses the flags, returning an Options struct.
@@ -28,6 +29,7 @@ func ParseFlags() *Options {
 
     flag.BoolVar(&opts.SaveResults, "save", false, "Save results to a csv file")
     flag.BoolVar(&opts.AnalyseCipher, "analyse", false, "Analyse the occurence of cipher suites")
+    flag.BoolVar(&opts.PlotResults, "plot", false, "Plot the occurence of the cipher suites in a bar chart")
 
     flag.IntVar(&opts.EntriesToScan, "entries", -1, "Number of entries from the CSV file to scan; -1 for all")
     flag.IntVar(&opts.Concurrency, "concurrency", runtime.GOMAXPROCS(0), "Number of concurrent connections")
