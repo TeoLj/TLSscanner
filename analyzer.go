@@ -31,7 +31,7 @@ func NewAnalyzer(scanner Scanner) *Analyzer {
 
 func (a *Analyzer) Run(){
 
-	a.AnalyseCiphers()
+	a.AnalyzeCiphers()
 
 	if a.SaveResults {
 		if a.SaveResultsDirectory != "" {
@@ -43,7 +43,7 @@ func (a *Analyzer) Run(){
 	}
 }
 
-func (a *Analyzer) AnalyseCiphers() map[string]int {
+func (a *Analyzer) AnalyzeCiphers() map[string]int {
 
 	// Iterate over the scanned ciphers, assuming each entry is a domain followed by a list of ciphers
 	for _, scanned := range a.ScannedCiphers {
