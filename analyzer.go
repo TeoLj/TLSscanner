@@ -8,12 +8,16 @@ import (
 	"math"
 	"strings"
 	"sync"
+	"strconv"
+	
 	//"github.com/gonum/plot/vg"
 	"gonum.org/v1/plot"
 	"gonum.org/v1/plot/plotter"
 	"gonum.org/v1/plot/vg"
 	"gonum.org/v1/plot/vg/draw"
 )
+
+type IntegerTicks struct {}
 
 type Analyzer struct {
 	ScannedCiphers []string
@@ -144,6 +148,7 @@ func (a *Analyzer) PlotResults(outputFile string, cipherCount map[string]int)err
 	// Set the X-axis tick label rotation and alignment
 	p.X.Tick.Label.Rotation = math.Pi / 4 // 45 degrees
 	p.X.Tick.Label.XAlign = draw.XRight
+	p.Y.Tick.Marker = IntegerTicks{}
 
 	// Save the plot to a PNG file
     if err := p.Save(8*vg.Inch, 4*vg.Inch, outputFile); err != nil {
@@ -153,4 +158,25 @@ func (a *Analyzer) PlotResults(outputFile string, cipherCount map[string]int)err
 
     return nil
 
+}
+
+
+// Ticks generates the ticks for an axis ranging from min to max.
+func (IntegerTicks) Ticks(min, max float64) []plot.Tick {
+    var ticks []plot.Tick
+    for value := math.Floor(min); value <= max; value++ {
+        if value >= min && value <= max {
+            ticks = append(ticks, plot.Tick{
+                Value: value,
+                Label: formatFloatTick(value, 0), // 0 precision for integer labels
+            })
+        }
+    }
+    return ticks
+}
+
+// formatFloatTick formats tick labels.
+func formatFloatTick(v float64, prec int) string {
+    // As we're using this only for integer ticks, we can format with no decimal places.
+    return strconv.FormatFloat(v, 'f', prec, 64)
 }
