@@ -17,6 +17,11 @@ import (
 	"gonum.org/v1/plot/vg/draw"
 )
 
+const (
+    minPlotWidth   = 5 * vg.Inch // Minimum plot width to ensure readability
+    widthPerCipher = 0.8 * vg.Inch // Estimated width required per cipher suite
+)
+
 type IntegerTicks struct {}
 
 type Analyzer struct {
@@ -150,8 +155,15 @@ func (a *Analyzer) PlotResults(outputFile string, cipherCount map[string]int)err
 	p.X.Tick.Label.XAlign = draw.XRight
 	p.Y.Tick.Marker = IntegerTicks{}
 
+	// Estimate the width of the plot based on the number of ciphers
+	numCiphers := len(cipherCount)
+	estimatedWidth := vg.Length(numCiphers) * widthPerCipher
+	if estimatedWidth < minPlotWidth {
+    estimatedWidth = minPlotWidth
+	}
+
 	// Save the plot to a PNG file
-    if err := p.Save(8*vg.Inch, 4*vg.Inch, outputFile); err != nil {
+    if err := p.Save(estimatedWidth, 4*vg.Inch, outputFile); err != nil {
         return err
     }
 
