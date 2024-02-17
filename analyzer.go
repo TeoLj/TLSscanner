@@ -20,6 +20,9 @@ import (
 const (
     minPlotWidth   = 5 * vg.Inch // Minimum plot width to ensure readability
     widthPerCipher = 0.8 * vg.Inch // Estimated width required per cipher suite
+	baseHeight    = 5 * vg.Inch // Base height for the plot
+    extraPerStep  = 1 * vg.Inch // Extra height per y-axis unit
+    maxLabelHeight = 5 * vg.Inch // Maximum height allocated for labels
 )
 
 type IntegerTicks struct {}
@@ -162,11 +165,24 @@ func (a *Analyzer) PlotResults(outputFile string, cipherCount map[string]int)err
     estimatedWidth = minPlotWidth
 	}
 
+	// Calculate the maximum number of occurrences to determine plot height.
+	var maxOccurrences int
+	for _, count := range cipherCount {
+		if count > maxOccurrences {
+			maxOccurrences = count
+		}
+	}
+
+	// Estimate the height of the plot based on occurrences.
+	estimatedHeight := baseHeight + vg.Length(maxOccurrences)*extraPerStep
+	if estimatedHeight > baseHeight+maxLabelHeight {
+		estimatedHeight = baseHeight + maxLabelHeight
+	}
+
 	// Save the plot to a PNG file
-    if err := p.Save(estimatedWidth, 4*vg.Inch, outputFile); err != nil {
+    if err := p.Save(estimatedWidth, estimatedHeight, outputFile); err != nil {
         return err
     }
-
 
     return nil
 
