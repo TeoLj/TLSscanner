@@ -3,29 +3,18 @@ package main
 import (
 	"encoding/csv"
 	"fmt"
-	"image/color"
 	"os"
-	"math"
 	"strings"
 	"sync"
-	"strconv"
+
+	"github.com/go-echarts/go-echarts/v2/charts"
+	"github.com/go-echarts/go-echarts/v2/opts"
+	//"github.com/go-echarts/go-echarts/v2/types"
 	
-	//"github.com/gonum/plot/vg"
-	"gonum.org/v1/plot"
-	"gonum.org/v1/plot/plotter"
-	"gonum.org/v1/plot/vg"
-	"gonum.org/v1/plot/vg/draw"
 )
 
-const (
-    minPlotWidth   = 5 * vg.Inch // Minimum plot width to ensure readability
-    widthPerCipher = 0.8 * vg.Inch // Estimated width required per cipher suite
-	baseHeight    = 5 * vg.Inch // Base height for the plot
-    extraPerStep  = 1 * vg.Inch // Extra height per y-axis unit
-    maxLabelHeight = 5 * vg.Inch // Maximum height allocated for labels
-)
 
-type IntegerTicks struct {}
+
 
 type Analyzer struct {
 	ScannedCiphers []string
@@ -55,14 +44,15 @@ func (a *Analyzer) Run(){
 		if a.SaveResultsDirectory != "" {
 			os.Chdir(a.SaveResultsDirectory)
 			a.SaveCiphersCount(a.SaveResultsDirectory + "/cipherCounts.csv")
-			a.PlotResults(a.SaveResultsDirectory + "/cipherCounts_plot.png", a.cipherCount)
+			//a.PlotResults(a.SaveResultsDirectory + "/cipherCounts_plot.png", a.cipherCount)
 		} else {
 			// Create a folder called output to save the results if it doesn't exist
 			if _, err := os.Stat("output"); os.IsNotExist(err) {
 				os.Mkdir("output", 0755)
 			}
 			a.SaveCiphersCount("./output/cipherCounts.csv")
-			a.PlotResults("./output/cipherCounts_plot.png", a.cipherCount)
+			a.PlotResults(a.cipherCount)
+			//a.PlotResults("./output/cipherCounts_plot.png", a.cipherCount)
 		}
 	}
 }
@@ -121,90 +111,78 @@ func (a *Analyzer) SaveCiphersCount(filename string) {
 }
 
 
-func (a *Analyzer) PlotResults(outputFile string, cipherCount map[string]int)error {
+func (a *Analyzer) PlotResults(items map[string]int) {
 
-	p:= plot.New()
-	p.Title.Text = "Cipher Suite Occurrences"
-	p.X.Label.Text = "Cipher Suite"
-	p.Y.Label.Text = "Occurrences"
+	// Create a new bar instance
+    bar := charts.NewBar()
+
+
+	bar.SetGlobalOptions(
+		charts.WithTitleOpts(opts.Title{
+			Title: "Cipher Suite Occurrences",
+		}),
+		
+		charts.WithToolboxOpts(opts.Toolbox{
+			Show: true,
+			Feature: &opts.ToolBoxFeature{
+				SaveAsImage: &opts.ToolBoxFeatureSaveAsImage{
+					Show: true,
+					Title: "Save as Image",
+					Name: "Cipher Suite Occurrences",
+					
+				},
+
+				DataView: &opts.ToolBoxFeatureDataView{
+					Show: true,
+					Title: "Data View",
+					Lang: []string{"Data View", "Close", "Refresh"},
+
+
+				},
+			},
+		}),
+
+		charts.WithInitializationOpts(opts.Initialization{
+			PageTitle: "Cipher Suite Occurrences",
+			Width: "1100px",
+			Height: "700px",
+		}),
+
+		
+
+		
+	)
+    bar.SetGlobalOptions(charts.WithXAxisOpts(opts.XAxis{
+		AxisLabel: &opts.AxisLabel{
+			Show: true,
+			Interval: "auto",
+			Rotate: 34,
+			Formatter: "{value}",
+			ShowMaxLabel: true,
+			ShowMinLabel: true,
+
+		},
+	}),
 	
-	// Prepare the data for plotting
-    var values plotter.Values
-    cipherNames := make([]string, len(cipherCount))
-    i := 0
-    for cipher, count := range cipherCount {
-        values = append(values, float64(count))
-        // Use an index or shortened version of the cipher suite name
-        cipherNames[i] = fmt.Sprintf("%d: %s", i+1, cipher)
-        i++
-    }
-
-	 // Create the bar chart
-	 barChart, err := plotter.NewBarChart(values, vg.Points(20))
-	 if err != nil {
-		 return err
-	 }
+	 // Adjust the grid options to increase the bottom margin
+	charts.WithGridOpts(opts.Grid{
+        Bottom: "50%", // Adjust this value as needed to provide enough space
 	
-	// Create a bar plot
-	barChart.Color = color.RGBA{R: 0, G: 0, B: 255, A: 255}
-    barChart.Offset = vg.Points(0)
+   }),
 
-    p.Add(barChart)
-    p.NominalX(cipherNames...)
+)
 
 
-	// Set the X-axis tick label rotation and alignment
-	p.X.Tick.Label.Rotation = math.Pi / 4 // 45 degrees
-	p.X.Tick.Label.XAlign = draw.XRight
-	p.Y.Tick.Marker = IntegerTicks{}
-
-	// Estimate the width of the plot based on the number of ciphers
-	numCiphers := len(cipherCount)
-	estimatedWidth := vg.Length(numCiphers) * widthPerCipher
-	if estimatedWidth < minPlotWidth {
-    estimatedWidth = minPlotWidth
+	// Add data to bar
+	keys := make([]string, 0, len(items))
+	values := make([]opts.BarData, 0, len(items)) // Convert values to []opts.BarData
+	for k, v := range items {
+		keys = append(keys, k)
+		values = append(values, opts.BarData{Value: v}) // Wrap each value in opts.BarData
 	}
-
-	// Calculate the maximum number of occurrences to determine plot height.
-	var maxOccurrences int
-	for _, count := range cipherCount {
-		if count > maxOccurrences {
-			maxOccurrences = count
-		}
-	}
-
-	// Estimate the height of the plot based on occurrences.
-	estimatedHeight := baseHeight + vg.Length(maxOccurrences)*extraPerStep
-	if estimatedHeight > baseHeight+maxLabelHeight {
-		estimatedHeight = baseHeight + maxLabelHeight
-	}
-
-	// Save the plot to a PNG file
-    if err := p.Save(estimatedWidth, estimatedHeight, outputFile); err != nil {
-        return err
-    }
-
-    return nil
-
-}
-
-
-// Ticks generates the ticks for an axis ranging from min to max.
-func (IntegerTicks) Ticks(min, max float64) []plot.Tick {
-    var ticks []plot.Tick
-    for value := math.Floor(min); value <= max; value++ {
-        if value >= min && value <= max {
-            ticks = append(ticks, plot.Tick{
-                Value: value,
-                Label: formatFloatTick(value, 0), // 0 precision for integer labels
-            })
-        }
-    }
-    return ticks
-}
-
-// formatFloatTick formats tick labels.
-func formatFloatTick(v float64, prec int) string {
-    // As we're using this only for integer ticks, we can format with no decimal places.
-    return strconv.FormatFloat(v, 'f', prec, 64)
+	bar.SetXAxis(keys).
+	AddSeries("Occurrences", values)
+	// Save to file
+	f, _ := os.Create("./output/bar.html")
+    bar.Render(f)
 }
