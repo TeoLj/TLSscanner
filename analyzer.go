@@ -1,12 +1,18 @@
 package main
 
 import (
-	"fmt"
-	"strings"
-	"os"
 	"encoding/csv"
+	"fmt"
+	"image/color"
+	"os"
+	"math"
+	"strings"
 	"sync"
-	
+	//"github.com/gonum/plot/vg"
+	"gonum.org/v1/plot"
+	"gonum.org/v1/plot/plotter"
+	"gonum.org/v1/plot/vg"
+	"gonum.org/v1/plot/vg/draw"
 )
 
 type Analyzer struct {
@@ -37,8 +43,14 @@ func (a *Analyzer) Run(){
 		if a.SaveResultsDirectory != "" {
 			os.Chdir(a.SaveResultsDirectory)
 			a.SaveCiphersCount(a.SaveResultsDirectory + "/cipherCounts.csv")
+			a.PlotResults(a.SaveResultsDirectory + "/cipherCounts_plot.png", a.cipherCount)
 		} else {
-			a.SaveCiphersCount("cipherCounts.csv")
+			// Create a folder called output to save the results if it doesn't exist
+			if _, err := os.Stat("output"); os.IsNotExist(err) {
+				os.Mkdir("output", 0755)
+			}
+			a.SaveCiphersCount("./output/cipherCounts.csv")
+			a.PlotResults("./output/cipherCounts_plot.png", a.cipherCount)
 		}
 	}
 }
@@ -94,4 +106,51 @@ func (a *Analyzer) SaveCiphersCount(filename string) {
 	for cipher, count := range a.cipherCount {
 		writer.Write([]string{cipher, fmt.Sprintf("%d", count)})
 	}
+}
+
+
+func (a *Analyzer) PlotResults(outputFile string, cipherCount map[string]int)error {
+
+	p:= plot.New()
+	p.Title.Text = "Cipher Suite Occurrences"
+	p.X.Label.Text = "Cipher Suite"
+	p.Y.Label.Text = "Occurrences"
+	
+	// Prepare the data for plotting
+    var values plotter.Values
+    cipherNames := make([]string, len(cipherCount))
+    i := 0
+    for cipher, count := range cipherCount {
+        values = append(values, float64(count))
+        // Use an index or shortened version of the cipher suite name
+        cipherNames[i] = fmt.Sprintf("%d: %s", i+1, cipher)
+        i++
+    }
+
+	 // Create the bar chart
+	 barChart, err := plotter.NewBarChart(values, vg.Points(20))
+	 if err != nil {
+		 return err
+	 }
+	
+	// Create a bar plot
+	barChart.Color = color.RGBA{R: 0, G: 0, B: 255, A: 255}
+    barChart.Offset = vg.Points(0)
+
+    p.Add(barChart)
+    p.NominalX(cipherNames...)
+
+
+	// Set the X-axis tick label rotation and alignment
+	p.X.Tick.Label.Rotation = math.Pi / 4 // 45 degrees
+	p.X.Tick.Label.XAlign = draw.XRight
+
+	// Save the plot to a PNG file
+    if err := p.Save(8*vg.Inch, 4*vg.Inch, outputFile); err != nil {
+        return err
+    }
+
+
+    return nil
+
 }

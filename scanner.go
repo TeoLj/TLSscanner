@@ -54,9 +54,13 @@ func (s *Scanner) StartScanner() {
 	if s.opts.SaveResults {
 		if s.opts.SaveResultsDirectory != "" {
 			os.Chdir(s.opts.SaveResultsDirectory)
-			s.saveResultsToCSV(s.opts.SaveResultsDirectory + "/output.csv")
+			s.saveResultsToCSV(s.opts.SaveResultsDirectory + "/cipherScan.csv")
 		} else {
-			s.saveResultsToCSV("output.csv")
+			// Create a folder called output to save the results if it doesn't exist
+			if _, err := os.Stat("output"); os.IsNotExist(err) {
+			os.Mkdir("output", 0755)
+			}
+			s.saveResultsToCSV("./output/cipherScan.csv")
 		}
 	}
 
@@ -97,6 +101,7 @@ func (s *Scanner) scanDomain(domain string) {
 
 
 func (s *Scanner) saveResultsToCSV(filename string) {
+
 
 	s.Mutex.Lock()
 	defer s.Mutex.Unlock()
