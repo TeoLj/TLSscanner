@@ -188,6 +188,15 @@ func (a *Analyzer) PlotResults(items map[string]int) {
 		}),
 	)
 
+	bar.SetXAxis(keys).
+	SetSeriesOptions(charts.WithMarkLineNameTypeItemOpts(
+		opts.MarkLineNameTypeItem{Name:"Maximum", Type:"max"},
+		opts.MarkLineNameTypeItem{Name:"Minimum", Type:"min"},
+	))
+	
+
+
+
 	// Save to file
 	f, _ := os.Create("./output/bar.html")
     bar.Render(f)
