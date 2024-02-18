@@ -116,12 +116,10 @@ func (a *Analyzer) PlotResults(items map[string]int) {
 	// Create a new bar instance
     bar := charts.NewBar()
 
-
 	bar.SetGlobalOptions(
 		charts.WithTitleOpts(opts.Title{
 			Title: "Cipher Suite Occurrences",
 		}),
-		
 		charts.WithToolboxOpts(opts.Toolbox{
 			Show: true,
 			Feature: &opts.ToolBoxFeature{
@@ -129,59 +127,67 @@ func (a *Analyzer) PlotResults(items map[string]int) {
 					Show: true,
 					Title: "Save as Image",
 					Name: "Cipher Suite Occurrences",
-					
+					Type: "png",	
 				},
-
 				DataView: &opts.ToolBoxFeatureDataView{
 					Show: true,
 					Title: "Data View",
 					Lang: []string{"Data View", "Close", "Refresh"},
-
-
 				},
 			},
 		}),
-
 		charts.WithInitializationOpts(opts.Initialization{
 			PageTitle: "Cipher Suite Occurrences",
 			Width: "1100px",
 			Height: "700px",
 		}),
-
-		
-
-		
 	)
+
     bar.SetGlobalOptions(charts.WithXAxisOpts(opts.XAxis{
 		AxisLabel: &opts.AxisLabel{
 			Show: true,
 			Interval: "auto",
-			Rotate: 34,
+		    Rotate: 60,
 			Formatter: "{value}",
 			ShowMaxLabel: true,
 			ShowMinLabel: true,
-
-		},
-	}),
+			},
+		}),
 	
-	 // Adjust the grid options to increase the bottom margin
-	charts.WithGridOpts(opts.Grid{
-        Bottom: "50%", // Adjust this value as needed to provide enough space
+		// Adjust the grid options to increase the bottom margin
+		charts.WithGridOpts(opts.Grid{
+			Bottom: "50%", // Adjust this value as needed to provide enough space
+		
+		}),
+
+	// Add a tooltip to the bar (cursor hover over bar to see value)
+		charts.WithTooltipOpts(opts.Tooltip{
+			Show: true,
+			Trigger: "axis",
+			AxisPointer: &opts.AxisPointer{
+				Type: "shadow",
+			},
+		}),	
+	)
 	
-   }),
-
-)
-
-
-	// Add data to bar
+	
 	keys := make([]string, 0, len(items))
 	values := make([]opts.BarData, 0, len(items)) // Convert values to []opts.BarData
 	for k, v := range items {
 		keys = append(keys, k)
 		values = append(values, opts.BarData{Value: v}) // Wrap each value in opts.BarData
 	}
+
+	// Add the data to the bar
 	bar.SetXAxis(keys).
-	AddSeries("Occurrences", values)
+	AddSeries("Occurrences", values).
+	SetSeriesOptions( // Set the bar chart options
+		charts.WithBarChartOpts(opts.BarChart{
+			BarGap: "0%", // No gap between bars of different categories
+			BarCategoryGap: "40%", // Gap between bars of the same category (thinner)
+		}),
+	)
+
 	// Save to file
 	f, _ := os.Create("./output/bar.html")
     bar.Render(f)
