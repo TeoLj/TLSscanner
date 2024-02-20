@@ -9,7 +9,7 @@ import (
 
 	"github.com/go-echarts/go-echarts/v2/charts"
 	"github.com/go-echarts/go-echarts/v2/opts"
-	//"github.com/go-echarts/go-echarts/v2/types"
+	
 	
 )
 
@@ -38,12 +38,13 @@ func NewAnalyzer(scanner Scanner) *Analyzer {
 
 func (a *Analyzer) Run(){
 
-	a.AnalyzeCiphers()
+	a.CountCiphers()
 
 	if a.SaveResults {
 		if a.SaveResultsDirectory != "" {
 			os.Chdir(a.SaveResultsDirectory)
 			a.SaveCiphersCount(a.SaveResultsDirectory + "/cipherCounts.csv")
+			a.PlotCipherCounts(a.cipherCount, a.SaveResultsDirectory + "/cipherCounts_plot.html")
 			//a.PlotResults(a.SaveResultsDirectory + "/cipherCounts_plot.png", a.cipherCount)
 		} else {
 			// Create a folder called output to save the results if it doesn't exist
@@ -51,13 +52,13 @@ func (a *Analyzer) Run(){
 				os.Mkdir("output", 0755)
 			}
 			a.SaveCiphersCount("./output/cipherCounts.csv")
-			a.PlotResults(a.cipherCount)
-			//a.PlotResults("./output/cipherCounts_plot.png", a.cipherCount)
+			a.PlotCipherCounts(a.cipherCount, "./output/cipherCounts_plot.html")
+			
 		}
 	}
 }
 
-func (a *Analyzer) AnalyzeCiphers() map[string]int {
+func (a *Analyzer) CountCiphers() map[string]int {
 
 	// Iterate over the scanned ciphers, assuming each entry is a domain followed by a list of ciphers
 	for _, scanned := range a.ScannedCiphers {
@@ -73,10 +74,11 @@ func (a *Analyzer) AnalyzeCiphers() map[string]int {
 
 		// Count each cipher occurrence
 		for _, cipher := range ciphers {
-			a.cipherCount[cipher]++
+			if cipher != "" {
+				a.cipherCount[cipher]++
+			}
 		}
 	}
-
 	// Now print the count of each cipher suite
 	fmt.Println("\n\033[1;33mCipher suite occurrences:\033[0m")
 	for cipher, count := range a.cipherCount {
@@ -111,7 +113,7 @@ func (a *Analyzer) SaveCiphersCount(filename string) {
 }
 
 
-func (a *Analyzer) PlotResults(items map[string]int) {
+func (a *Analyzer) PlotCipherCounts(items map[string]int, filename string) {
 
 	// Create a new bar instance
     bar := charts.NewBar()
@@ -193,11 +195,8 @@ func (a *Analyzer) PlotResults(items map[string]int) {
 		opts.MarkLineNameTypeItem{Name:"Maximum", Type:"max"},
 		opts.MarkLineNameTypeItem{Name:"Minimum", Type:"min"},
 	))
-	
-
-
 
 	// Save to file
-	f, _ := os.Create("./output/bar.html")
+	f, _ := os.Create(filename)
     bar.Render(f)
 }

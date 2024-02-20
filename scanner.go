@@ -63,8 +63,6 @@ func (s *Scanner) StartScanner() {
 			s.saveResultsToCSV("./output/cipherScan.csv")
 		}
 	}
-
-	
 }
 
 func (s *Scanner) scanDomain(domain string) {
@@ -102,7 +100,6 @@ func (s *Scanner) scanDomain(domain string) {
 
 func (s *Scanner) saveResultsToCSV(filename string) {
 
-
 	s.Mutex.Lock()
 	defer s.Mutex.Unlock()
 
@@ -123,7 +120,5 @@ func (s *Scanner) saveResultsToCSV(filename string) {
 		parts := strings.Split(cipher, ":")
 		writer.Write([]string{parts[0], parts[1]})
 	}
- 
-
 }
 
