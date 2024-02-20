@@ -6,7 +6,7 @@ import (
 	"os"
 	"strings"
 	"sync"
-
+	"strconv"
 	"github.com/go-echarts/go-echarts/v2/charts"
 	"github.com/go-echarts/go-echarts/v2/opts"
 	
@@ -44,7 +44,7 @@ func (a *Analyzer) Run(){
 		if a.SaveResultsDirectory != "" {
 			os.Chdir(a.SaveResultsDirectory)
 			a.SaveCiphersCount(a.SaveResultsDirectory + "/cipherCounts.csv")
-			a.PlotCipherCounts(a.cipherCount, a.SaveResultsDirectory + "/cipherCounts_plot.html")
+			a.PlotCipherCountsFromCSV(a.SaveResultsDirectory+"/cipherCounts.csv", a.SaveResultsDirectory + "/cipherCounts_plot.html")
 			//a.PlotResults(a.SaveResultsDirectory + "/cipherCounts_plot.png", a.cipherCount)
 		} else {
 			// Create a folder called output to save the results if it doesn't exist
@@ -52,7 +52,7 @@ func (a *Analyzer) Run(){
 				os.Mkdir("output", 0755)
 			}
 			a.SaveCiphersCount("./output/cipherCounts.csv")
-			a.PlotCipherCounts(a.cipherCount, "./output/cipherCounts_plot.html")
+			a.PlotCipherCountsFromCSV("./output/cipherCounts.csv", "./output/cipherCounts_plot.html")
 			
 		}
 	}
@@ -113,90 +113,115 @@ func (a *Analyzer) SaveCiphersCount(filename string) {
 }
 
 
-func (a *Analyzer) PlotCipherCounts(items map[string]int, filename string) {
+func (a *Analyzer) PlotCipherCountsFromCSV(filenameIn string, filenameOut string) {
+	// Open the CSV file
+	file, err := os.Open(filenameIn)
+	if err != nil {
+		fmt.Println("Error opening CSV file:", err)
+		return
+	}
+	defer file.Close()
+
+	// Read the CSV records
+	reader := csv.NewReader(file)
+	records, err := reader.ReadAll()
+	if err != nil {
+		fmt.Println("Error reading CSV file:", err)
+		return
+	}
+
+	// Extract the keys and values from the CSV records
+	keys := make([]string, 0, len(records)-1)
+	values := make([]opts.BarData, 0, len(records)-1)
+	for i, record := range records {
+		if i == 0 { // Skip the header
+			continue
+		}
+		keys = append(keys, record[0])
+		value, err := strconv.Atoi(record[1])
+		if err != nil {
+			fmt.Println("Error converting value to int:", err)
+			return
+		}
+		values = append(values, opts.BarData{Value: value})
+	}
 
 	// Create a new bar instance
-    bar := charts.NewBar()
+	bar := charts.NewBar()
 
 	bar.SetGlobalOptions(
+		// Set the chart title
 		charts.WithTitleOpts(opts.Title{
 			Title: "Cipher Suite Occurrences",
 		}),
+		// Set the toolbox options
 		charts.WithToolboxOpts(opts.Toolbox{
 			Show: true,
 			Feature: &opts.ToolBoxFeature{
 				SaveAsImage: &opts.ToolBoxFeatureSaveAsImage{
-					Show: true,
+					Show:  true,
 					Title: "Save as Image",
-					Name: "Cipher Suite Occurrences",
-					Type: "png",	
+					Name:  "Cipher Suite Occurrences",
+					Type:  "png",
 				},
 				DataView: &opts.ToolBoxFeatureDataView{
-					Show: true,
+					Show:  true,
 					Title: "Data View",
-					Lang: []string{"Data View", "Close", "Refresh"},
+					Lang:  []string{"Data View", "Close", "Refresh"},
 				},
 			},
 		}),
+		// Set the chart initialization options
 		charts.WithInitializationOpts(opts.Initialization{
 			PageTitle: "Cipher Suite Occurrences",
-			Width: "1100px",
-			Height: "700px",
+			Width:     "1100px",
+			Height:    "700px",
 		}),
 	)
 
-    bar.SetGlobalOptions(charts.WithXAxisOpts(opts.XAxis{
-		AxisLabel: &opts.AxisLabel{
-			Show: true,
-			Interval: "auto",
-		    Rotate: 60,
-			Formatter: "{value}",
-			ShowMaxLabel: true,
-			ShowMinLabel: true,
+	bar.SetGlobalOptions(
+		// Set the X-axis options
+		charts.WithXAxisOpts(opts.XAxis{
+			AxisLabel: &opts.AxisLabel{
+				Show:        true,
+				Interval:    "auto",
+				Rotate:      60,
+				Formatter:   "{value}",
+				ShowMaxLabel: true,
+				ShowMinLabel: true,
 			},
 		}),
-	
 		// Adjust the grid options to increase the bottom margin
 		charts.WithGridOpts(opts.Grid{
 			Bottom: "50%", // Adjust this value as needed to provide enough space
-		
 		}),
-
-	// Add a tooltip to the bar (cursor hover over bar to see value)
+		// Add a tooltip to the bar (cursor hover over bar to see value)
 		charts.WithTooltipOpts(opts.Tooltip{
-			Show: true,
-			Trigger: "axis",
-			AxisPointer: &opts.AxisPointer{
-				Type: "shadow",
-			},
-		}),	
+			Show:        true,
+			Trigger:     "axis",
+			AxisPointer: &opts.AxisPointer{Type: "shadow"},
+		}),
 	)
-	
-	
-	keys := make([]string, 0, len(items))
-	values := make([]opts.BarData, 0, len(items)) // Convert values to []opts.BarData
-	for k, v := range items {
-		keys = append(keys, k)
-		values = append(values, opts.BarData{Value: v}) // Wrap each value in opts.BarData
-	}
 
 	// Add the data to the bar
 	bar.SetXAxis(keys).
-	AddSeries("Occurrences", values).
-	SetSeriesOptions( // Set the bar chart options
-		charts.WithBarChartOpts(opts.BarChart{
-			BarGap: "0%", // No gap between bars of different categories
-			BarCategoryGap: "40%", // Gap between bars of the same category (thinner)
-		}),
-	)
+		AddSeries("Occurrences", values).
+		SetSeriesOptions(
+			// Set the bar chart options
+			charts.WithBarChartOpts(opts.BarChart{
+				BarGap:         "0%",    // No gap between bars of different categories
+				BarCategoryGap: "40%",   // Gap between bars of the same category (thinner)
+			}),
+		)
 
 	bar.SetXAxis(keys).
-	SetSeriesOptions(charts.WithMarkLineNameTypeItemOpts(
-		opts.MarkLineNameTypeItem{Name:"Maximum", Type:"max"},
-		opts.MarkLineNameTypeItem{Name:"Minimum", Type:"min"},
-	))
+		SetSeriesOptions(charts.WithMarkLineNameTypeItemOpts(
+			opts.MarkLineNameTypeItem{Name: "Maximum", Type: "max"},
+			opts.MarkLineNameTypeItem{Name: "Minimum", Type: "min"},
+		))
 
 	// Save to file
-	f, _ := os.Create(filename)
-    bar.Render(f)
+	f, _ := os.Create(filenameOut)
+	bar.Render(f)
 }
+

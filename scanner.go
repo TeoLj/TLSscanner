@@ -53,6 +53,7 @@ func (s *Scanner) StartScanner() {
 	
 	if s.opts.SaveResults {
 		if s.opts.SaveResultsDirectory != "" {
+			//create a folder called output to save the results if it doesn't exist
 			os.Chdir(s.opts.SaveResultsDirectory)
 			s.saveResultsToCSV(s.opts.SaveResultsDirectory + "/cipherScan.csv")
 		} else {
