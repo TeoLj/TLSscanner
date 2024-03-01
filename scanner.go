@@ -46,24 +46,43 @@ func (s *Scanner) StartScanner() {
 
 	wg.Wait() // wait for all goroutines to complete
 	
-	if s.opts.AnalyseCipher {
+	if s.opts.ScanAndSaveDirectory != ""{
+	 	analyzer := NewAnalyzer(*s)
+	 	analyzer.Run()
+	 } else {
 		analyzer := NewAnalyzer(*s)
-		analyzer.Run()
+		analyzer.Run()}		
+
+	if s.opts.ScanAndSaveDirectory != "" {
+		//create a folder called output to save the results if it doesn't exist
+		os.Chdir(s.opts.ScanAndSaveDirectory)
+		s.saveResultsToCSV(s.opts.ScanAndSaveDirectory + "/cipherScan.csv")
+		
+	} else {
+		// Create a folder called output to save the results if it doesn't exist
+		if _, err := os.Stat("output"); os.IsNotExist(err) {
+			os.Mkdir("output", 0755)
+		}
+		s.saveResultsToCSV("./output/cipherScan.csv")
+		
 	}
 	
-	if s.opts.SaveResults {
-		if s.opts.SaveResultsDirectory != "" {
-			//create a folder called output to save the results if it doesn't exist
-			os.Chdir(s.opts.SaveResultsDirectory)
-			s.saveResultsToCSV(s.opts.SaveResultsDirectory + "/cipherScan.csv")
-		} else {
-			// Create a folder called output to save the results if it doesn't exist
-			if _, err := os.Stat("output"); os.IsNotExist(err) {
-			os.Mkdir("output", 0755)
-			}
-			s.saveResultsToCSV("./output/cipherScan.csv")
+	
+
+	if s.opts.ScanAndSaveDirectory != "" {
+		//create a folder called output to save the results if it doesn't exist
+		os.Chdir(s.opts.ScanAndSaveDirectory)
+		s.saveResultsToCSV(s.opts.ScanAndSaveDirectory + "/cipherScan.csv")
+		
+	} else {
+		// Create a folder called output to save the results if it doesn't exist
+		if _, err := os.Stat("output"); os.IsNotExist(err) {
+		os.Mkdir("output", 0755)
 		}
+		s.saveResultsToCSV("./output/cipherScan.csv")
+		
 	}
+	
 }
 
 func (s *Scanner) scanDomain(domain string) {

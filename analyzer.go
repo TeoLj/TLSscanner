@@ -18,8 +18,8 @@ import (
 
 type Analyzer struct {
 	ScannedCiphers []string
-	SaveResults bool
-	SaveResultsDirectory string
+	//ScanAndSave bool
+	ScanAndSaveDirectory string
 	cipherCount    map[string]int
 	Mutex		  *sync.Mutex // fine grained locking
 }
@@ -29,8 +29,8 @@ type Analyzer struct {
 func NewAnalyzer(scanner Scanner) *Analyzer {
 	return &Analyzer{
 		ScannedCiphers: scanner.ScannedCiphers,
-		SaveResults: scanner.opts.SaveResults,
-		SaveResultsDirectory: scanner.opts.SaveResultsDirectory,
+		//ScanAndSave: scanner.opts.ScanAndSave,
+		ScanAndSaveDirectory: scanner.opts.ScanAndSaveDirectory,
 		cipherCount:    make(map[string]int),
 		Mutex:          &sync.Mutex{},
 	}
@@ -40,12 +40,12 @@ func (a *Analyzer) Run(){
 
 	a.CountCiphers()
 
-	if a.SaveResults {
-		if a.SaveResultsDirectory != "" {
-			os.Chdir(a.SaveResultsDirectory)
-			a.SaveCiphersCount(a.SaveResultsDirectory + "/cipherCounts.csv")
-			a.PlotCipherCountsFromCSV(a.SaveResultsDirectory+"/cipherCounts.csv", a.SaveResultsDirectory + "/cipherCounts_plot.html")
-			//a.PlotResults(a.SaveResultsDirectory + "/cipherCounts_plot.png", a.cipherCount)
+	//if a.ScanAndSave {
+		if a.ScanAndSaveDirectory != "" {
+			os.Chdir(a.ScanAndSaveDirectory)
+			a.SaveCiphersCount(a.ScanAndSaveDirectory + "/cipherCounts.csv")
+			a.PlotCipherCountsFromCSV(a.ScanAndSaveDirectory+"/cipherCounts.csv", a.ScanAndSaveDirectory + "/cipherCounts_plot.html")
+			//a.PlotResults(a.ScanAndSaveDirectory + "/cipherCounts_plot.png", a.cipherCount)
 		} else {
 			// Create a folder called output to save the results if it doesn't exist
 			if _, err := os.Stat("output"); os.IsNotExist(err) {
@@ -55,7 +55,7 @@ func (a *Analyzer) Run(){
 			a.PlotCipherCountsFromCSV("./output/cipherCounts.csv", "./output/cipherCounts_plot.html")
 			
 		}
-	}
+	//}
 }
 
 func (a *Analyzer) CountCiphers() map[string]int {
