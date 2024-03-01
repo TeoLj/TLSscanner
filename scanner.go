@@ -51,37 +51,41 @@ func (s *Scanner) StartScanner() {
 	 	analyzer.Run()
 	 } else {
 		analyzer := NewAnalyzer(*s)
-		analyzer.Run()}		
+		analyzer.Run()
+	}		
+
+	
 
 	if s.opts.ScanAndSaveDirectory != "" {
 		//create a folder called output to save the results if it doesn't exist
 		os.Chdir(s.opts.ScanAndSaveDirectory)
-		s.saveResultsToCSV(s.opts.ScanAndSaveDirectory + "/cipherScan.csv")
-		
-	} else {
-		// Create a folder called output to save the results if it doesn't exist
-		if _, err := os.Stat("output"); os.IsNotExist(err) {
-			os.Mkdir("output", 0755)
+
+		if s.opts.CSVFilePath != "" {
+			//extract the name of the csv file which is written before .csv
+			fileName := strings.Split(s.opts.CSVFilePath, ".csv")
+			s.saveResultsToCSV(s.opts.ScanAndSaveDirectory + "/" + fileName[0] + "cipherScan.csv")
+		}else {
+			s.saveResultsToCSV(s.opts.ScanAndSaveDirectory + "/cipherScan.csv")
 		}
-		s.saveResultsToCSV("./output/cipherScan.csv")
-		
-	}
-	
-	
 
-	if s.opts.ScanAndSaveDirectory != "" {
-		//create a folder called output to save the results if it doesn't exist
-		os.Chdir(s.opts.ScanAndSaveDirectory)
-		s.saveResultsToCSV(s.opts.ScanAndSaveDirectory + "/cipherScan.csv")
-		
-	} else {
+
+	} else { // if no directory is specified
+
 		// Create a folder called output to save the results if it doesn't exist
-		if _, err := os.Stat("output"); os.IsNotExist(err) {
+		if _, err := os.Stat("output"); err == nil {
+			os.RemoveAll("output")
+		}
 		os.Mkdir("output", 0755)
+
+		if s.opts.CSVFilePath != "" {
+			//extract the name of the csv file which is written before .csv
+			fileName := strings.Split(s.opts.CSVFilePath, ".csv")
+			s.saveResultsToCSV("./output/" + fileName[0] + "_cipherScan.csv")
+		} else {
+			s.saveResultsToCSV("./output/cipherScan.csv")
 		}
-		s.saveResultsToCSV("./output/cipherScan.csv")
-		
 	}
+
 	
 }
 

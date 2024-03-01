@@ -48,9 +48,9 @@ func (a *Analyzer) Run(){
 			//a.PlotResults(a.ScanAndSaveDirectory + "/cipherCounts_plot.png", a.cipherCount)
 		} else {
 			// Create a folder called output to save the results if it doesn't exist
-			if _, err := os.Stat("output"); os.IsNotExist(err) {
-				os.Mkdir("output", 0755)
-			}
+			//if _, err := os.Stat("output"); os.IsNotExist(err) {
+			//	os.Mkdir("output", 0755)
+			//}
 			a.SaveCiphersCount("./output/cipherCounts.csv")
 			a.PlotCipherCountsFromCSV("./output/cipherCounts.csv", "./output/cipherCounts_plot.html")
 			
