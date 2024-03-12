@@ -4,6 +4,7 @@ import (
 	"flag"
 	"runtime"
 	"time"
+  
    
 )
 
@@ -15,9 +16,6 @@ type Options struct {
     EntriesToScan int
 	CSVFilePath string
     ScanAndSaveDirectory string
- 
-    
-
 }
 
 // Initializes and parses the flags, returning an Options struct.

@@ -3,52 +3,55 @@ package main
 import (
 	"encoding/csv"
 	"fmt"
-	"os"
-	"strings"
-	"sync"
-	"strconv"
 	"github.com/go-echarts/go-echarts/v2/charts"
 	"github.com/go-echarts/go-echarts/v2/opts"
-	
-	
+	"os"
+	"strconv"
+	"strings"
+	"sync"
 )
 
 type Analyzer struct {
-	ScannedCiphers []string
-	CSVFilePath   string
+	ScannedCiphers       []string
+	CSVFilePath          string
 	ScanAndSaveDirectory string
-	cipherCount    map[string]int
-	Mutex		  *sync.Mutex // fine grained locking
+	DomainsList          string
+	cipherCount          map[string]int
+	Mutex                *sync.Mutex // fine grained locking
 }
-
 
 func NewAnalyzer(scanner Scanner) *Analyzer {
 	return &Analyzer{
-		ScannedCiphers: scanner.ScannedCiphers,
+		ScannedCiphers:       scanner.ScannedCiphers,
 		ScanAndSaveDirectory: scanner.opts.ScanAndSaveDirectory,
-		CSVFilePath:   scanner.opts.CSVFilePath,
-		cipherCount:    make(map[string]int),
-		Mutex:          &sync.Mutex{},
+		CSVFilePath:          scanner.opts.CSVFilePath,
+		DomainsList:          scanner.opts.DomainsList,
+		cipherCount:          make(map[string]int),
+		Mutex:                &sync.Mutex{},
 	}
 }
 
-func (a *Analyzer) Run(){
+func (a *Analyzer) Run() {
 
 	a.CountCiphers()
 	fileName := strings.TrimSuffix(strings.TrimPrefix(a.CSVFilePath, "./"), ".csv")
+	outputDir := "./output"
 
 	if a.ScanAndSaveDirectory != "" {
 		os.Chdir(a.ScanAndSaveDirectory)
-		
-		a.SaveCiphersCount(a.ScanAndSaveDirectory +  "/" + fileName +"_cipherCounts.csv")
-		a.PlotCipherCountsFromCSV(a.ScanAndSaveDirectory+  "/" + fileName +"_cipherCounts.csv", a.ScanAndSaveDirectory + "/" + fileName +"/_plot.html")
-	} else {
-		
-		a.SaveCiphersCount("./output/"+ fileName+"_cipherCounts.csv")
-		a.PlotCipherCountsFromCSV("./output/"+ fileName+"_cipherCounts.csv", "./output/"+fileName+"_plot.html")
-		
+		outputDir = a.ScanAndSaveDirectory
 	}
-	
+
+	if a.DomainsList != "" {
+		a.SaveCiphersCount(outputDir + "/cipherCounts.csv")
+		a.PlotCipherCountsFromCSV(outputDir + "/cipherCounts.csv", outputDir + "/plot.html")
+	}
+
+	if a.CSVFilePath != "" {
+		a.SaveCiphersCount(outputDir + "/" + fileName + "_cipherCounts.csv")
+		a.PlotCipherCountsFromCSV(outputDir + "/" + fileName + "_cipherCounts.csv", outputDir + "/" + fileName + "_plot.html")
+	}
+
 }
 
 func (a *Analyzer) CountCiphers() map[string]int {
@@ -104,7 +107,6 @@ func (a *Analyzer) SaveCiphersCount(filename string) {
 		writer.Write([]string{cipher, fmt.Sprintf("%d", count)})
 	}
 }
-
 
 func (a *Analyzer) PlotCipherCountsFromCSV(filenameIn string, filenameOut string) {
 	// Open the CSV file
@@ -177,10 +179,10 @@ func (a *Analyzer) PlotCipherCountsFromCSV(filenameIn string, filenameOut string
 		// Set the X-axis options
 		charts.WithXAxisOpts(opts.XAxis{
 			AxisLabel: &opts.AxisLabel{
-				Show:        true,
-				Interval:    "auto",
-				Rotate:      60,
-				Formatter:   "{value}",
+				Show:         true,
+				Interval:     "auto",
+				Rotate:       60,
+				Formatter:    "{value}",
 				ShowMaxLabel: true,
 				ShowMinLabel: true,
 			},
@@ -203,8 +205,8 @@ func (a *Analyzer) PlotCipherCountsFromCSV(filenameIn string, filenameOut string
 		SetSeriesOptions(
 			// Set the bar chart options
 			charts.WithBarChartOpts(opts.BarChart{
-				BarGap:         "0%",    // No gap between bars of different categories
-				BarCategoryGap: "40%",   // Gap between bars of the same category (thinner)
+				BarGap:         "0%",  // No gap between bars of different categories
+				BarCategoryGap: "40%", // Gap between bars of the same category (thinner)
 			}),
 		)
 
@@ -218,4 +220,3 @@ func (a *Analyzer) PlotCipherCountsFromCSV(filenameIn string, filenameOut string
 	f, _ := os.Create(filenameOut)
 	bar.Render(f)
 }
-

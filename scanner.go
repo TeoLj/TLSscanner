@@ -45,16 +45,21 @@ func (s *Scanner) StartScanner() {
 	}
 
 	wg.Wait() // wait for all goroutines to complete
-	
+	fileName := strings.TrimSuffix(strings.TrimPrefix(s.opts.CSVFilePath, "./"), ".csv")
+
 	
 	if s.opts.ScanAndSaveDirectory != "" {
 		//create a folder called output to save the results if it doesn't exist
 		os.Chdir(s.opts.ScanAndSaveDirectory)
 
-		fileName := strings.Split(s.opts.CSVFilePath, ".csv")
+		
 		if s.opts.CSVFilePath != "" {
-			s.saveResultsToCSV(s.opts.ScanAndSaveDirectory + "/" + fileName[0] + "_cipherScan.csv")
+			s.saveResultsToCSV(s.opts.ScanAndSaveDirectory + "/" + fileName+ "_cipherScan.csv")
 		}
+		if s.opts.DomainsList != "" {
+			s.saveResultsToCSV(s.opts.ScanAndSaveDirectory + "/cipherScan.csv")
+		}
+
 
 	} else { // if no directory is specified
 
@@ -63,13 +68,16 @@ func (s *Scanner) StartScanner() {
 			os.RemoveAll("output")
 		}
 		os.Mkdir("output", 0755)
-		fileName := strings.TrimSuffix(strings.TrimPrefix(s.opts.CSVFilePath, "./"), ".csv")
-
+	
 		if s.opts.CSVFilePath != "" {
 			s.saveResultsToCSV("./output/" + fileName + "_cipherScan.csv")
-		} else {
+		} 
+		
+		if s.opts.DomainsList != "" {
+			fmt.Println("domains list")
 			s.saveResultsToCSV("./output/cipherScan.csv")
 		}
+		
 	}
 
 
@@ -79,7 +87,7 @@ func (s *Scanner) StartScanner() {
 	} else {
 	   analyzer := NewAnalyzer(*s)
 	   analyzer.Run()
-   }		
+    }		
 
 
 	

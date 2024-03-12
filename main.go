@@ -39,6 +39,8 @@ func main() {
 	end := time.Now()
 	fmt.Println("\033[1;35mEnd:", end.Format("2006-01-02 15:04:05"), "| Duration:", end.Sub(start), "\033[0m")
 
+
+
 }
 
 func readCSV(filePath string, entriesToScan int) ([]string, error) {
