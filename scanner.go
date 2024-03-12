@@ -46,20 +46,13 @@ func (s *Scanner) StartScanner() {
 
 	wg.Wait() // wait for all goroutines to complete
 	
-	if s.opts.ScanAndSaveDirectory != ""{
-	 	analyzer := NewAnalyzer(*s)
-	 	analyzer.Run()
-	 } else {
-		analyzer := NewAnalyzer(*s)
-		analyzer.Run()
-	}		
-
+	
 	
 
 	if s.opts.ScanAndSaveDirectory != "" {
 		//create a folder called output to save the results if it doesn't exist
 		os.Chdir(s.opts.ScanAndSaveDirectory)
-
+		
 		if s.opts.CSVFilePath != "" {
 			//extract the name of the csv file which is written before .csv
 			fileName := strings.Split(s.opts.CSVFilePath, ".csv")
@@ -86,6 +79,15 @@ func (s *Scanner) StartScanner() {
 		}
 	}
 
+	if s.opts.ScanAndSaveDirectory != ""{
+		analyzer := NewAnalyzer(*s)
+		analyzer.Run()
+	} else {
+	   analyzer := NewAnalyzer(*s)
+	   analyzer.Run()
+   }		
+
+
 	
 }
 
@@ -100,6 +102,7 @@ func (s *Scanner) scanDomain(domain string) {
 			MinVersion:   tls.VersionTLS12,
 			MaxVersion:   tls.VersionTLS13,
 		}
+
 		// establish a connection to the domain
 		dialer := net.Dialer{Timeout: s.opts.Timeout}
 

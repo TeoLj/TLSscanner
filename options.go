@@ -15,7 +15,7 @@ type Options struct {
     EntriesToScan int
 	CSVFilePath string
     ScanAndSaveDirectory string
-    AnalyseCipher bool 
+ 
     
 
 }
@@ -26,8 +26,6 @@ func ParseFlags() *Options {
     flag.StringVar(&opts.DomainsList, "domains", "", "Comma-separated list of domains to scan")
     flag.StringVar(&opts.CSVFilePath, "csv", "", "Path to a CSV file containing domains to scan")
     flag.StringVar(&opts.ScanAndSaveDirectory, "ScanAndSave", "", "Directory to save the results")
-
-    flag.BoolVar(&opts.AnalyseCipher, "analyse", false, "Analyse the occurence of cipher suites")
     
     flag.IntVar(&opts.EntriesToScan, "entries", -1, "Number of entries from the CSV file to scan; -1 for all")
     flag.IntVar(&opts.Concurrency, "concurrency", runtime.GOMAXPROCS(0), "Number of concurrent connections")

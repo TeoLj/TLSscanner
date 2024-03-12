@@ -116,6 +116,7 @@ func (a *Analyzer) SaveCiphersCount(filename string) {
 func (a *Analyzer) PlotCipherCountsFromCSV(filenameIn string, filenameOut string) {
 	// Open the CSV file
 	file, err := os.Open(filenameIn)
+
 	if err != nil {
 		fmt.Println("Error opening CSV file:", err)
 		return
