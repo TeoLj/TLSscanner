@@ -47,20 +47,14 @@ func (s *Scanner) StartScanner() {
 	wg.Wait() // wait for all goroutines to complete
 	
 	
-	
-
 	if s.opts.ScanAndSaveDirectory != "" {
 		//create a folder called output to save the results if it doesn't exist
 		os.Chdir(s.opts.ScanAndSaveDirectory)
-		
-		if s.opts.CSVFilePath != "" {
-			//extract the name of the csv file which is written before .csv
-			fileName := strings.Split(s.opts.CSVFilePath, ".csv")
-			s.saveResultsToCSV(s.opts.ScanAndSaveDirectory + "/" + fileName[0] + "cipherScan.csv")
-		}else {
-			s.saveResultsToCSV(s.opts.ScanAndSaveDirectory + "/cipherScan.csv")
-		}
 
+		fileName := strings.Split(s.opts.CSVFilePath, ".csv")
+		if s.opts.CSVFilePath != "" {
+			s.saveResultsToCSV(s.opts.ScanAndSaveDirectory + "/" + fileName[0] + "_cipherScan.csv")
+		}
 
 	} else { // if no directory is specified
 
@@ -69,15 +63,15 @@ func (s *Scanner) StartScanner() {
 			os.RemoveAll("output")
 		}
 		os.Mkdir("output", 0755)
+		fileName := strings.TrimSuffix(strings.TrimPrefix(s.opts.CSVFilePath, "./"), ".csv")
 
 		if s.opts.CSVFilePath != "" {
-			//extract the name of the csv file which is written before .csv
-			fileName := strings.Split(s.opts.CSVFilePath, ".csv")
-			s.saveResultsToCSV("./output/" + fileName[0] + "_cipherScan.csv")
+			s.saveResultsToCSV("./output/" + fileName + "_cipherScan.csv")
 		} else {
 			s.saveResultsToCSV("./output/cipherScan.csv")
 		}
 	}
+
 
 	if s.opts.ScanAndSaveDirectory != ""{
 		analyzer := NewAnalyzer(*s)

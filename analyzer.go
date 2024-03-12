@@ -13,24 +13,20 @@ import (
 	
 )
 
-
-
-
 type Analyzer struct {
 	ScannedCiphers []string
-	//ScanAndSave bool
+	CSVFilePath   string
 	ScanAndSaveDirectory string
 	cipherCount    map[string]int
 	Mutex		  *sync.Mutex // fine grained locking
 }
 
-// uses Struct elements Domains[]string, ScannedCiphers []string to analyze occurence of ciphers
 
 func NewAnalyzer(scanner Scanner) *Analyzer {
 	return &Analyzer{
 		ScannedCiphers: scanner.ScannedCiphers,
-		//ScanAndSave: scanner.opts.ScanAndSave,
 		ScanAndSaveDirectory: scanner.opts.ScanAndSaveDirectory,
+		CSVFilePath:   scanner.opts.CSVFilePath,
 		cipherCount:    make(map[string]int),
 		Mutex:          &sync.Mutex{},
 	}
@@ -39,30 +35,27 @@ func NewAnalyzer(scanner Scanner) *Analyzer {
 func (a *Analyzer) Run(){
 
 	a.CountCiphers()
+	fileName := strings.TrimSuffix(strings.TrimPrefix(a.CSVFilePath, "./"), ".csv")
 
-	//if a.ScanAndSave {
-		if a.ScanAndSaveDirectory != "" {
-			os.Chdir(a.ScanAndSaveDirectory)
-			a.SaveCiphersCount(a.ScanAndSaveDirectory + "/cipherCounts.csv")
-			a.PlotCipherCountsFromCSV(a.ScanAndSaveDirectory+"/cipherCounts.csv", a.ScanAndSaveDirectory + "/cipherCounts_plot.html")
-			//a.PlotResults(a.ScanAndSaveDirectory + "/cipherCounts_plot.png", a.cipherCount)
-		} else {
-			// Create a folder called output to save the results if it doesn't exist
-			//if _, err := os.Stat("output"); os.IsNotExist(err) {
-			//	os.Mkdir("output", 0755)
-			//}
-			a.SaveCiphersCount("./output/cipherCounts.csv")
-			a.PlotCipherCountsFromCSV("./output/cipherCounts.csv", "./output/cipherCounts_plot.html")
-			
-		}
-	//}
+	if a.ScanAndSaveDirectory != "" {
+		os.Chdir(a.ScanAndSaveDirectory)
+		
+		a.SaveCiphersCount(a.ScanAndSaveDirectory +  "/" + fileName +"_cipherCounts.csv")
+		a.PlotCipherCountsFromCSV(a.ScanAndSaveDirectory+  "/" + fileName +"_cipherCounts.csv", a.ScanAndSaveDirectory + "/" + fileName +"/_plot.html")
+	} else {
+		
+		a.SaveCiphersCount("./output/"+ fileName+"_cipherCounts.csv")
+		a.PlotCipherCountsFromCSV("./output/"+ fileName+"_cipherCounts.csv", "./output/"+fileName+"_plot.html")
+		
+	}
+	
 }
 
 func (a *Analyzer) CountCiphers() map[string]int {
 
 	// Iterate over the scanned ciphers, assuming each entry is a domain followed by a list of ciphers
 	for _, scanned := range a.ScannedCiphers {
-		// Assuming each entry in ScannedCiphers is a string like "domain: cipher1;cipher2;cipher3" (specified in ScanDomain)
+		// Assuming each entry in ScannedCiphers is a string like "domain: cipher1,cipher2,cipher3" (specified in ScanDomain)
 		// Split the string into domain and ciphers part
 		parts := strings.Split(scanned, ": ")
 		if len(parts) != 2 {
