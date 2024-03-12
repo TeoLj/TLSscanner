@@ -49,35 +49,30 @@ func (s *Scanner) StartScanner() {
 
 	
 	if s.opts.ScanAndSaveDirectory != "" {
-		//create a folder called output to save the results if it doesn't exist
+		// Create a folder called output to save the results if it doesn't exist
 		os.Chdir(s.opts.ScanAndSaveDirectory)
-
-		
-		if s.opts.CSVFilePath != "" {
-			s.saveResultsToCSV(s.opts.ScanAndSaveDirectory + "/" + fileName+ "_cipherScan.csv")
-		}
-		if s.opts.DomainsList != "" {
-			s.saveResultsToCSV(s.opts.ScanAndSaveDirectory + "/cipherScan.csv")
-		}
-
-
-	} else { // if no directory is specified
-
+	} else {
 		// Create a folder called output to save the results if it doesn't exist
 		if _, err := os.Stat("output"); err == nil {
 			os.RemoveAll("output")
 		}
 		os.Mkdir("output", 0755)
-	
-		if s.opts.CSVFilePath != "" {
+	}
+
+	if s.opts.CSVFilePath != "" {
+		if s.opts.ScanAndSaveDirectory != "" {
+			s.saveResultsToCSV(s.opts.ScanAndSaveDirectory + "/" + fileName + "_cipherScan.csv")
+		} else {
 			s.saveResultsToCSV("./output/" + fileName + "_cipherScan.csv")
-		} 
-		
-		if s.opts.DomainsList != "" {
-			fmt.Println("domains list")
+		}
+	}
+
+	if s.opts.DomainsList != "" {
+		if s.opts.ScanAndSaveDirectory != "" {
+			s.saveResultsToCSV(s.opts.ScanAndSaveDirectory + "/cipherScan.csv")
+		} else {
 			s.saveResultsToCSV("./output/cipherScan.csv")
 		}
-		
 	}
 
 
@@ -114,7 +109,7 @@ func (s *Scanner) scanDomain(domain string) {
 			supportedCiphers = append(supportedCiphers, cipher.Name) // lock not put here due to performance overhead(release mutex for every cipher)
 			conn.Close()
 		} else {
-			fmt.Printf("%s: Connection error type: %s for %s\n", domain, err, cipher.Name)
+			fmt.Printf("\033[3m%s\033[0m: \033[1;31m %s \033[0m for %s\n", domain, err, cipher.Name)
 		}
 	}
 
