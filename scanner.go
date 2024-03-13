@@ -15,6 +15,14 @@ type Scanner struct {
 	ScannedCiphers []string
 	opts           *Options
 	Mutex          *sync.Mutex // fine grained locking
+	ErrorCounts ErrorCounter
+}
+
+type ErrorCounter struct {
+	HandshakeFailures int
+	InvalidDomainFormat int
+	NoHostFound int
+	OtherErrors map[string]int
 }
 
 func NewScanner(domains []string, opts *Options) *Scanner {
@@ -23,6 +31,9 @@ func NewScanner(domains []string, opts *Options) *Scanner {
 		ScannedCiphers: make([]string, 0), // create slice of strings with 0 length
 		opts:           opts,
 		Mutex:          &sync.Mutex{}, //initialize the mutex; & creates a pointer to the mutex
+		ErrorCounts: ErrorCounter{
+			OtherErrors: make(map[string]int),
+		},
 	}
 }
 
@@ -75,18 +86,20 @@ func (s *Scanner) StartScanner() {
 		}
 	}
 
+}
 
-	if s.opts.ScanAndSaveDirectory != ""{
+
+func (s *Scanner) AnalyzeResults() {
+	if s.opts.ScanAndSaveDirectory != "" {
 		analyzer := NewAnalyzer(*s)
 		analyzer.Run()
 	} else {
-	   analyzer := NewAnalyzer(*s)
-	   analyzer.Run()
-    }		
-
-
-	
+		analyzer := NewAnalyzer(*s)
+		analyzer.Run()
+	}
 }
+
+
 
 func (s *Scanner) scanDomain(domain string) {
 	var supportedCiphers []string
@@ -98,6 +111,7 @@ func (s *Scanner) scanDomain(domain string) {
 			CipherSuites: []uint16{cipher.ID},
 			MinVersion:   tls.VersionTLS12,
 			MaxVersion:   tls.VersionTLS13,
+			// InsecureSkipVerify: true, optional
 		}
 
 		// establish a connection to the domain
@@ -109,17 +123,38 @@ func (s *Scanner) scanDomain(domain string) {
 			supportedCiphers = append(supportedCiphers, cipher.Name) // lock not put here due to performance overhead(release mutex for every cipher)
 			conn.Close()
 		} else {
-			fmt.Printf("\033[3m%s\033[0m: \033[1;31m %s \033[0m for %s\n", domain, err, cipher.Name)
-		}
+			
+		s.Mutex.Lock()
+        // Error checking logic
+        switch {
+        case strings.Contains(err.Error(), "handshake failure"):
+            s.ErrorCounts.HandshakeFailures++
+        case strings.Contains(err.Error(), "no such host"):
+            s.ErrorCounts.NoHostFound++
+        case strings.Contains(err.Error(), "invalid domain format"):
+            // This case is hypothetical; you'll need to adjust the error text accordingly
+            s.ErrorCounts.InvalidDomainFormat++
+        default:
+            errMsg := err.Error()
+            if _, exists := s.ErrorCounts.OtherErrors[errMsg]; !exists {
+                s.ErrorCounts.OtherErrors[errMsg] = 0
+            }
+            s.ErrorCounts.OtherErrors[errMsg]++
+        }
+        s.Mutex.Unlock()
+        fmt.Printf("\033[3m%s\033[0m: \033[1;31m %s \033[0m for %s\n", domain, err, cipher.Name)
+    	}
+
 	}
-
+	
 	fmt.Printf("%s: \n %s\n", domain, strings.Join(supportedCiphers, ";"))
-
 	// outside of loop to prevent lock contention
 	s.Mutex.Lock()
 	s.ScannedCiphers = append(s.ScannedCiphers, domain+": "+strings.Join(supportedCiphers, ";"))
 	s.Mutex.Unlock()
+	
 }
+
 
 
 func (s *Scanner) saveResultsToCSV(filename string) {

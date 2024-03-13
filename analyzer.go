@@ -5,10 +5,12 @@ import (
 	"fmt"
 	"github.com/go-echarts/go-echarts/v2/charts"
 	"github.com/go-echarts/go-echarts/v2/opts"
+	"github.com/go-echarts/go-echarts/v2/components"
 	"os"
 	"strconv"
 	"strings"
 	"sync"
+	"io"
 )
 
 type Analyzer struct {
@@ -18,6 +20,7 @@ type Analyzer struct {
 	DomainsList          string
 	cipherCount          map[string]int
 	Mutex                *sync.Mutex // fine grained locking
+	ErrorCounts          ErrorCounter
 }
 
 func NewAnalyzer(scanner Scanner) *Analyzer {
@@ -28,6 +31,8 @@ func NewAnalyzer(scanner Scanner) *Analyzer {
 		DomainsList:          scanner.opts.DomainsList,
 		cipherCount:          make(map[string]int),
 		Mutex:                &sync.Mutex{},
+		ErrorCounts:          scanner.ErrorCounts,
+
 	}
 }
 
@@ -44,12 +49,14 @@ func (a *Analyzer) Run() {
 
 	if a.DomainsList != "" {
 		a.SaveCiphersCount(outputDir + "/cipherCounts.csv")
-		a.PlotCipherCountsFromCSV(outputDir + "/cipherCounts.csv", outputDir + "/plot.html")
+		a.PlotCipherCountsFromCSV(outputDir + "/cipherCounts.csv")
+		a.CombineCharts(outputDir + "/cipherCounts.csv", outputDir + "/plot.html", a.ErrorCounts)
 	}
 
 	if a.CSVFilePath != "" {
 		a.SaveCiphersCount(outputDir + "/" + fileName + "_cipherCounts.csv")
-		a.PlotCipherCountsFromCSV(outputDir + "/" + fileName + "_cipherCounts.csv", outputDir + "/" + fileName + "_plot.html")
+		a.PlotCipherCountsFromCSV(outputDir + "/" + fileName + "_cipherCounts.csv")
+		a.CombineCharts(outputDir + "/" + fileName + "_cipherCounts.csv", outputDir + "/" + fileName + "_plot.html", a.ErrorCounts)
 	}
 
 }
@@ -108,13 +115,14 @@ func (a *Analyzer) SaveCiphersCount(filename string) {
 	}
 }
 
-func (a *Analyzer) PlotCipherCountsFromCSV(filenameIn string, filenameOut string) {
+
+func (a *Analyzer) PlotCipherCountsFromCSV(filenameIn string) *charts.Bar {
 	// Open the CSV file
 	file, err := os.Open(filenameIn)
 
 	if err != nil {
 		fmt.Println("Error opening CSV file:", err)
-		return
+		
 	}
 	defer file.Close()
 
@@ -123,7 +131,7 @@ func (a *Analyzer) PlotCipherCountsFromCSV(filenameIn string, filenameOut string
 	records, err := reader.ReadAll()
 	if err != nil {
 		fmt.Println("Error reading CSV file:", err)
-		return
+		
 	}
 
 	// Extract the keys and values from the CSV records
@@ -137,7 +145,7 @@ func (a *Analyzer) PlotCipherCountsFromCSV(filenameIn string, filenameOut string
 		value, err := strconv.Atoi(record[1])
 		if err != nil {
 			fmt.Println("Error converting value to int:", err)
-			return
+			
 		}
 		values = append(values, opts.BarData{Value: value})
 	}
@@ -216,7 +224,79 @@ func (a *Analyzer) PlotCipherCountsFromCSV(filenameIn string, filenameOut string
 			opts.MarkLineNameTypeItem{Name: "Minimum", Type: "min"},
 		))
 
-	// Save to file
-	f, _ := os.Create(filenameOut)
-	bar.Render(f)
+	return bar
+}
+
+
+func (a *Analyzer) PlotErrorCountsToPieChart(errorCounts ErrorCounter) *charts.Pie {
+    
+	pie:=charts.NewPie()
+
+	pie.SetGlobalOptions(
+        charts.WithTitleOpts(opts.Title{
+            Title: "Error Counts",
+        }),
+        charts.WithInitializationOpts(opts.Initialization{
+            PageTitle: "Error Counts",
+            Width:     "800px",
+            Height:    "600px",
+        }),
+        charts.WithToolboxOpts(opts.Toolbox{
+            Show: true,
+            Feature: &opts.ToolBoxFeature{
+                SaveAsImage: &opts.ToolBoxFeatureSaveAsImage{
+                    Show:  true,
+                    Title: "Save as Image",
+                    Type:  "png",
+                },
+            },
+        }),
+    )
+
+
+	 // Add data to the pie chart
+	 var data []opts.PieData
+	 if errorCounts.HandshakeFailures > 0 {
+		 data = append(data, opts.PieData{Name: "Handshake Failures", Value: errorCounts.HandshakeFailures})
+	 }
+	 
+	 if errorCounts.InvalidDomainFormat > 0 {
+		 data = append(data, opts.PieData{Name: "Invalid Domain Format", Value: errorCounts.InvalidDomainFormat})
+	 }
+	 if errorCounts.NoHostFound > 0 {
+		 data = append(data, opts.PieData{Name: "No Such Host", Value: errorCounts.NoHostFound} )
+	 }
+	 for err, count := range errorCounts.OtherErrors {
+		 data = append(data, opts.PieData{Name: err, Value: count})
+	 }
+
+	pie.AddSeries("Errors", data).SetSeriesOptions(charts.WithPieChartOpts(
+        opts.PieChart{Radius: "30%", Center: []string{"50%", "60%"}},
+    ))
+	return pie
+
+}
+
+
+
+
+func (a *Analyzer) CombineCharts(filenameIn, filenameOut string, errorCounts ErrorCounter) {
+    page := components.NewPage()
+
+    bar := a.PlotCipherCountsFromCSV(filenameIn) 
+    pie := a.PlotErrorCountsToPieChart(errorCounts) // Now returns *charts.Pie
+
+    page.AddCharts(bar, pie)
+
+    // Render the page to the specified output file
+    f, err := os.Create(filenameOut)
+    if err != nil {
+        fmt.Println("Failed to create file:", err)
+        return
+    }
+    defer f.Close()
+
+    if err := page.Render(io.MultiWriter(f)); err != nil {
+        fmt.Println("Failed to render page:", err)
+    }
 }
