@@ -240,7 +240,7 @@ func (a *Analyzer) PlotErrorCountsToPieChart(errorCounts ErrorCounter) *charts.P
 
     // If totalErrors is 0, avoid division by zero in percentage calculation
     if totalErrors == 0 {
-        totalErrors = 1 
+        totalErrors = 1 // Ensure we show 0% for all categories to maintain the full legend
     }
 
     // Prepare data with label, count, and percentage
@@ -261,27 +261,20 @@ func (a *Analyzer) PlotErrorCountsToPieChart(errorCounts ErrorCounter) *charts.P
         addDataPoint(err, count)
     }
 
-    // Set global options including adjusted title position
-    pie.SetGlobalOptions(
-        charts.WithTitleOpts(opts.Title{
-            Title:    "TLS Scan Error Counts",
-            Top:      "5%", // Adjust the title position
-           
+    pie.AddSeries("Error Counts", data).
+        SetGlobalOptions(
+            charts.WithTitleOpts(opts.Title{Title: "TLS Scan Error Report"}),
+            charts.WithLegendOpts(opts.Legend{
+				Show: true, 
+				Right: "right",
+				Left: "left",
+		        Orient: "vertical",
+				Top: "10%",
+				
+	}),
             
-        }),
-        charts.WithLegendOpts(opts.Legend{
-            Orient: "vertical",
-            Top:    "15%", // Push the legend down to prevent overlap
-        }),
-        charts.WithTooltipOpts(opts.Tooltip{Show: true, Trigger: "item", Formatter: "{a} <br/>{b} : {c} ({d}%)"}),
-    )
+        )
 
-    
-
-    // Add data to pie chart series
-    pie.AddSeries("Error Counts", data)
-
-        
 	return pie
 
 }
