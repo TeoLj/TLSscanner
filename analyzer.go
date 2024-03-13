@@ -230,49 +230,58 @@ func (a *Analyzer) PlotCipherCountsFromCSV(filenameIn string) *charts.Bar {
 
 func (a *Analyzer) PlotErrorCountsToPieChart(errorCounts ErrorCounter) *charts.Pie {
     
-	pie:=charts.NewPie()
+	pie := charts.NewPie()
 
-	pie.SetGlobalOptions(
+    // Calculate the total count of all errors
+    totalErrors := errorCounts.HandshakeFailures + errorCounts.InvalidDomainFormat + errorCounts.NoHostFound
+    for _, count := range errorCounts.OtherErrors {
+        totalErrors += count
+    }
+
+    // If totalErrors is 0, avoid division by zero in percentage calculation
+    if totalErrors == 0 {
+        totalErrors = 1 
+    }
+
+    // Prepare data with label, count, and percentage
+    var data []opts.PieData
+    addDataPoint := func(name string, count int) {
+        percentage := float64(count) / float64(totalErrors) * 100
+        label := fmt.Sprintf("%s: %d (%.2f%%)", name, count, percentage)
+        data = append(data, opts.PieData{Name: label, Value: count})
+    }
+
+    // Add predefined error types
+    addDataPoint("Handshake Failures", errorCounts.HandshakeFailures)
+    addDataPoint("Invalid Domain Format", errorCounts.InvalidDomainFormat)
+    addDataPoint("No Such Host", errorCounts.NoHostFound)
+
+    // Add other errors
+    for err, count := range errorCounts.OtherErrors {
+        addDataPoint(err, count)
+    }
+
+    // Set global options including adjusted title position
+    pie.SetGlobalOptions(
         charts.WithTitleOpts(opts.Title{
-            Title: "Error Counts",
+            Title:    "TLS Scan Error Counts",
+            Top:      "5%", // Adjust the title position
+           
+            
         }),
-        charts.WithInitializationOpts(opts.Initialization{
-            PageTitle: "Error Counts",
-            Width:     "800px",
-            Height:    "600px",
+        charts.WithLegendOpts(opts.Legend{
+            Orient: "vertical",
+            Top:    "15%", // Push the legend down to prevent overlap
         }),
-        charts.WithToolboxOpts(opts.Toolbox{
-            Show: true,
-            Feature: &opts.ToolBoxFeature{
-                SaveAsImage: &opts.ToolBoxFeatureSaveAsImage{
-                    Show:  true,
-                    Title: "Save as Image",
-                    Type:  "png",
-                },
-            },
-        }),
+        charts.WithTooltipOpts(opts.Tooltip{Show: true, Trigger: "item", Formatter: "{a} <br/>{b} : {c} ({d}%)"}),
     )
 
+    
 
-	 // Add data to the pie chart
-	 var data []opts.PieData
-	 if errorCounts.HandshakeFailures > 0 {
-		 data = append(data, opts.PieData{Name: "Handshake Failures", Value: errorCounts.HandshakeFailures})
-	 }
-	 
-	 if errorCounts.InvalidDomainFormat > 0 {
-		 data = append(data, opts.PieData{Name: "Invalid Domain Format", Value: errorCounts.InvalidDomainFormat})
-	 }
-	 if errorCounts.NoHostFound > 0 {
-		 data = append(data, opts.PieData{Name: "No Such Host", Value: errorCounts.NoHostFound} )
-	 }
-	 for err, count := range errorCounts.OtherErrors {
-		 data = append(data, opts.PieData{Name: err, Value: count})
-	 }
+    // Add data to pie chart series
+    pie.AddSeries("Error Counts", data)
 
-	pie.AddSeries("Errors", data).SetSeriesOptions(charts.WithPieChartOpts(
-        opts.PieChart{Radius: "30%", Center: []string{"50%", "60%"}},
-    ))
+        
 	return pie
 
 }
