@@ -281,8 +281,6 @@ func (a *Analyzer) PlotErrorCountsToPieChart(errorCounts ErrorCounter) *charts.P
 				Center: []string{"50%", "60%"}, // second% is vertical position
 			}),
 		)
-		
-			
 
 	pie.SetGlobalOptions(
 		// Set the toolbox options
@@ -305,11 +303,6 @@ func (a *Analyzer) PlotErrorCountsToPieChart(errorCounts ErrorCounter) *charts.P
 	)
 	return pie
 }
-
-func SetSeriesOptions(seriesOpts charts.SeriesOpts) {
-	panic("unimplemented")
-}
-
 
 
 

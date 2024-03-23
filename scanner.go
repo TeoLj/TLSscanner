@@ -129,13 +129,13 @@ func (s *Scanner) scanDomain(domain string) {
         case strings.Contains(err.Error(), "handshake failure"):
             s.ErrorCounts.HandshakeFailures++
 			fmt.Printf("\033[3m%s\033[0m: \033[1;31m %s for %s \033[0m  \n", domain, err, cipher.Name)
-			//s.Mutex.Unlock() // unlock and
-			//continue
+			s.Mutex.Unlock() // unlock and
+			continue // skip to next cipher (next iteration)
         case strings.Contains(err.Error(), "no such host"):
             s.ErrorCounts.NoHostFound++
 			fmt.Printf("\033[3m%s\033[0m: \033[1;31m %s \033[0m  \n", domain, err)
 			s.Mutex.Unlock() // unlock and 
-			return // return to prevent further processing
+			return // return to main function and go to next domain
         default:
             errMsg := err.Error()
             if _, exists := s.ErrorCounts.OtherErrors[errMsg]; !exists {
