@@ -233,7 +233,7 @@ func (a *Analyzer) PlotErrorCountsToPieChart(errorCounts ErrorCounter) *charts.P
 	pie := charts.NewPie()
 
     // Calculate the total count of all errors
-    totalErrors := errorCounts.HandshakeFailures + errorCounts.InvalidDomainFormat + errorCounts.NoHostFound
+    totalErrors := errorCounts.HandshakeFailures +  errorCounts.NoHostFound
     for _, count := range errorCounts.OtherErrors {
         totalErrors += count
     }
@@ -253,9 +253,7 @@ func (a *Analyzer) PlotErrorCountsToPieChart(errorCounts ErrorCounter) *charts.P
 
     // Add predefined error types
     addDataPoint("Handshake Failures", errorCounts.HandshakeFailures)
-	if errorCounts.InvalidDomainFormat > 0 {	
-    addDataPoint("Invalid Domain Format", errorCounts.InvalidDomainFormat) 
-	}
+
 
 	if errorCounts.NoHostFound > 0 {
     addDataPoint("No Such Host", errorCounts.NoHostFound)
@@ -276,17 +274,15 @@ func (a *Analyzer) PlotErrorCountsToPieChart(errorCounts ErrorCounter) *charts.P
 		        Orient: "horizontal",
 				Top: "10%",  
 			}),
-			
-	)
-
-	pie.AddSeries("Error Counts", data).
+		). // Add a comma here
 		SetSeriesOptions(
 			charts.WithPieChartOpts(opts.PieChart{
 				Radius:140,
 				Center: []string{"50%", "60%"}, // second% is vertical position
-				
-	},),
-	)
+			}),
+		)
+		
+			
 
 	pie.SetGlobalOptions(
 		// Set the toolbox options
@@ -308,6 +304,10 @@ func (a *Analyzer) PlotErrorCountsToPieChart(errorCounts ErrorCounter) *charts.P
 		}),
 	)
 	return pie
+}
+
+func SetSeriesOptions(seriesOpts charts.SeriesOpts) {
+	panic("unimplemented")
 }
 
 

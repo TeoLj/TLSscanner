@@ -20,7 +20,6 @@ type Scanner struct {
 
 type ErrorCounter struct {
 	HandshakeFailures int
-	InvalidDomainFormat int
 	NoHostFound int
 	OtherErrors map[string]int
 }
@@ -129,17 +128,21 @@ func (s *Scanner) scanDomain(domain string) {
         switch {
         case strings.Contains(err.Error(), "handshake failure"):
             s.ErrorCounts.HandshakeFailures++
+			fmt.Printf("\033[3m%s\033[0m: \033[1;31m %s for %s \033[0m  \n", domain, err, cipher.Name)
+			//s.Mutex.Unlock() // unlock and
+			//continue
         case strings.Contains(err.Error(), "no such host"):
             s.ErrorCounts.NoHostFound++
-        case strings.Contains(err.Error(), "invalid domain format"):
-            // change defined by myself
-            s.ErrorCounts.InvalidDomainFormat++
+			fmt.Printf("\033[3m%s\033[0m: \033[1;31m %s \033[0m  \n", domain, err)
+			s.Mutex.Unlock() // unlock and 
+			return // return to prevent further processing
         default:
             errMsg := err.Error()
             if _, exists := s.ErrorCounts.OtherErrors[errMsg]; !exists {
                 s.ErrorCounts.OtherErrors[errMsg] = 0
             }
             s.ErrorCounts.OtherErrors[errMsg]++
+		
         }
         s.Mutex.Unlock()
         fmt.Printf("\033[3m%s\033[0m: \033[1;31m %s \033[0m for %s\n", domain, err, cipher.Name)
@@ -154,7 +157,6 @@ func (s *Scanner) scanDomain(domain string) {
 	s.Mutex.Unlock()
 	
 }
-
 
 
 func (s *Scanner) saveResultsToCSV(filename string) {

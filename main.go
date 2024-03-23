@@ -60,17 +60,18 @@ func readCSV(filePath string, entriesToScan int) ([]string, error) {
 		}
 		line := scanner.Text()
 		record := strings.Split(line, ",")
+	
 		for _, field := range record {
-			domain, err := extractDomain(field)
+			domain,err := extractDomain(field)
 			if err != nil {
-				fmt.Printf("\033[1;31mError for: %s %v\033[0m\n", field, err)
+				fmt.Println("Error", err, " while extracting domain:", domain)
 			}
-			if err == nil && domain != "" {
+
+			if  domain != "" {
 				domains = append(domains, domain)
 			}
 		}
 	}
-
 	if err := scanner.Err(); err != nil {
 		fmt.Println("Error reading CSV file:", err)
 		return nil, err
@@ -85,12 +86,12 @@ func extractDomain(field string) (string, error) {
 	if strings.HasPrefix(field, "http://") || strings.HasPrefix(field, "https://") {
 		u, err := url.Parse(field)
 		if err != nil {
-			return "", err
+			return "", fmt.Errorf("invalid URL format")
 		}
 
 		return u.Hostname(), nil
 	} else if strings.HasPrefix(field, "www.") || strings.HasSuffix(field, ".com") {
 		return field, nil
 	}
-	return "", fmt.Errorf("invalid domain format")
+	return field, fmt.Errorf("invalid domain format")
 }
