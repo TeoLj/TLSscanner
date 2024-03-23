@@ -132,7 +132,7 @@ func (s *Scanner) scanDomain(domain string) {
         case strings.Contains(err.Error(), "no such host"):
             s.ErrorCounts.NoHostFound++
         case strings.Contains(err.Error(), "invalid domain format"):
-            // This case is hypothetical; you'll need to adjust the error text accordingly
+            // change defined by myself
             s.ErrorCounts.InvalidDomainFormat++
         default:
             errMsg := err.Error()

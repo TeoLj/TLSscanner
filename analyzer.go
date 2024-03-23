@@ -171,7 +171,7 @@ func (a *Analyzer) PlotCipherCountsFromCSV(filenameIn string) *charts.Bar {
 				DataView: &opts.ToolBoxFeatureDataView{
 					Show:  true,
 					Title: "Data View",
-					Lang:  []string{"Data View", "Close", "Refresh"},
+					Lang:  []string{ "Data View","Close", "Refresh"},
 				},
 			},
 		}),
@@ -253,8 +253,13 @@ func (a *Analyzer) PlotErrorCountsToPieChart(errorCounts ErrorCounter) *charts.P
 
     // Add predefined error types
     addDataPoint("Handshake Failures", errorCounts.HandshakeFailures)
-    addDataPoint("Invalid Domain Format", errorCounts.InvalidDomainFormat)
+	if errorCounts.InvalidDomainFormat > 0 {	
+    addDataPoint("Invalid Domain Format", errorCounts.InvalidDomainFormat) 
+	}
+
+	if errorCounts.NoHostFound > 0 {
     addDataPoint("No Such Host", errorCounts.NoHostFound)
+	}
 
     // Add other errors
     for err, count := range errorCounts.OtherErrors {
@@ -263,20 +268,46 @@ func (a *Analyzer) PlotErrorCountsToPieChart(errorCounts ErrorCounter) *charts.P
 
     pie.AddSeries("Error Counts", data).
         SetGlobalOptions(
-            charts.WithTitleOpts(opts.Title{Title: "TLS Scan Error Report"}),
+            charts.WithTitleOpts(opts.Title{Title: "Scan Error Report"}),
             charts.WithLegendOpts(opts.Legend{
 				Show: true, 
 				Right: "right",
 				Left: "left",
-		        Orient: "vertical",
-				Top: "10%",
+		        Orient: "horizontal",
+				Top: "10%",  
+			}),
+			
+	)
+
+	pie.AddSeries("Error Counts", data).
+		SetSeriesOptions(
+			charts.WithPieChartOpts(opts.PieChart{
+				Radius:140,
+				Center: []string{"50%", "60%"}, // second% is vertical position
 				
-	}),
-            
-        )
+	},),
+	)
 
+	pie.SetGlobalOptions(
+		// Set the toolbox options
+		charts.WithToolboxOpts(opts.Toolbox{
+			Show: true,
+			Feature: &opts.ToolBoxFeature{
+				SaveAsImage: &opts.ToolBoxFeatureSaveAsImage{
+					Show:  true,
+					Title: "Save as Image",
+					Name:  "Error Counts",
+					Type:  "png",
+				},
+				DataView: &opts.ToolBoxFeatureDataView{
+					Show:  true,
+					Title: "Data View",
+					Lang:  []string{"Data View", "Close", "Refresh"},
+				},
+			},
+		}),
+	)
 	return pie
-
 }
 
 
