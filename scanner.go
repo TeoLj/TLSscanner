@@ -8,6 +8,7 @@ import (
 	"os"
 	"strings"
 	"sync"
+	
 )
 
 type Scanner struct {
@@ -15,15 +16,13 @@ type Scanner struct {
 	ScannedCiphers []string
 	opts           *Options
 	Mutex          *sync.Mutex // fine grained locking
-	ErrorCounts ErrorCounter
+	ErrorCounts    ErrorCounter
 }
 
 type ErrorCounter struct {
-	HandshakeFailures int
-	NoHostFound int
-	CertificateUnknown int 
-	CertificatedExpired int
-	OtherErrors map[string]int
+	HandshakeFailures   int
+	NoHostFound         int
+	OtherErrors         map[string]int
 }
 
 func NewScanner(domains []string, opts *Options) *Scanner {
@@ -39,6 +38,33 @@ func NewScanner(domains []string, opts *Options) *Scanner {
 }
 
 func (s *Scanner) StartScanner() {
+
+	if s.opts.ScanAndSaveDirectory != "" {
+		// Create a folder called output to save the results if it doesn't exist
+		os.Chdir(s.opts.ScanAndSaveDirectory)
+	} else {
+		// Create a folder called output to save the results if it doesn't exist
+		if _, err := os.Stat("output"); err == nil {
+			os.RemoveAll("output")
+		}
+		os.Mkdir("output", 0755)
+	}
+
+	var logFileName string
+
+	if s.opts.ScanAndSaveDirectory != "" {
+		logFileName = s.opts.ScanAndSaveDirectory + "/errorLog.txt"
+	} else {
+		logFileName = "./output/errorLog.txt"
+	}
+
+	file, err := os.OpenFile(logFileName, os.O_TRUNC|os.O_CREATE|os.O_WRONLY, 0644)
+	if err != nil {
+		fmt.Printf("Error opening or creating the log file: %v\n", err)
+		return
+	}
+    defer file.Close()
+
 	var wg sync.WaitGroup
 
 	// create a buffered channel with a capacity of s.Concurrency
@@ -51,7 +77,8 @@ func (s *Scanner) StartScanner() {
 		sem <- struct{}{}        // will block if the channel is full, routine sends struct to take slot in the channel
 		go func(domain string) { // closure function
 			defer wg.Done() // decrease the counter when the goroutine completes
-			s.scanDomain(domain)
+			s.scanDomain(domain, file)
+		
 			<-sem // release a slot in the channel
 		}(domain)
 	}
@@ -60,16 +87,6 @@ func (s *Scanner) StartScanner() {
 	fileName := strings.TrimSuffix(strings.TrimPrefix(s.opts.CSVFilePath, "./"), ".csv")
 
 	
-	if s.opts.ScanAndSaveDirectory != "" {
-		// Create a folder called output to save the results if it doesn't exist
-		os.Chdir(s.opts.ScanAndSaveDirectory)
-	} else {
-		// Create a folder called output to save the results if it doesn't exist
-		if _, err := os.Stat("output"); err == nil {
-			os.RemoveAll("output")
-		}
-		os.Mkdir("output", 0755)
-	}
 
 	if s.opts.CSVFilePath != "" {
 		if s.opts.ScanAndSaveDirectory != "" {
@@ -89,7 +106,6 @@ func (s *Scanner) StartScanner() {
 
 }
 
-
 func (s *Scanner) AnalyzeResults() {
 	if s.opts.ScanAndSaveDirectory != "" {
 		analyzer := NewAnalyzer(*s)
@@ -100,9 +116,7 @@ func (s *Scanner) AnalyzeResults() {
 	}
 }
 
-
-
-func (s *Scanner) scanDomain(domain string) {
+func (s *Scanner) scanDomain(domain string, file *os.File) {
 	var supportedCiphers []string
 
 	fmt.Printf("Scanning domain: %s \n", domain)
@@ -112,9 +126,7 @@ func (s *Scanner) scanDomain(domain string) {
 			CipherSuites: []uint16{cipher.ID},
 			MinVersion:   tls.VersionTLS12,
 			MaxVersion:   tls.VersionTLS13,
-			// InsecureSkipVerify: true, optional
 		}
-
 
 		// establish a connection to the domain
 		dialer := net.Dialer{Timeout: s.opts.Timeout}
@@ -125,52 +137,78 @@ func (s *Scanner) scanDomain(domain string) {
 			supportedCiphers = append(supportedCiphers, cipher.Name) // lock not put here due to performance overhead(release mutex for every cipher)
 			conn.Close()
 		} else {
-			
-		s.Mutex.Lock()
-        // Error checking logic
-        switch {
-        case strings.Contains(err.Error(), "handshake failure"):
-            s.ErrorCounts.HandshakeFailures++
-			fmt.Printf("\033[3m%s\033[0m: \033[1;31m %s for %s \033[0m  \n", domain, err, cipher.Name)
-			s.Mutex.Unlock() // unlock and
-			continue // skip to next cipher (next iteration)
-        case strings.Contains(err.Error(), "no such host"):
-            s.ErrorCounts.NoHostFound++
-			fmt.Printf("\033[3m%s\033[0m: \033[1;31m %s \033[0m  \n", domain, err)
-			s.Mutex.Unlock() // unlock and 
-			return // return to main function and go to next domain
-		case strings.Contains(err.Error(), "certificate signed by unknown authority"):
-			s.ErrorCounts.CertificateUnknown++
-			fmt.Printf("\033[3m%s\033[0m: \033[1;31m %s \033[0m for %s\n", domain, err, cipher.Name)
-			s.Mutex.Unlock() // unlock and
-			return // return to main function and go to next domain
-		case strings.Contains(err.Error(), "certificate has expired"):
-			s.ErrorCounts.CertificatedExpired++
-			fmt.Printf("\033[3m%s\033[0m: \033[1;31m %s \033[0m for %s\n", domain, err, cipher.Name)
-			s.Mutex.Unlock() // unlock and
-			return // return to main function and go to next domain
-        default:
-            errMsg := err.Error()
+
+			errMsg := err.Error()
+
+			s.Mutex.Lock()
+			// Error checking logic
+			switch {
+			case strings.Contains(err.Error(), "handshake failure"):
+				s.ErrorCounts.HandshakeFailures++
+				fmt.Printf("\033[3m%s\033[0m: \033[1;31m %s for %s \033[0m  \n", domain, err, cipher.Name)
+				s.LogError(domain, errMsg, cipher.Name, file)
+				// write the error message to the error file
+				s.Mutex.Unlock() // unlock and
+				continue         // skip to next cipher (next iteration)
+				
+			case strings.Contains(err.Error(), "no such host"):
+				s.ErrorCounts.NoHostFound++
+				fmt.Printf("\033[3m%s\033[0m: \033[1;31m %s \033[0m  \n", domain, err)
+				s.LogError(domain, errMsg, cipher.Name, file)
+				s.Mutex.Unlock() // unlock and
+				return           // return to main function and go to next domain
+			case strings.Contains(err.Error(), "certificate"):
+				s.ErrorCounts.OtherErrors["certificate related"]++
+				s.LogError(domain, errMsg, cipher.Name, file)
+				s.Mutex.Unlock()
+				return
+			case strings.Contains(err.Error(), "timeout"):
+				s.ErrorCounts.OtherErrors["timeout related"]++
+			default:
+				errMsg := err.Error()
             if _, exists := s.ErrorCounts.OtherErrors[errMsg]; !exists {
                 s.ErrorCounts.OtherErrors[errMsg] = 0 // if error message does not exist
             }
             s.ErrorCounts.OtherErrors[errMsg]++ 
-		
+			s.LogError(domain, errMsg, cipher.Name, file)
         }
         s.Mutex.Unlock()
         fmt.Printf("\033[3m%s\033[0m: \033[1;31m %s \033[0m for %s\n", domain, err, cipher.Name)
     	}
 
 	}
-	
 	fmt.Printf("%s: \n %s\n", domain, strings.Join(supportedCiphers, ";"))
 	// outside of loop to prevent lock contention
 	s.Mutex.Lock()
 	s.ScannedCiphers = append(s.ScannedCiphers, domain+": "+strings.Join(supportedCiphers, ";"))
 	s.Mutex.Unlock()
+
+
+}
+	
+	
+
+func (s *Scanner)LogError(domain, errMsg, cipherName string, file *os.File) {
+	var logMsg string
+    if strings.Contains(errMsg, "no such host") {
+        // Exclude the cipher name from the log message for "no such host" errors
+        logMsg = fmt.Sprintf("%s: %s\n", domain, errMsg)
+    } else {
+        // Include the cipher name in the log message for all other errors
+        logMsg = fmt.Sprintf("%s: %s for %s\n", domain, errMsg, cipherName)
+    }
+
+    // Check if the file is not nil and write the log message to the file
+    if file != nil {
+        _, err := file.WriteString(logMsg)
+        if err != nil {
+            fmt.Printf("Error writing to file: %v\n", err)
+        }
+    }
+	
+
 	
 }
-
 
 func (s *Scanner) saveResultsToCSV(filename string) {
 
@@ -195,4 +233,3 @@ func (s *Scanner) saveResultsToCSV(filename string) {
 		writer.Write([]string{parts[0], parts[1]})
 	}
 }
-

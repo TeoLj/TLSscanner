@@ -256,7 +256,7 @@ func (a *Analyzer) PlotErrorCountsToPieChart(errorCounts ErrorCounter) *charts.P
 	pie := charts.NewPie()
 
 	// Calculate the total count of all errors
-	totalErrors := errorCounts.HandshakeFailures + errorCounts.NoHostFound + errorCounts.CertificateUnknown + errorCounts.CertificatedExpired
+	totalErrors := errorCounts.HandshakeFailures + errorCounts.NoHostFound //+ errorCounts.CertificateUnknown + errorCounts.CertificatedExpired
 	for _, count := range errorCounts.OtherErrors {
 		totalErrors += count
 	}
@@ -300,7 +300,7 @@ func (a *Analyzer) PlotErrorCountsToPieChart(errorCounts ErrorCounter) *charts.P
 		SetSeriesOptions(
 			charts.WithPieChartOpts(opts.PieChart{
 				Radius: 140,
-				Center: []string{"30%", "60%"}, // second% is vertical position
+				Center: []string{"50%", "60%"}, // second% is vertical position
 			}),
 		)
 

@@ -1,0 +1,36 @@
+ü.tum.de: dial tcp: lookup ü.tum.de: no such host
+w.tum.de: dial tcp: lookup w.tum.de on 127.0.0.53:53: no such host
+cataas.com: remote error: tls: handshake failure for TLS_AES_128_GCM_SHA256
+cataas.com: remote error: tls: handshake failure for TLS_AES_256_GCM_SHA384
+apiv3.iucnredlist.org: remote error: tls: handshake failure for TLS_AES_128_GCM_SHA256
+cataas.com: remote error: tls: handshake failure for TLS_CHACHA20_POLY1305_SHA256
+apiv3.iucnredlist.org: remote error: tls: handshake failure for TLS_AES_256_GCM_SHA384
+cataas.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+apiv3.iucnredlist.org: remote error: tls: handshake failure for TLS_CHACHA20_POLY1305_SHA256
+cataas.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+apiv3.iucnredlist.org: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+www.petfinder.com: EOF for TLS_AES_128_GCM_SHA256
+apiv3.iucnredlist.org: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+random.dog: remote error: tls: handshake failure for TLS_AES_128_GCM_SHA256
+cataas.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+cataas.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+www.petfinder.com: EOF for TLS_AES_256_GCM_SHA384
+random.dog: remote error: tls: handshake failure for TLS_AES_256_GCM_SHA384
+apiv3.iucnredlist.org: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+apiv3.iucnredlist.org: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+cataas.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256
+random.dog: remote error: tls: handshake failure for TLS_CHACHA20_POLY1305_SHA256
+www.petfinder.com: EOF for TLS_CHACHA20_POLY1305_SHA256
+apiv3.iucnredlist.org: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256
+www.petfinder.com: EOF for TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+random.dog: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+random.dog: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+www.petfinder.com: EOF for TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+random.dog: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+www.petfinder.com: EOF for TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+random.dog: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+www.petfinder.com: EOF for TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+random.dog: remote error: tls: handshake failure for TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256
+random.dog: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256
+www.petfinder.com: EOF for TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256
+www.petfinder.com: EOF for TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256
