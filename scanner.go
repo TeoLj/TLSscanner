@@ -21,6 +21,8 @@ type Scanner struct {
 type ErrorCounter struct {
 	HandshakeFailures int
 	NoHostFound int
+	CertificateUnknown int 
+	CertificatedExpired int
 	OtherErrors map[string]int
 }
 
@@ -113,6 +115,7 @@ func (s *Scanner) scanDomain(domain string) {
 			// InsecureSkipVerify: true, optional
 		}
 
+
 		// establish a connection to the domain
 		dialer := net.Dialer{Timeout: s.opts.Timeout}
 
@@ -136,12 +139,22 @@ func (s *Scanner) scanDomain(domain string) {
 			fmt.Printf("\033[3m%s\033[0m: \033[1;31m %s \033[0m  \n", domain, err)
 			s.Mutex.Unlock() // unlock and 
 			return // return to main function and go to next domain
+		case strings.Contains(err.Error(), "certificate signed by unknown authority"):
+			s.ErrorCounts.CertificateUnknown++
+			fmt.Printf("\033[3m%s\033[0m: \033[1;31m %s \033[0m for %s\n", domain, err, cipher.Name)
+			s.Mutex.Unlock() // unlock and
+			return // return to main function and go to next domain
+		case strings.Contains(err.Error(), "certificate has expired"):
+			s.ErrorCounts.CertificatedExpired++
+			fmt.Printf("\033[3m%s\033[0m: \033[1;31m %s \033[0m for %s\n", domain, err, cipher.Name)
+			s.Mutex.Unlock() // unlock and
+			return // return to main function and go to next domain
         default:
             errMsg := err.Error()
             if _, exists := s.ErrorCounts.OtherErrors[errMsg]; !exists {
-                s.ErrorCounts.OtherErrors[errMsg] = 0
+                s.ErrorCounts.OtherErrors[errMsg] = 0 // if error message does not exist
             }
-            s.ErrorCounts.OtherErrors[errMsg]++
+            s.ErrorCounts.OtherErrors[errMsg]++ 
 		
         }
         s.Mutex.Unlock()
