@@ -8,6 +8,7 @@ import (
 	"os"
 	"strings"
 	"sync"
+	"sort"
 	
 )
 
@@ -103,6 +104,7 @@ func (s *Scanner) StartScanner() {
 			s.saveResultsToCSV("./output/cipherScan.csv")
 		}
 	}
+	SortErrorFile(logFileName)
 
 }
 
@@ -205,10 +207,29 @@ func (s *Scanner)LogError(domain, errMsg, cipherName string, file *os.File) {
             fmt.Printf("Error writing to file: %v\n", err)
         }
     }
+}
+
+func SortErrorFile(filename string){
+    // Step 1: Read file contents
+    content, err := os.ReadFile(filename)
+    if err != nil {
+        fmt.Printf("Error reading the file: %v\n", err)
+        return
+    }
+
+    lines := strings.Split(string(content), "\n")
+    sort.Strings(lines)
 	
 
-	
+   
+    sortedContent := strings.Join(lines, "\n")
+    err = os.WriteFile(filename, []byte(sortedContent), 0644)
+    if err != nil {
+        fmt.Printf("Error writing the sorted content back to the file: %v\n", err)
+        return
+    }
 }
+
 
 func (s *Scanner) saveResultsToCSV(filename string) {
 
