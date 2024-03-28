@@ -16,7 +16,7 @@ type Scanner struct {
 	Domains        []string
 	ScannedCiphers []string
 	opts           *Options
-	Mutex          *sync.Mutex // fine grained locking
+	Mutex          *sync.Mutex 
 	ErrorCounts    ErrorCounter
 }
 
@@ -29,9 +29,9 @@ type ErrorCounter struct {
 func NewScanner(domains []string, opts *Options) *Scanner {
 	return &Scanner{
 		Domains:        domains,
-		ScannedCiphers: make([]string, 0), // create slice of strings with 0 length
+		ScannedCiphers: make([]string, 0), 
 		opts:           opts,
-		Mutex:          &sync.Mutex{}, //initialize the mutex; & creates a pointer to the mutex
+		Mutex:          &sync.Mutex{}, 
 		ErrorCounts: ErrorCounter{
 			OtherErrors: make(map[string]int),
 		},
@@ -159,7 +159,6 @@ func (s *Scanner) scanDomain(domain string, file *os.File) {
 				s.ErrorCounts.HandshakeFailures++
 				fmt.Printf("\033[3m%s\033[0m: \033[1;31m %s for %s \033[0m  \n", domain, err, cipher.Name)
 				s.LogError(domain, errMsg, cipher.Name, file)
-				// write the error message to the error file
 				s.Mutex.Unlock() // unlock and
 				continue         // skip to next cipher (next iteration)
 				
@@ -167,40 +166,46 @@ func (s *Scanner) scanDomain(domain string, file *os.File) {
 				s.ErrorCounts.NoHostFound++
 				fmt.Printf("\033[3m%s\033[0m: \033[1;31m %s \033[0m  \n", domain, err)
 				s.LogError(domain, errMsg, cipher.Name, file)
-				s.Mutex.Unlock() // unlock and
+				s.Mutex.Unlock() 
 				return           // return to main function and go to next domain
-
+ 
+			// Fundamental issue that is unlikely to be resolved by trying different cipher suites
 			case strings.Contains(err.Error(), "certificate"):
 				s.ErrorCounts.OtherErrors["certificate related"]++
 				s.LogError(domain, errMsg, cipher.Name, file)
 				s.Mutex.Unlock()
 				return
 
+			// Skip cipher suite causing timeout and move to next cipher
 			case strings.Contains(err.Error(), "timeout"):
 				s.ErrorCounts.OtherErrors["timeout related"]++
 				s.LogError(domain, errMsg, cipher.Name, file)
 				s.Mutex.Unlock()
 				continue
 
+			// Not specific to the cipher suite but rather indicates a broader connectivity issue
 			case strings.Contains(err.Error(), "connection refused"):
 				s.ErrorCounts.OtherErrors["connection refused"]++
 				s.LogError(domain, errMsg, cipher.Name, file)
 				s.Mutex.Unlock()
 				return
 			
-			
+			// Remote server forcibly closes the TCP connection. Attempting other connections
+			// with different ciphers, is unlikely to resolve the issue.
 			case strings.Contains(err.Error(), "connection reset"):
 				s.ErrorCounts.OtherErrors["connection reset by peer"]++
 				s.LogError(domain, errMsg, cipher.Name, file)
 				s.Mutex.Unlock()
 				return
 
+			// Fundamental issue on client-side.
 			case strings.Contains(err.Error(), "permission denied"):
 				s.ErrorCounts.OtherErrors["connect permission denied"]++
 				s.LogError(domain, errMsg, cipher.Name, file)
 				s.Mutex.Unlock()
 				return
 			
+			// Fundamental issue that indicates broader configuration problem
 			case strings.Contains(err.Error(), "server misbehaving"):
 				s.ErrorCounts.OtherErrors["server misbehaving"]++
 				s.LogError(domain, errMsg, cipher.Name, file)
@@ -221,12 +226,10 @@ func (s *Scanner) scanDomain(domain string, file *os.File) {
 
 	}
 	fmt.Printf("%s: \n %s\n", domain, strings.Join(supportedCiphers, ";"))
-	// outside of loop to prevent lock contention
+	// Outside of loop to prevent lock contention
 	s.Mutex.Lock()
 	s.ScannedCiphers = append(s.ScannedCiphers, domain+": "+strings.Join(supportedCiphers, ";"))
 	s.Mutex.Unlock()
-
-
 }
 	
 	
@@ -251,7 +254,6 @@ func (s *Scanner)LogError(domain, errMsg, cipherName string, file *os.File) {
 }
 
 func (s *Scanner) sortErrorFile(filename string){
-    // Step 1: Read file contents
     content, err := os.ReadFile(filename)
     if err != nil {
         fmt.Printf("Error reading the file: %v\n", err)
@@ -261,7 +263,6 @@ func (s *Scanner) sortErrorFile(filename string){
 	
 	sort.Strings(lines)
 	sortedContent := strings.Join(lines, "\n")
-	// between each sorted line, add a separator
 	sortedContent = strings.ReplaceAll(sortedContent, "\n", "\n--------------------------------\n")
 	err = os.WriteFile(filename, []byte(sortedContent), 0644)
 	if err != nil {
@@ -276,7 +277,7 @@ func (s *Scanner) saveResultsToCSV(filename string) {
 	s.Mutex.Lock()
 	defer s.Mutex.Unlock()
 
-	// open the file for writing
+	// Open the file for writing
 	file, err := os.Create(filename)
 	file.Truncate(0) // Overwrite the old content of output.csv
 
