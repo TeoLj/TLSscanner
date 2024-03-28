@@ -40,6 +40,7 @@ func NewScanner(domains []string, opts *Options) *Scanner {
 
 func (s *Scanner) StartScanner() {
 
+	/* Create an output folder to save the results */
 	if s.opts.ScanAndSaveDirectory != "" {
 		// Create a folder called output to save the results if it doesn't exist
 		os.Chdir(s.opts.ScanAndSaveDirectory)
@@ -51,6 +52,7 @@ func (s *Scanner) StartScanner() {
 		os.Mkdir("output", 0755)
 	}
 
+	/* Create a file to save the error logs */
 	var logFileName string
 
 	if s.opts.ScanAndSaveDirectory != "" {
@@ -68,35 +70,43 @@ func (s *Scanner) StartScanner() {
 
 	var wg sync.WaitGroup
 
-	// create a buffered channel with a capacity of s.Concurrency
-	// limit the number of goroutines that can run at the same time
-	// channel defined as empty struct cos it takes no memory
-	sem := make(chan struct{}, s.opts.Concurrency) //  limiting the number of goroutines that can actively perform work at the same time
 
-	for _, domain := range s.Domains {
-		wg.Add(1)                // new goroutine
-		sem <- struct{}{}        // will block if the channel is full, routine sends struct to take slot in the channel
-		go func(domain string) { // closure function
-			defer wg.Done() // decrease the counter when the goroutine completes
+	/* Create a buffered channel with a capacity of s.Concurrency
+	limit the number of goroutines that can run at the same time
+	channel defined as empty struct cos it takes no memory */
+	if !s.opts.Naive { // default
+		sem := make(chan struct{}, s.opts.Concurrency) // limiting the number of goroutines that can actively perform work at the same time
+
+		for _, domain := range s.Domains {
+			wg.Add(1)                // new goroutine
+			sem <- struct{}{}        // will block if the channel is full, routine sends struct to take slot in the channel
+			go func(domain string) { // closure function
+				defer wg.Done() // decrease the counter when the goroutine completes
+				s.scanDomain(domain, file)
+				<-sem // release a slot in the channel
+			}(domain)
+		}
+
+		wg.Wait() // wait for all goroutines to complete
+	} else {
+
+	/* Naive scanner scans sequentially */
+		for _, domain := range s.Domains {
 			s.scanDomain(domain, file)
-		
-			<-sem // release a slot in the channel
-		}(domain)
+		}
 	}
-
-	wg.Wait() // wait for all goroutines to complete
-	fileName := strings.TrimSuffix(strings.TrimPrefix(s.opts.CSVFilePath, "./"), ".csv")
-
 	
 
-	if s.opts.CSVFilePath != "" {
+	/* Save the cipher scan results to a CSV file*/
+	fileName := strings.TrimSuffix(strings.TrimPrefix(s.opts.CSVFilePath, "./"), ".csv")
+
+	if s.opts.CSVFilePath != "" { // Result file takes the name of the input file
 		if s.opts.ScanAndSaveDirectory != "" {
 			s.saveResultsToCSV(s.opts.ScanAndSaveDirectory + "/" + fileName + "_cipherScan.csv")
 		} else {
 			s.saveResultsToCSV("./output/" + fileName + "_cipherScan.csv")
 		}
 	}
-
 	if s.opts.DomainsList != "" {
 		if s.opts.ScanAndSaveDirectory != "" {
 			s.saveResultsToCSV(s.opts.ScanAndSaveDirectory + "/cipherScan.csv")
@@ -104,7 +114,7 @@ func (s *Scanner) StartScanner() {
 			s.saveResultsToCSV("./output/cipherScan.csv")
 		}
 	}
-	SortErrorFile(logFileName)
+	s.sortErrorFile(logFileName)
 
 }
 
@@ -159,13 +169,44 @@ func (s *Scanner) scanDomain(domain string, file *os.File) {
 				s.LogError(domain, errMsg, cipher.Name, file)
 				s.Mutex.Unlock() // unlock and
 				return           // return to main function and go to next domain
+
 			case strings.Contains(err.Error(), "certificate"):
 				s.ErrorCounts.OtherErrors["certificate related"]++
 				s.LogError(domain, errMsg, cipher.Name, file)
 				s.Mutex.Unlock()
 				return
+
 			case strings.Contains(err.Error(), "timeout"):
 				s.ErrorCounts.OtherErrors["timeout related"]++
+				s.LogError(domain, errMsg, cipher.Name, file)
+				s.Mutex.Unlock()
+				continue
+
+			case strings.Contains(err.Error(), "connection refused"):
+				s.ErrorCounts.OtherErrors["connection refused"]++
+				s.LogError(domain, errMsg, cipher.Name, file)
+				s.Mutex.Unlock()
+				return
+			
+			
+			case strings.Contains(err.Error(), "connection reset"):
+				s.ErrorCounts.OtherErrors["connection reset by peer"]++
+				s.LogError(domain, errMsg, cipher.Name, file)
+				s.Mutex.Unlock()
+				return
+
+			case strings.Contains(err.Error(), "permission denied"):
+				s.ErrorCounts.OtherErrors["connect permission denied"]++
+				s.LogError(domain, errMsg, cipher.Name, file)
+				s.Mutex.Unlock()
+				return
+			
+			case strings.Contains(err.Error(), "server misbehaving"):
+				s.ErrorCounts.OtherErrors["server misbehaving"]++
+				s.LogError(domain, errMsg, cipher.Name, file)
+				s.Mutex.Unlock()
+				return
+
 			default:
 				errMsg := err.Error()
             if _, exists := s.ErrorCounts.OtherErrors[errMsg]; !exists {
@@ -209,25 +250,24 @@ func (s *Scanner)LogError(domain, errMsg, cipherName string, file *os.File) {
     }
 }
 
-func SortErrorFile(filename string){
+func (s *Scanner) sortErrorFile(filename string){
     // Step 1: Read file contents
     content, err := os.ReadFile(filename)
     if err != nil {
         fmt.Printf("Error reading the file: %v\n", err)
         return
     }
-
     lines := strings.Split(string(content), "\n")
-    sort.Strings(lines)
 	
-
-   
-    sortedContent := strings.Join(lines, "\n")
-    err = os.WriteFile(filename, []byte(sortedContent), 0644)
-    if err != nil {
-        fmt.Printf("Error writing the sorted content back to the file: %v\n", err)
-        return
-    }
+	sort.Strings(lines)
+	sortedContent := strings.Join(lines, "\n")
+	// between each sorted line, add a separator
+	sortedContent = strings.ReplaceAll(sortedContent, "\n", "\n--------------------------------\n")
+	err = os.WriteFile(filename, []byte(sortedContent), 0644)
+	if err != nil {
+		fmt.Printf("Error writing the sorted content back to the file: %v\n", err)
+		return
+	}
 }
 
 

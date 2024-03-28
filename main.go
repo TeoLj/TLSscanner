@@ -38,8 +38,18 @@ func main() {
 	scanner.AnalyzeResults()
 
 	end := time.Now()
-	fmt.Println("\033[1;35mEnd:", end.Format("2006-01-02 15:04:05"), "| Duration:", end.Sub(start), "\033[0m")
 
+	duration := end.Sub(start)
+	totalSeconds := int(duration.Seconds())
+
+	// Calculate minutes and seconds
+	minutes := totalSeconds / 60
+	seconds := totalSeconds % 60
+
+	
+	// Print end time and formatted duration
+	fmt.Printf("\033[1;35mEnd: %s | Duration: %02d:%02d\033[0m\n",
+	end.Format("2006-01-02 15:04:05"), minutes, seconds)
 
 
 }

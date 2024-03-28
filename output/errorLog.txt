@@ -1,38 +1,1125 @@
 
-----------------------------------------
+--------------------------------
+agify.io: remote error: tls: handshake failure for TLS_AES_128_GCM_SHA256
+--------------------------------
+agify.io: remote error: tls: handshake failure for TLS_AES_256_GCM_SHA384
+--------------------------------
+agify.io: remote error: tls: handshake failure for TLS_CHACHA20_POLY1305_SHA256
+--------------------------------
+agify.io: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+--------------------------------
+agify.io: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+--------------------------------
+agify.io: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+--------------------------------
+agify.io: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+--------------------------------
+agify.io: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+agify.io: remote error: tls: handshake failure for TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+aniapi.com: dial tcp 207.244.65.58:443: i/o timeout for TLS_AES_128_GCM_SHA256
+--------------------------------
+aniapi.com: dial tcp 207.244.65.58:443: i/o timeout for TLS_AES_256_GCM_SHA384
+--------------------------------
+aniapi.com: dial tcp 207.244.65.58:443: i/o timeout for TLS_CHACHA20_POLY1305_SHA256
+--------------------------------
+aniapi.com: dial tcp 207.244.65.58:443: i/o timeout for TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+--------------------------------
+aniapi.com: dial tcp 207.244.65.58:443: i/o timeout for TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+--------------------------------
+aniapi.com: dial tcp 207.244.65.58:443: i/o timeout for TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+--------------------------------
+aniapi.com: dial tcp 207.244.65.58:443: i/o timeout for TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+--------------------------------
+aniapi.com: dial tcp 207.244.65.58:443: i/o timeout for TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+aniapi.com: dial tcp 207.244.65.58:443: i/o timeout for TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA
+--------------------------------
+aniapi.com: dial tcp 207.244.65.58:443: i/o timeout for TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+--------------------------------
+aniapi.com: dial tcp 207.244.65.58:443: i/o timeout for TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA
+--------------------------------
+aniapi.com: dial tcp 207.244.65.58:443: i/o timeout for TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+--------------------------------
+aniapi.com: dial tcp 207.244.65.58:443: i/o timeout for TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+anonfiles.com: dial tcp: lookup anonfiles.com on 127.0.0.53:53: no such host
+--------------------------------
+api.amethyste.moe: dial tcp 185.163.124.226:443: i/o timeout for TLS_AES_128_GCM_SHA256
+--------------------------------
+api.amethyste.moe: dial tcp 185.163.124.226:443: i/o timeout for TLS_AES_256_GCM_SHA384
+--------------------------------
+api.amethyste.moe: dial tcp 185.163.124.226:443: i/o timeout for TLS_CHACHA20_POLY1305_SHA256
+--------------------------------
+api.amethyste.moe: dial tcp 185.163.124.226:443: i/o timeout for TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+--------------------------------
+api.amethyste.moe: dial tcp 185.163.124.226:443: i/o timeout for TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+--------------------------------
+api.amethyste.moe: dial tcp 185.163.124.226:443: i/o timeout for TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+--------------------------------
+api.amethyste.moe: dial tcp 185.163.124.226:443: i/o timeout for TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+--------------------------------
+api.amethyste.moe: dial tcp 185.163.124.226:443: i/o timeout for TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+api.amethyste.moe: dial tcp 185.163.124.226:443: i/o timeout for TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA
+--------------------------------
+api.amethyste.moe: dial tcp 185.163.124.226:443: i/o timeout for TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+--------------------------------
+api.amethyste.moe: dial tcp 185.163.124.226:443: i/o timeout for TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA
+--------------------------------
+api.amethyste.moe: dial tcp 185.163.124.226:443: i/o timeout for TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+--------------------------------
+api.amethyste.moe: dial tcp 185.163.124.226:443: i/o timeout for TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+api.collinsdictionary.com: remote error: tls: handshake failure for TLS_AES_128_GCM_SHA256
+--------------------------------
+api.collinsdictionary.com: remote error: tls: handshake failure for TLS_AES_256_GCM_SHA384
+--------------------------------
+api.collinsdictionary.com: remote error: tls: handshake failure for TLS_CHACHA20_POLY1305_SHA256
+--------------------------------
+api.collinsdictionary.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+--------------------------------
+api.collinsdictionary.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+--------------------------------
+api.collinsdictionary.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+--------------------------------
+api.collinsdictionary.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+--------------------------------
+api.collinsdictionary.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+api.collinsdictionary.com: remote error: tls: handshake failure for TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+api.ganjoor.net: read tcp 10.181.83.37:48898->193.36.84.220:443: read: connection reset by peer for TLS_AES_128_GCM_SHA256
+--------------------------------
+api.stackexchange.com: remote error: tls: handshake failure for TLS_AES_128_GCM_SHA256
+--------------------------------
+api.stackexchange.com: remote error: tls: handshake failure for TLS_AES_256_GCM_SHA384
+--------------------------------
+api.stackexchange.com: remote error: tls: handshake failure for TLS_CHACHA20_POLY1305_SHA256
+--------------------------------
+api.stackexchange.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+--------------------------------
+api.stackexchange.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+--------------------------------
+api.stackexchange.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+--------------------------------
+api.stackexchange.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+--------------------------------
+api.stackexchange.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+api.stackexchange.com: remote error: tls: handshake failure for TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA
+--------------------------------
+api.stackexchange.com: remote error: tls: handshake failure for TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA
+--------------------------------
+api.stackexchange.com: remote error: tls: handshake failure for TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+api.thenounproject.com: EOF for TLS_AES_128_GCM_SHA256
+--------------------------------
+api.thenounproject.com: EOF for TLS_AES_256_GCM_SHA384
+--------------------------------
+api.thenounproject.com: EOF for TLS_CHACHA20_POLY1305_SHA256
+--------------------------------
+api.thenounproject.com: EOF for TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+--------------------------------
+api.thenounproject.com: EOF for TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+--------------------------------
+api.thenounproject.com: EOF for TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+--------------------------------
+api.thenounproject.com: EOF for TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+--------------------------------
+api.thenounproject.com: EOF for TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+api.thenounproject.com: EOF for TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+apidocs.geekflare.com: dial tcp: lookup apidocs.geekflare.com on 127.0.0.53:53: no such host
+--------------------------------
+apiflash.com: remote error: tls: handshake failure for TLS_AES_128_GCM_SHA256
+--------------------------------
+apiflash.com: remote error: tls: handshake failure for TLS_AES_256_GCM_SHA384
+--------------------------------
+apiflash.com: remote error: tls: handshake failure for TLS_CHACHA20_POLY1305_SHA256
+--------------------------------
+apiflash.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+--------------------------------
+apiflash.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+--------------------------------
+apiflash.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+--------------------------------
+apiflash.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+--------------------------------
+apiflash.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+apiflash.com: remote error: tls: handshake failure for TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA
+--------------------------------
+apiv2.bitcoinaverage.com: remote error: tls: handshake failure for TLS_AES_128_GCM_SHA256
+--------------------------------
+apiv2.bitcoinaverage.com: remote error: tls: handshake failure for TLS_AES_256_GCM_SHA384
+--------------------------------
+apiv2.bitcoinaverage.com: remote error: tls: handshake failure for TLS_CHACHA20_POLY1305_SHA256
+--------------------------------
+apiv2.bitcoinaverage.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+--------------------------------
+apiv2.bitcoinaverage.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+--------------------------------
+apiv2.bitcoinaverage.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+--------------------------------
+apiv2.bitcoinaverage.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+--------------------------------
+apiv2.bitcoinaverage.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+apiv2.bitcoinaverage.com: remote error: tls: handshake failure for TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
 apiv3.iucnredlist.org: remote error: tls: handshake failure for TLS_AES_128_GCM_SHA256
+--------------------------------
 apiv3.iucnredlist.org: remote error: tls: handshake failure for TLS_AES_256_GCM_SHA384
+--------------------------------
 apiv3.iucnredlist.org: remote error: tls: handshake failure for TLS_CHACHA20_POLY1305_SHA256
+--------------------------------
 apiv3.iucnredlist.org: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+--------------------------------
 apiv3.iucnredlist.org: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+--------------------------------
 apiv3.iucnredlist.org: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+--------------------------------
 apiv3.iucnredlist.org: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+--------------------------------
 apiv3.iucnredlist.org: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+bayfiles.com: dial tcp: lookup bayfiles.com on 127.0.0.53:53: no such host
+--------------------------------
+bazaar.abuse.ch: remote error: tls: handshake failure for TLS_AES_128_GCM_SHA256
+--------------------------------
+bazaar.abuse.ch: remote error: tls: handshake failure for TLS_AES_256_GCM_SHA384
+--------------------------------
+bazaar.abuse.ch: remote error: tls: handshake failure for TLS_CHACHA20_POLY1305_SHA256
+--------------------------------
+bazaar.abuse.ch: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+--------------------------------
+bazaar.abuse.ch: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+--------------------------------
+bazaar.abuse.ch: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+--------------------------------
+bazaar.abuse.ch: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+--------------------------------
+bazaar.abuse.ch: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+bitcoincharts.com: remote error: tls: handshake failure for TLS_AES_128_GCM_SHA256
+--------------------------------
+bitcoincharts.com: remote error: tls: handshake failure for TLS_AES_256_GCM_SHA384
+--------------------------------
+bitcoincharts.com: remote error: tls: handshake failure for TLS_CHACHA20_POLY1305_SHA256
+--------------------------------
+bitcoincharts.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+--------------------------------
+bitcoincharts.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+--------------------------------
+bitcoincharts.com: tls: failed to verify certificate: x509: certificate has expired or is not yet valid: current time 2024-03-28T15:20:53+01:00 is after 2021-11-29T21:00:28Z for TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA
+--------------------------------
+bnb.data.bl.uk: dial tcp 194.66.233.215:443: i/o timeout for TLS_AES_128_GCM_SHA256
+--------------------------------
+bnb.data.bl.uk: dial tcp 194.66.233.215:443: i/o timeout for TLS_AES_256_GCM_SHA384
+--------------------------------
+bnb.data.bl.uk: dial tcp 194.66.233.215:443: i/o timeout for TLS_CHACHA20_POLY1305_SHA256
+--------------------------------
+bnb.data.bl.uk: dial tcp 194.66.233.215:443: i/o timeout for TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+--------------------------------
+bnb.data.bl.uk: dial tcp 194.66.233.215:443: i/o timeout for TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+--------------------------------
+bnb.data.bl.uk: dial tcp 194.66.233.215:443: i/o timeout for TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+--------------------------------
+bnb.data.bl.uk: dial tcp 194.66.233.215:443: i/o timeout for TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+--------------------------------
+bnb.data.bl.uk: dial tcp 194.66.233.215:443: i/o timeout for TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+bnb.data.bl.uk: dial tcp 194.66.233.215:443: i/o timeout for TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA
+--------------------------------
+bnb.data.bl.uk: dial tcp 194.66.233.215:443: i/o timeout for TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+--------------------------------
+bnb.data.bl.uk: dial tcp 194.66.233.215:443: i/o timeout for TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA
+--------------------------------
+bnb.data.bl.uk: dial tcp 194.66.233.215:443: i/o timeout for TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+--------------------------------
+bnb.data.bl.uk: dial tcp 194.66.233.215:443: i/o timeout for TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+brainshop.ai: remote error: tls: handshake failure for TLS_AES_128_GCM_SHA256
+--------------------------------
+brainshop.ai: remote error: tls: handshake failure for TLS_AES_256_GCM_SHA384
+--------------------------------
+brainshop.ai: remote error: tls: handshake failure for TLS_CHACHA20_POLY1305_SHA256
+--------------------------------
+brainshop.ai: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+--------------------------------
+brainshop.ai: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+--------------------------------
+brainshop.ai: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+--------------------------------
+brainshop.ai: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+--------------------------------
+brainshop.ai: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+brainshop.ai: remote error: tls: handshake failure for TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+browshot.com: remote error: tls: handshake failure for TLS_AES_128_GCM_SHA256
+--------------------------------
+browshot.com: remote error: tls: handshake failure for TLS_AES_256_GCM_SHA384
+--------------------------------
+browshot.com: remote error: tls: handshake failure for TLS_CHACHA20_POLY1305_SHA256
+--------------------------------
+browshot.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+--------------------------------
+browshot.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+--------------------------------
+browshot.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+--------------------------------
+browshot.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+--------------------------------
+browshot.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+browshot.com: remote error: tls: handshake failure for TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+calapi.inadiutorium.cz: dial tcp [2a02:2b88:2:1::22da]:443: i/o timeout for TLS_AES_128_GCM_SHA256
+--------------------------------
+calapi.inadiutorium.cz: dial tcp [2a02:2b88:2:1::22da]:443: i/o timeout for TLS_AES_256_GCM_SHA384
+--------------------------------
+calapi.inadiutorium.cz: dial tcp [2a02:2b88:2:1::22da]:443: i/o timeout for TLS_CHACHA20_POLY1305_SHA256
+--------------------------------
+calapi.inadiutorium.cz: dial tcp [2a02:2b88:2:1::22da]:443: i/o timeout for TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+--------------------------------
+calapi.inadiutorium.cz: dial tcp [2a02:2b88:2:1::22da]:443: i/o timeout for TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+--------------------------------
+calapi.inadiutorium.cz: dial tcp [2a02:2b88:2:1::22da]:443: i/o timeout for TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+--------------------------------
+calapi.inadiutorium.cz: dial tcp [2a02:2b88:2:1::22da]:443: i/o timeout for TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+--------------------------------
+calapi.inadiutorium.cz: dial tcp [2a02:2b88:2:1::22da]:443: i/o timeout for TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+calapi.inadiutorium.cz: dial tcp [2a02:2b88:2:1::22da]:443: i/o timeout for TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA
+--------------------------------
+calapi.inadiutorium.cz: dial tcp [2a02:2b88:2:1::22da]:443: i/o timeout for TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+--------------------------------
+calapi.inadiutorium.cz: dial tcp [2a02:2b88:2:1::22da]:443: i/o timeout for TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA
+--------------------------------
+calapi.inadiutorium.cz: dial tcp [2a02:2b88:2:1::22da]:443: i/o timeout for TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+--------------------------------
+calapi.inadiutorium.cz: dial tcp [2a02:2b88:2:1::22da]:443: i/o timeout for TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
 cataas.com: remote error: tls: handshake failure for TLS_AES_128_GCM_SHA256
+--------------------------------
 cataas.com: remote error: tls: handshake failure for TLS_AES_256_GCM_SHA384
+--------------------------------
 cataas.com: remote error: tls: handshake failure for TLS_CHACHA20_POLY1305_SHA256
+--------------------------------
 cataas.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+--------------------------------
 cataas.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+--------------------------------
 cataas.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+--------------------------------
 cataas.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+--------------------------------
 cataas.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+catboys.com: context deadline exceeded for TLS_AES_256_GCM_SHA384
+--------------------------------
+ccdb.hemiola.com: tls: failed to verify certificate: x509: certificate is valid for *.accountservergroup.com, accountservergroup.com, not ccdb.hemiola.com for TLS_AES_128_GCM_SHA256
+--------------------------------
+changelogs.md: dial tcp: lookup changelogs.md on 127.0.0.53:53: no such host
+--------------------------------
+collection.cooperhewitt.org: remote error: tls: handshake failure for TLS_AES_128_GCM_SHA256
+--------------------------------
+collection.cooperhewitt.org: remote error: tls: handshake failure for TLS_AES_256_GCM_SHA384
+--------------------------------
+collection.cooperhewitt.org: remote error: tls: handshake failure for TLS_CHACHA20_POLY1305_SHA256
+--------------------------------
+collection.cooperhewitt.org: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+--------------------------------
+collection.cooperhewitt.org: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+--------------------------------
+collection.cooperhewitt.org: tls: failed to verify certificate: x509: certificate signed by unknown authority for TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA
+--------------------------------
+colormind.io: remote error: tls: handshake failure for TLS_AES_128_GCM_SHA256
+--------------------------------
+colormind.io: remote error: tls: handshake failure for TLS_AES_256_GCM_SHA384
+--------------------------------
+colormind.io: remote error: tls: handshake failure for TLS_CHACHA20_POLY1305_SHA256
+--------------------------------
+colormind.io: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+--------------------------------
+colormind.io: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+--------------------------------
+colormind.io: tls: failed to verify certificate: x509: certificate has expired or is not yet valid: current time 2024-03-28T15:20:44+01:00 is after 2016-01-18T02:56:33Z for TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA
+--------------------------------
+ctext.org: remote error: tls: handshake failure for TLS_AES_128_GCM_SHA256
+--------------------------------
+ctext.org: remote error: tls: handshake failure for TLS_AES_256_GCM_SHA384
+--------------------------------
+ctext.org: remote error: tls: handshake failure for TLS_CHACHA20_POLY1305_SHA256
+--------------------------------
+ctext.org: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+--------------------------------
+ctext.org: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+--------------------------------
+ctext.org: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+--------------------------------
+ctext.org: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+--------------------------------
+ctext.org: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+ctext.org: remote error: tls: handshake failure for TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+developer.gitter.im: dial tcp: lookup developer.gitter.im on 127.0.0.53:53: no such host
+--------------------------------
+docs.coincap.io: remote error: tls: handshake failure for TLS_AES_128_GCM_SHA256
+--------------------------------
+docs.coincap.io: remote error: tls: handshake failure for TLS_AES_256_GCM_SHA384
+--------------------------------
+docs.coincap.io: remote error: tls: handshake failure for TLS_CHACHA20_POLY1305_SHA256
+--------------------------------
+docs.travis-ci.com: remote error: tls: handshake failure for TLS_AES_128_GCM_SHA256
+--------------------------------
+docs.travis-ci.com: remote error: tls: handshake failure for TLS_AES_256_GCM_SHA384
+--------------------------------
+docs.travis-ci.com: remote error: tls: handshake failure for TLS_CHACHA20_POLY1305_SHA256
+--------------------------------
+docs.travis-ci.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+--------------------------------
+docs.travis-ci.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+--------------------------------
+docs.travis-ci.com: remote error: tls: handshake failure for TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA
+--------------------------------
+docs.travis-ci.com: remote error: tls: handshake failure for TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+--------------------------------
+docs.travis-ci.com: remote error: tls: handshake failure for TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA
+--------------------------------
+docs.travis-ci.com: remote error: tls: handshake failure for TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+--------------------------------
+docs.travis-ci.com: remote error: tls: handshake failure for TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+genderize.io: remote error: tls: handshake failure for TLS_AES_128_GCM_SHA256
+--------------------------------
+genderize.io: remote error: tls: handshake failure for TLS_AES_256_GCM_SHA384
+--------------------------------
+genderize.io: remote error: tls: handshake failure for TLS_CHACHA20_POLY1305_SHA256
+--------------------------------
+genderize.io: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+--------------------------------
+genderize.io: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+--------------------------------
+genderize.io: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+--------------------------------
+genderize.io: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+--------------------------------
+genderize.io: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+genderize.io: remote error: tls: handshake failure for TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+ghibliapi.herokuapp.com: EOF for TLS_AES_128_GCM_SHA256
+--------------------------------
+ghibliapi.herokuapp.com: EOF for TLS_AES_256_GCM_SHA384
+--------------------------------
+ghibliapi.herokuapp.com: EOF for TLS_CHACHA20_POLY1305_SHA256
+--------------------------------
+ghibliapi.herokuapp.com: EOF for TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+--------------------------------
+ghibliapi.herokuapp.com: EOF for TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+--------------------------------
+ghibliapi.herokuapp.com: EOF for TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+--------------------------------
+ghibliapi.herokuapp.com: EOF for TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+--------------------------------
+ghibliapi.herokuapp.com: EOF for TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+ghibliapi.herokuapp.com: EOF for TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+goqr.me: remote error: tls: handshake failure for TLS_AES_128_GCM_SHA256
+--------------------------------
+goqr.me: remote error: tls: handshake failure for TLS_AES_256_GCM_SHA384
+--------------------------------
+goqr.me: remote error: tls: handshake failure for TLS_CHACHA20_POLY1305_SHA256
+--------------------------------
+goqr.me: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+--------------------------------
+goqr.me: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+--------------------------------
+goqr.me: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+--------------------------------
+goqr.me: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+--------------------------------
+goqr.me: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+goqr.me: remote error: tls: handshake failure for TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA
+--------------------------------
+goqr.me: remote error: tls: handshake failure for TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA
+--------------------------------
+goqr.me: remote error: tls: handshake failure for TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+graphql.bitquery.io: remote error: tls: handshake failure for TLS_AES_128_GCM_SHA256
+--------------------------------
+graphql.bitquery.io: remote error: tls: handshake failure for TLS_AES_256_GCM_SHA384
+--------------------------------
+graphql.bitquery.io: remote error: tls: handshake failure for TLS_CHACHA20_POLY1305_SHA256
+--------------------------------
+graphql.bitquery.io: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+--------------------------------
+graphql.bitquery.io: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+--------------------------------
+graphql.bitquery.io: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+--------------------------------
+graphql.bitquery.io: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+--------------------------------
+graphql.bitquery.io: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+httpbin.org: EOF for TLS_AES_128_GCM_SHA256
+--------------------------------
+httpbin.org: EOF for TLS_AES_256_GCM_SHA384
+--------------------------------
+httpbin.org: EOF for TLS_CHACHA20_POLY1305_SHA256
+--------------------------------
+httpbin.org: EOF for TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+--------------------------------
+httpbin.org: EOF for TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+--------------------------------
+httpbin.org: EOF for TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+--------------------------------
+httpbin.org: EOF for TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+--------------------------------
+httpbin.org: EOF for TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+httpbin.org: EOF for TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+hub.openapihub.com: EOF for TLS_AES_128_GCM_SHA256
+--------------------------------
+hub.openapihub.com: EOF for TLS_AES_256_GCM_SHA384
+--------------------------------
+hub.openapihub.com: EOF for TLS_CHACHA20_POLY1305_SHA256
+--------------------------------
+hub.openapihub.com: EOF for TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+--------------------------------
+hub.openapihub.com: EOF for TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+--------------------------------
+hub.openapihub.com: EOF for TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+--------------------------------
+hub.openapihub.com: EOF for TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+--------------------------------
+hub.openapihub.com: EOF for TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+hub.openapihub.com: EOF for TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+ip-fast.com: dial tcp 162.210.196.166:443: i/o timeout for TLS_AES_128_GCM_SHA256
+--------------------------------
+ip-fast.com: dial tcp 162.210.196.166:443: i/o timeout for TLS_AES_256_GCM_SHA384
+--------------------------------
+ip-fast.com: dial tcp 162.210.196.166:443: i/o timeout for TLS_CHACHA20_POLY1305_SHA256
+--------------------------------
+ip-fast.com: dial tcp 162.210.196.166:443: i/o timeout for TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+--------------------------------
+ip-fast.com: dial tcp 162.210.196.166:443: i/o timeout for TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+--------------------------------
+ip-fast.com: dial tcp 162.210.196.166:443: i/o timeout for TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+--------------------------------
+ip-fast.com: dial tcp 162.210.196.166:443: i/o timeout for TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+--------------------------------
+ip-fast.com: dial tcp 162.210.196.166:443: i/o timeout for TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+ip-fast.com: dial tcp 162.210.196.166:443: i/o timeout for TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA
+--------------------------------
+ip-fast.com: dial tcp 162.210.196.166:443: i/o timeout for TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+--------------------------------
+ip-fast.com: dial tcp 162.210.196.166:443: i/o timeout for TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA
+--------------------------------
+ip-fast.com: dial tcp 162.210.196.166:443: i/o timeout for TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+--------------------------------
+ip-fast.com: dial tcp 162.210.196.166:443: i/o timeout for TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+ipfind.io: remote error: tls: handshake failure for TLS_AES_128_GCM_SHA256
+--------------------------------
+ipfind.io: remote error: tls: handshake failure for TLS_AES_256_GCM_SHA384
+--------------------------------
+ipfind.io: remote error: tls: handshake failure for TLS_CHACHA20_POLY1305_SHA256
+--------------------------------
+ipfind.io: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+--------------------------------
+ipfind.io: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+--------------------------------
+ipfind.io: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+--------------------------------
+ipfind.io: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+--------------------------------
+ipfind.io: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+lordicon.com: remote error: tls: handshake failure for TLS_AES_128_GCM_SHA256
+--------------------------------
+lordicon.com: remote error: tls: handshake failure for TLS_AES_256_GCM_SHA384
+--------------------------------
+lordicon.com: remote error: tls: handshake failure for TLS_CHACHA20_POLY1305_SHA256
+--------------------------------
+lordicon.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+--------------------------------
+lordicon.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+--------------------------------
+lordicon.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+--------------------------------
+lordicon.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+--------------------------------
+lordicon.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+lua-decompiler.ferib.dev: remote error: tls: handshake failure for TLS_AES_128_GCM_SHA256
+--------------------------------
+lua-decompiler.ferib.dev: remote error: tls: handshake failure for TLS_AES_256_GCM_SHA384
+--------------------------------
+lua-decompiler.ferib.dev: remote error: tls: handshake failure for TLS_CHACHA20_POLY1305_SHA256
+--------------------------------
+lua-decompiler.ferib.dev: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+--------------------------------
+lua-decompiler.ferib.dev: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+--------------------------------
+lua-decompiler.ferib.dev: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+--------------------------------
+lua-decompiler.ferib.dev: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+--------------------------------
+lua-decompiler.ferib.dev: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+lua-decompiler.ferib.dev: remote error: tls: handshake failure for TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+microenv.com: remote error: tls: handshake failure for TLS_AES_128_GCM_SHA256
+--------------------------------
+microenv.com: remote error: tls: handshake failure for TLS_AES_256_GCM_SHA384
+--------------------------------
+microenv.com: remote error: tls: handshake failure for TLS_CHACHA20_POLY1305_SHA256
+--------------------------------
+microenv.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+--------------------------------
+microenv.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+--------------------------------
+microenv.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+--------------------------------
+microenv.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+--------------------------------
+microenv.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+microenv.com: remote error: tls: handshake failure for TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+nationalize.io: remote error: tls: handshake failure for TLS_AES_128_GCM_SHA256
+--------------------------------
+nationalize.io: remote error: tls: handshake failure for TLS_AES_256_GCM_SHA384
+--------------------------------
+nationalize.io: remote error: tls: handshake failure for TLS_CHACHA20_POLY1305_SHA256
+--------------------------------
+nationalize.io: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+--------------------------------
+nationalize.io: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+--------------------------------
+nationalize.io: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+--------------------------------
+nationalize.io: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+--------------------------------
+nationalize.io: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+nationalize.io: remote error: tls: handshake failure for TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+new-kbbi-api.herokuapp.com: EOF for TLS_AES_128_GCM_SHA256
+--------------------------------
+new-kbbi-api.herokuapp.com: EOF for TLS_AES_256_GCM_SHA384
+--------------------------------
+new-kbbi-api.herokuapp.com: EOF for TLS_CHACHA20_POLY1305_SHA256
+--------------------------------
+new-kbbi-api.herokuapp.com: EOF for TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+--------------------------------
+new-kbbi-api.herokuapp.com: EOF for TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+--------------------------------
+new-kbbi-api.herokuapp.com: EOF for TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+--------------------------------
+new-kbbi-api.herokuapp.com: EOF for TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+--------------------------------
+new-kbbi-api.herokuapp.com: EOF for TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+new-kbbi-api.herokuapp.com: EOF for TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+nomics.com: dial tcp: lookup nomics.com on 127.0.0.53:53: server misbehaving for TLS_AES_128_GCM_SHA256
+--------------------------------
+old.coindesk.com: dial tcp: lookup old.coindesk.com on 127.0.0.53:53: no such host
+--------------------------------
+opengraphr.com: dial tcp: lookup opengraphr.com on 127.0.0.53:53: server misbehaving for TLS_AES_128_GCM_SHA256
+--------------------------------
+pagecdn.com: tls: failed to verify certificate: x509: certificate is valid for *.cloudwaysapps.com, cloudwaysapps.com, not pagecdn.com for TLS_AES_128_GCM_SHA256
+--------------------------------
+php-noise.com: remote error: tls: handshake failure for TLS_AES_128_GCM_SHA256
+--------------------------------
+php-noise.com: remote error: tls: handshake failure for TLS_AES_256_GCM_SHA384
+--------------------------------
+php-noise.com: remote error: tls: handshake failure for TLS_CHACHA20_POLY1305_SHA256
+--------------------------------
+php-noise.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+--------------------------------
+php-noise.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+--------------------------------
+php-noise.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+--------------------------------
+php-noise.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+--------------------------------
+php-noise.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+php-noise.com: remote error: tls: handshake failure for TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA
+--------------------------------
+php-noise.com: remote error: tls: handshake failure for TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA
+--------------------------------
+php-noise.com: remote error: tls: handshake failure for TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+pixelencounter.com: tls: failed to verify certificate: x509: certificate is valid for *.azurewebsites.net, *.scm.azurewebsites.net, *.sso.azurewebsites.net, *.northeurope-01.azurewebsites.net, *.scm.northeurope-01.azurewebsites.net, *.sso.northeurope-01.azurewebsites.net, *.northeurope.c.azurewebsites.net, *.scm.northeurope.c.azurewebsites.net, *.sso.northeurope.c.azurewebsites.net, *.azure-mobile.net, *.scm.azure-mobile.net, not pixelencounter.com for TLS_AES_128_GCM_SHA256
+--------------------------------
+pusher.com: remote error: tls: handshake failure for TLS_AES_128_GCM_SHA256
+--------------------------------
+pusher.com: remote error: tls: handshake failure for TLS_AES_256_GCM_SHA384
+--------------------------------
+pusher.com: remote error: tls: handshake failure for TLS_CHACHA20_POLY1305_SHA256
+--------------------------------
+pusher.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+--------------------------------
+pusher.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+--------------------------------
+pusher.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+--------------------------------
+pusher.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+--------------------------------
+pusher.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+pusher.com: remote error: tls: handshake failure for TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+quickchart.io: remote error: tls: handshake failure for TLS_AES_128_GCM_SHA256
+--------------------------------
+quickchart.io: remote error: tls: handshake failure for TLS_AES_256_GCM_SHA384
+--------------------------------
+quickchart.io: remote error: tls: handshake failure for TLS_CHACHA20_POLY1305_SHA256
+--------------------------------
 random.dog: remote error: tls: handshake failure for TLS_AES_128_GCM_SHA256
+--------------------------------
 random.dog: remote error: tls: handshake failure for TLS_AES_256_GCM_SHA384
+--------------------------------
 random.dog: remote error: tls: handshake failure for TLS_CHACHA20_POLY1305_SHA256
+--------------------------------
 random.dog: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+--------------------------------
 random.dog: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+--------------------------------
 random.dog: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+--------------------------------
 random.dog: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+--------------------------------
 random.dog: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
 random.dog: remote error: tls: handshake failure for TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+rates.hirak.site: dial tcp 185.107.56.193:443: i/o timeout for TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+rates.hirak.site: dial tcp 185.107.56.193:443: i/o timeout for TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+--------------------------------
+rates.hirak.site: dial tcp 185.107.56.193:443: i/o timeout for TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+rates.hirak.site: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+--------------------------------
+rates.hirak.site: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+--------------------------------
+rates.hirak.site: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+--------------------------------
+rates.hirak.site: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+--------------------------------
+rates.hirak.site: remote error: tls: handshake failure for TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA
+--------------------------------
+rates.hirak.site: remote error: tls: handshake failure for TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+--------------------------------
+rates.hirak.site: remote error: tls: handshake failure for TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA
+--------------------------------
+rates.hirak.site: remote error: tls: insufficient security level for TLS_AES_128_GCM_SHA256
+--------------------------------
+rates.hirak.site: remote error: tls: insufficient security level for TLS_AES_256_GCM_SHA384
+--------------------------------
+rates.hirak.site: remote error: tls: insufficient security level for TLS_CHACHA20_POLY1305_SHA256
+--------------------------------
+rejax.io: remote error: tls: handshake failure for TLS_AES_128_GCM_SHA256
+--------------------------------
+rejax.io: remote error: tls: handshake failure for TLS_AES_256_GCM_SHA384
+--------------------------------
+rejax.io: remote error: tls: handshake failure for TLS_CHACHA20_POLY1305_SHA256
+--------------------------------
+rejax.io: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+--------------------------------
+rejax.io: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+--------------------------------
+rejax.io: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+--------------------------------
+rejax.io: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+--------------------------------
+rejax.io: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+rejax.io: remote error: tls: handshake failure for TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+sawolabs.com: dial tcp 35.154.12.146:443: connect: connection refused for TLS_AES_128_GCM_SHA256
+--------------------------------
+sheetsu.com: remote error: tls: handshake failure for TLS_AES_128_GCM_SHA256
+--------------------------------
+sheetsu.com: remote error: tls: handshake failure for TLS_AES_256_GCM_SHA384
+--------------------------------
+sheetsu.com: remote error: tls: handshake failure for TLS_CHACHA20_POLY1305_SHA256
+--------------------------------
+sheetsu.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+--------------------------------
+sheetsu.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+--------------------------------
+sheetsu.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+--------------------------------
+sheetsu.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+--------------------------------
+sheetsu.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+sheetsu.com: remote error: tls: handshake failure for TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+support.mywot.com: remote error: tls: handshake failure for TLS_AES_128_GCM_SHA256
+--------------------------------
+support.mywot.com: remote error: tls: handshake failure for TLS_AES_256_GCM_SHA384
+--------------------------------
+support.mywot.com: remote error: tls: handshake failure for TLS_CHACHA20_POLY1305_SHA256
+--------------------------------
+support.mywot.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+--------------------------------
+support.mywot.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+--------------------------------
+support.mywot.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+--------------------------------
+support.mywot.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+--------------------------------
+support.mywot.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+tenders.guru: remote error: tls: handshake failure for TLS_AES_128_GCM_SHA256
+--------------------------------
+tenders.guru: remote error: tls: handshake failure for TLS_AES_128_GCM_SHA256
+--------------------------------
+tenders.guru: remote error: tls: handshake failure for TLS_AES_128_GCM_SHA256
+--------------------------------
+tenders.guru: remote error: tls: handshake failure for TLS_AES_128_GCM_SHA256
+--------------------------------
+tenders.guru: remote error: tls: handshake failure for TLS_AES_128_GCM_SHA256
+--------------------------------
+tenders.guru: remote error: tls: handshake failure for TLS_AES_256_GCM_SHA384
+--------------------------------
+tenders.guru: remote error: tls: handshake failure for TLS_AES_256_GCM_SHA384
+--------------------------------
+tenders.guru: remote error: tls: handshake failure for TLS_AES_256_GCM_SHA384
+--------------------------------
+tenders.guru: remote error: tls: handshake failure for TLS_AES_256_GCM_SHA384
+--------------------------------
+tenders.guru: remote error: tls: handshake failure for TLS_AES_256_GCM_SHA384
+--------------------------------
+tenders.guru: remote error: tls: handshake failure for TLS_CHACHA20_POLY1305_SHA256
+--------------------------------
+tenders.guru: remote error: tls: handshake failure for TLS_CHACHA20_POLY1305_SHA256
+--------------------------------
+tenders.guru: remote error: tls: handshake failure for TLS_CHACHA20_POLY1305_SHA256
+--------------------------------
+tenders.guru: remote error: tls: handshake failure for TLS_CHACHA20_POLY1305_SHA256
+--------------------------------
+tenders.guru: remote error: tls: handshake failure for TLS_CHACHA20_POLY1305_SHA256
+--------------------------------
+tenders.guru: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+--------------------------------
+tenders.guru: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+--------------------------------
+tenders.guru: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+--------------------------------
+tenders.guru: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+--------------------------------
+tenders.guru: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+--------------------------------
+tenders.guru: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+--------------------------------
+tenders.guru: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+--------------------------------
+tenders.guru: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+--------------------------------
+tenders.guru: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+--------------------------------
+tenders.guru: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+--------------------------------
+tenders.guru: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+--------------------------------
+tenders.guru: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+--------------------------------
+tenders.guru: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+--------------------------------
+tenders.guru: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+--------------------------------
+tenders.guru: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+--------------------------------
+tenders.guru: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+--------------------------------
+tenders.guru: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+--------------------------------
+tenders.guru: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+--------------------------------
+tenders.guru: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+--------------------------------
+tenders.guru: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+--------------------------------
+tenders.guru: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+tenders.guru: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+tenders.guru: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+tenders.guru: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+tenders.guru: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
 w.tum.de: dial tcp: lookup w.tum.de on 127.0.0.53:53: no such host
+--------------------------------
+walltime.info: tls: failed to verify certificate: x509: certificate has expired or is not yet valid: current time 2024-03-28T15:20:44+01:00 is after 2023-09-19T06:33:18Z for TLS_AES_128_GCM_SHA256
+--------------------------------
+wizard-world-api.herokuapp.com: EOF for TLS_AES_128_GCM_SHA256
+--------------------------------
+wizard-world-api.herokuapp.com: EOF for TLS_AES_256_GCM_SHA384
+--------------------------------
+wizard-world-api.herokuapp.com: EOF for TLS_CHACHA20_POLY1305_SHA256
+--------------------------------
+wizard-world-api.herokuapp.com: EOF for TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+--------------------------------
+wizard-world-api.herokuapp.com: EOF for TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+--------------------------------
+wizard-world-api.herokuapp.com: EOF for TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+--------------------------------
+wizard-world-api.herokuapp.com: EOF for TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+--------------------------------
+wizard-world-api.herokuapp.com: EOF for TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+wizard-world-api.herokuapp.com: EOF for TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+www.base-api.io: context deadline exceeded for TLS_AES_128_GCM_SHA256
+--------------------------------
+www.base-api.io: remote error: tls: handshake failure for TLS_AES_256_GCM_SHA384
+--------------------------------
+www.base-api.io: remote error: tls: handshake failure for TLS_CHACHA20_POLY1305_SHA256
+--------------------------------
+www.base-api.io: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+--------------------------------
+www.base-api.io: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+--------------------------------
+www.base-api.io: tls: failed to verify certificate: x509: certificate signed by unknown authority for TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA
+--------------------------------
+www.cryptingup.com: dial tcp 3.130.204.160:443: i/o timeout for TLS_AES_128_GCM_SHA256
+--------------------------------
+www.cryptingup.com: dial tcp 3.130.204.160:443: i/o timeout for TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+--------------------------------
+www.cryptingup.com: dial tcp 3.130.204.160:443: i/o timeout for TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+--------------------------------
+www.cryptingup.com: dial tcp 3.130.204.160:443: i/o timeout for TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+www.cryptingup.com: dial tcp 3.130.204.160:443: i/o timeout for TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+--------------------------------
+www.cryptingup.com: dial tcp 3.130.253.23:443: i/o timeout for TLS_AES_256_GCM_SHA384
+--------------------------------
+www.cryptingup.com: dial tcp 3.130.253.23:443: i/o timeout for TLS_CHACHA20_POLY1305_SHA256
+--------------------------------
+www.cryptingup.com: dial tcp 3.130.253.23:443: i/o timeout for TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+--------------------------------
+www.cryptingup.com: dial tcp 3.130.253.23:443: i/o timeout for TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+--------------------------------
+www.cryptingup.com: dial tcp 3.130.253.23:443: i/o timeout for TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA
+--------------------------------
+www.cryptingup.com: dial tcp 3.130.253.23:443: i/o timeout for TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA
+--------------------------------
+www.cryptingup.com: dial tcp 3.130.253.23:443: i/o timeout for TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+--------------------------------
+www.cryptingup.com: dial tcp 3.130.253.23:443: i/o timeout for TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+www.domcop.com: remote error: tls: handshake failure for TLS_AES_128_GCM_SHA256
+--------------------------------
+www.domcop.com: remote error: tls: handshake failure for TLS_AES_256_GCM_SHA384
+--------------------------------
+www.domcop.com: remote error: tls: handshake failure for TLS_CHACHA20_POLY1305_SHA256
+--------------------------------
+www.domcop.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+--------------------------------
+www.domcop.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+--------------------------------
+www.domcop.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+--------------------------------
+www.domcop.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+--------------------------------
+www.domcop.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+www.domcop.com: remote error: tls: handshake failure for TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+www.dropbox.com: remote error: tls: handshake failure for TLS_AES_128_GCM_SHA256
+--------------------------------
+www.dropbox.com: remote error: tls: handshake failure for TLS_AES_256_GCM_SHA384
+--------------------------------
+www.dropbox.com: remote error: tls: handshake failure for TLS_CHACHA20_POLY1305_SHA256
+--------------------------------
+www.dropbox.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+--------------------------------
+www.dropbox.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+--------------------------------
+www.dropbox.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+--------------------------------
+www.dropbox.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+--------------------------------
+www.dropbox.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+www.filestack.com: remote error: tls: handshake failure for TLS_AES_128_GCM_SHA256
+--------------------------------
+www.filestack.com: remote error: tls: handshake failure for TLS_AES_256_GCM_SHA384
+--------------------------------
+www.filestack.com: remote error: tls: handshake failure for TLS_CHACHA20_POLY1305_SHA256
+--------------------------------
+www.filestack.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+--------------------------------
+www.filestack.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+--------------------------------
+www.filestack.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+--------------------------------
+www.filestack.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+--------------------------------
+www.filestack.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+www.okex.com: remote error: tls: handshake failure for TLS_AES_128_GCM_SHA256
+--------------------------------
+www.okex.com: remote error: tls: handshake failure for TLS_AES_256_GCM_SHA384
+--------------------------------
+www.okex.com: remote error: tls: handshake failure for TLS_CHACHA20_POLY1305_SHA256
+--------------------------------
+www.okex.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+--------------------------------
+www.okex.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+--------------------------------
+www.okex.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+--------------------------------
+www.okex.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+--------------------------------
+www.okex.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+www.penguinrandomhouse.biz: remote error: tls: handshake failure for TLS_AES_128_GCM_SHA256
+--------------------------------
+www.penguinrandomhouse.biz: remote error: tls: handshake failure for TLS_AES_256_GCM_SHA384
+--------------------------------
+www.penguinrandomhouse.biz: remote error: tls: handshake failure for TLS_CHACHA20_POLY1305_SHA256
+--------------------------------
+www.penguinrandomhouse.biz: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+--------------------------------
+www.penguinrandomhouse.biz: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+--------------------------------
+www.penguinrandomhouse.biz: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+--------------------------------
+www.penguinrandomhouse.biz: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+--------------------------------
+www.penguinrandomhouse.biz: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+www.penguinrandomhouse.biz: remote error: tls: handshake failure for TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
 www.petfinder.com: EOF for TLS_AES_128_GCM_SHA256
+--------------------------------
 www.petfinder.com: EOF for TLS_AES_256_GCM_SHA384
+--------------------------------
 www.petfinder.com: EOF for TLS_CHACHA20_POLY1305_SHA256
+--------------------------------
 www.petfinder.com: EOF for TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+--------------------------------
 www.petfinder.com: EOF for TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+--------------------------------
 www.petfinder.com: EOF for TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+--------------------------------
 www.petfinder.com: EOF for TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+--------------------------------
 www.petfinder.com: EOF for TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
 www.petfinder.com: EOF for TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+www.postman-echo.com: EOF for TLS_AES_128_GCM_SHA256
+--------------------------------
+www.postman-echo.com: EOF for TLS_AES_256_GCM_SHA384
+--------------------------------
+www.postman-echo.com: EOF for TLS_CHACHA20_POLY1305_SHA256
+--------------------------------
+www.postman-echo.com: EOF for TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+--------------------------------
+www.postman-echo.com: EOF for TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+--------------------------------
+www.postman-echo.com: EOF for TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+--------------------------------
+www.postman-echo.com: EOF for TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+--------------------------------
+www.postman-echo.com: EOF for TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+www.postman-echo.com: EOF for TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA
+--------------------------------
+www.postman-echo.com: EOF for TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA
+--------------------------------
+www.postman-echo.com: EOF for TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+www.scrapingdog.com: remote error: tls: handshake failure for TLS_AES_128_GCM_SHA256
+--------------------------------
+www.scrapingdog.com: remote error: tls: handshake failure for TLS_AES_256_GCM_SHA384
+--------------------------------
+www.scrapingdog.com: remote error: tls: handshake failure for TLS_CHACHA20_POLY1305_SHA256
+--------------------------------
+www.scrapingdog.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+--------------------------------
+www.scrapingdog.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+--------------------------------
+www.scrapingdog.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+--------------------------------
+www.scrapingdog.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+--------------------------------
+www.scrapingdog.com: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+x-colors.herokuapp.com: EOF for TLS_AES_128_GCM_SHA256
+--------------------------------
+x-colors.herokuapp.com: EOF for TLS_AES_256_GCM_SHA384
+--------------------------------
+x-colors.herokuapp.com: EOF for TLS_CHACHA20_POLY1305_SHA256
+--------------------------------
+x-colors.herokuapp.com: EOF for TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+--------------------------------
+x-colors.herokuapp.com: EOF for TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+--------------------------------
+x-colors.herokuapp.com: EOF for TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+--------------------------------
+x-colors.herokuapp.com: EOF for TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+--------------------------------
+x-colors.herokuapp.com: EOF for TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+x-colors.herokuapp.com: EOF for TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+zmok.io: remote error: tls: handshake failure for TLS_AES_128_GCM_SHA256
+--------------------------------
+zmok.io: remote error: tls: handshake failure for TLS_AES_256_GCM_SHA384
+--------------------------------
+zmok.io: remote error: tls: handshake failure for TLS_CHACHA20_POLY1305_SHA256
+--------------------------------
+zmok.io: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+--------------------------------
+zmok.io: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+--------------------------------
+zmok.io: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+--------------------------------
+zmok.io: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+--------------------------------
+zmok.io: remote error: tls: handshake failure for TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+zoo-animal-api.herokuapp.com: EOF for TLS_AES_128_GCM_SHA256
+--------------------------------
+zoo-animal-api.herokuapp.com: EOF for TLS_AES_256_GCM_SHA384
+--------------------------------
+zoo-animal-api.herokuapp.com: EOF for TLS_CHACHA20_POLY1305_SHA256
+--------------------------------
+zoo-animal-api.herokuapp.com: EOF for TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+--------------------------------
+zoo-animal-api.herokuapp.com: EOF for TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+--------------------------------
+zoo-animal-api.herokuapp.com: EOF for TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+--------------------------------
+zoo-animal-api.herokuapp.com: EOF for TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+--------------------------------
+zoo-animal-api.herokuapp.com: EOF for TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
+zoo-animal-api.herokuapp.com: EOF for TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256
+--------------------------------
 ü.tum.de: dial tcp: lookup ü.tum.de: no such host

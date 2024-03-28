@@ -11,11 +11,15 @@ import (
 // Contains the command-line options
 type Options struct {
 	DomainsList string
-	Concurrency int
+	
 	Timeout     time.Duration
     EntriesToScan int
 	CSVFilePath string
     ScanAndSaveDirectory string
+
+    Naive bool 
+    Concurrency int
+    Parallel bool 
 }
 
 // Initializes and parses the flags, returning an Options struct.
@@ -27,6 +31,9 @@ func ParseFlags() *Options {
     
     flag.IntVar(&opts.EntriesToScan, "entries", -1, "Number of entries from the CSV file to scan; -1 for all")
     flag.IntVar(&opts.Concurrency, "concurrency", runtime.GOMAXPROCS(0), "Number of concurrent connections")
+
+    flag.Bool("naive", false, "Use a naive scanner that scans sequentially")
+    flag.Bool("parallel", false, "Use a parallel scanner that activates all cores on the machine")
 
     timeout := flag.Int("timeout", 3000, "Connection timeout in milliseconds")
     flag.Parse()
