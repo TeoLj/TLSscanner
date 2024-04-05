@@ -63,7 +63,6 @@ This example scans two specified domains and saves the results in the default fo
 ```
 
 ### HTML Plot
-![Scan results of 500 entries](/home/teodora/Desktop/ExamplePlot.jpeg)
 
 
 ## Features 
