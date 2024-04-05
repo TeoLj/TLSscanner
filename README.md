@@ -25,7 +25,7 @@ To install the TLS scanner, follow these steps:
     ```shell
     go mod 
     ```
-This will download the necessary Go modules as specified in `go.mod` and update `go.sum` accordingly.
+This will download the necessary Go modules as specified in `go.mod` and update `go.sum` accordingly. The Go version is **go1.22.0**.
 
 ## Usage
 The scanner's repository includes *api_urls.csv* which contains 1427 of the most popular public api urls. 
@@ -63,6 +63,7 @@ This example scans two specified domains and saves the results in the default fo
 ```
 
 ### HTML Plot
+Scan results of 500 entries from *api_urls.csv*
 ![ExamplePlot](https://github.com/TeoLj/TLSscanner_FP/assets/16741630/5797aadb-c4d0-4d8c-8613-fecef2c53482)
 
 
