@@ -8,11 +8,10 @@ import (
 	"os"
 	"strings"
 	"time"
-
 )
 
 func main() {
-	
+
 	start := time.Now()
 	fmt.Println("\033[1;35mStart:", start.Format("2006-01-02 15:04:05"), "\033[0m")
 
@@ -33,9 +32,9 @@ func main() {
 		domains = strings.Split(opts.DomainsList, ",")
 	}
 
-	scanner := NewScanner(domains, opts)
-	scanner.StartScanner()
-	scanner.AnalyzeResults()
+	scanner := newScanner(domains, opts)
+	scanner.startScanner()
+	scanner.analyzeResults()
 
 	end := time.Now()
 
@@ -46,14 +45,15 @@ func main() {
 	minutes := totalSeconds / 60
 	seconds := totalSeconds % 60
 
-	
 	// Print end time and formatted duration
 	fmt.Printf("\033[1;35mEnd: %s | Duration: %02d:%02d\033[0m\n",
-	end.Format("2006-01-02 15:04:05"), minutes, seconds)
-
+		end.Format("2006-01-02 15:04:05"), minutes, seconds)
 
 }
 
+// Reads a CSV file from the specified file path and extracts domains from the file.
+// It returns a slice of strings containing the extracted domains.
+// The function stops reading the file when the number of entries to scan is reached.
 func readCSV(filePath string, entriesToScan int) ([]string, error) {
 
 	file, err := os.Open(filePath)
@@ -70,14 +70,14 @@ func readCSV(filePath string, entriesToScan int) ([]string, error) {
 		}
 		line := scanner.Text()
 		record := strings.Split(line, ",")
-	
+
 		for _, field := range record {
-			domain,err := extractDomain(field)
+			domain, err := extractDomain(field)
 			if err != nil {
 				fmt.Println("Error", err, " while extracting domain:", domain)
 			}
 
-			if  domain != "" {
+			if domain != "" {
 				domains = append(domains, domain)
 			}
 		}
@@ -90,6 +90,11 @@ func readCSV(filePath string, entriesToScan int) ([]string, error) {
 	return domains, nil
 }
 
+
+// Extracts the domain from a given field.
+// It supports extracting domains from URLs with "http://" or "https://" prefixes,
+// as well as domains with "www." prefix or ".com" suffix.
+// If the field does not match any of the supported formats, it returns an error.
 func extractDomain(field string) (string, error) {
 
 	field = strings.TrimSpace(field)

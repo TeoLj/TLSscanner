@@ -25,7 +25,7 @@ type Analyzer struct {
 	ErrorCounts          ErrorCounter
 }
 
-func NewAnalyzer(scanner Scanner) *Analyzer {
+func newAnalyzer(scanner Scanner) *Analyzer {
 	return &Analyzer{
 		ScannedCiphers:       scanner.ScannedCiphers,
 		ScanAndSaveDirectory: scanner.opts.ScanAndSaveDirectory,
@@ -37,9 +37,14 @@ func NewAnalyzer(scanner Scanner) *Analyzer {
 	}
 }
 
-func (a *Analyzer) Run() {
+// Executes the TLS scanning and analysis process.
+// It counts the ciphers used in the TLS connections and saves the results to a CSV file.
+// If a ScanAndSaveDirectory is provided, it changes the current working directory to that directory.
+// If a CSVFilePath is provided, it saves the cipher counts to a CSV file with a filename based on the CSVFilePath,
+// plots the cipher counts from the CSV file, and combines the charts into an HTML file.
+func (a *Analyzer) run() {
 
-	a.CountCiphers()
+	a.countCiphers()
 	fileName := strings.TrimSuffix(strings.TrimPrefix(a.CSVFilePath, "./"), ".csv")
 	outputDir := "./output"
 
@@ -49,31 +54,33 @@ func (a *Analyzer) Run() {
 	}
 
 	if a.DomainsList != "" {
-		a.SaveCiphersCount(outputDir + "/cipherCounts.csv")
-		a.PlotCipherCountsFromCSV(outputDir + "/cipherCounts.csv")
-		a.CombineCharts(outputDir+"/cipherCounts.csv", outputDir+"/plot.html", a.ErrorCounts)
+		a.saveCiphersCount(outputDir + "/cipherCounts.csv")
+		a.plotCipherCountsFromCSV(outputDir + "/cipherCounts.csv")
+		a.combineCharts(outputDir+"/cipherCounts.csv", outputDir+"/plot.html", a.ErrorCounts)
 	}
 
 	if a.CSVFilePath != "" {
-		a.SaveCiphersCount(outputDir + "/" + fileName + "_cipherCounts.csv")
-		a.PlotCipherCountsFromCSV(outputDir + "/" + fileName + "_cipherCounts.csv")
-		a.CombineCharts(outputDir+"/"+fileName+"_cipherCounts.csv", outputDir+"/"+fileName+"_plot.html", a.ErrorCounts)
+		a.saveCiphersCount(outputDir + "/" + fileName + "_cipherCounts.csv")
+		a.plotCipherCountsFromCSV(outputDir + "/" + fileName + "_cipherCounts.csv")
+		a.combineCharts(outputDir+"/"+fileName+"_cipherCounts.csv", outputDir+"/"+fileName+"_plot.html", a.ErrorCounts)
 	}
 
 }
 
-func (a *Analyzer) CountCiphers() map[string]int {
+// Iterates over the scanned ciphers and counts the occurrence of each cipher.
+// The function splits the string into domain and ciphers parts, and then counts each cipher occurrence.
+// The result is a map[string]int where the keys are the cipher names and the values are the counts.
+func (a *Analyzer) countCiphers() map[string]int {
 
 	// Iterate over the scanned ciphers, assuming each entry is a domain followed by a list of ciphers
 	for _, scanned := range a.ScannedCiphers {
-		// Assuming each entry in ScannedCiphers is a string like "domain: cipher1,cipher2,cipher3" (specified in ScanDomain)
 		// Split the string into domain and ciphers part
 		parts := strings.Split(scanned, ": ")
 		if len(parts) != 2 {
 			fmt.Println("Unexpected format in ScannedCiphers, skipping:", scanned)
 			continue
 		}
-		// Now parts[1] contains "cipher1;cipher2;cipher3", split these into individual ciphers
+
 		ciphers := strings.Split(parts[1], ";")
 
 		// Count each cipher occurrence
@@ -91,7 +98,11 @@ func (a *Analyzer) CountCiphers() map[string]int {
 	return a.cipherCount
 }
 
-func (a *Analyzer) SaveCiphersCount(filename string) {
+// Saves the cipher count to a CSV file.
+// It takes a filename as a parameter and writes the cipher count data to the file.
+// The function acquires a lock to ensure thread safety while writing to the file.
+// It overwrites the old content of the file if it exists.
+func (a *Analyzer) saveCiphersCount(filename string) {
 
 	a.Mutex.Lock()
 	defer a.Mutex.Unlock()
@@ -116,7 +127,9 @@ func (a *Analyzer) SaveCiphersCount(filename string) {
 	}
 }
 
-func (a *Analyzer) PlotCipherCountsFromCSV(filenameIn string) *charts.Bar {
+// Reads a CSV file containing cipher suite occurrences and plots a bar chart.
+// It takes the filenameIn string parameter as the path to the input CSV file.
+func (a *Analyzer) plotCipherCountsFromCSV(filenameIn string) *charts.Bar {
 	// Open the CSV file
 	file, err := os.Open(filenameIn)
 
@@ -236,7 +249,6 @@ func (a *Analyzer) PlotCipherCountsFromCSV(filenameIn string) *charts.Bar {
 			opts.MarkLineNameTypeItem{Name: "Maximum", Type: "max"},
 			opts.MarkLineNameTypeItem{Name: "Minimum", Type: "min"},
 		))
-		
 
 	return bar
 }
@@ -251,7 +263,10 @@ func (a *Analyzer) colorFunc(supportedVersions []uint16) string {
 	return "orange"
 }
 
-func (a *Analyzer) PlotErrorCountsToPieChart(errorCounts ErrorCounter) *charts.Pie {
+// Generates a pie chart representing the error counts.
+// The pie chart displays the count and percentage of different error types.
+// It also includes toolbox options for saving the chart as an image and enabling data view.
+func (a *Analyzer) plotErrorCountsToPieChart(errorCounts ErrorCounter) *charts.Pie {
 
 	pie := charts.NewPie()
 
@@ -326,11 +341,15 @@ func (a *Analyzer) PlotErrorCountsToPieChart(errorCounts ErrorCounter) *charts.P
 	return pie
 }
 
-func (a *Analyzer) CombineCharts(filenameIn, filenameOut string, errorCounts ErrorCounter) {
+
+// Combines the cipher counts from a CSV file and the error counts
+// into a single page with bar and pie charts. The resulting page is then rendered
+// to the specified output file.
+func (a *Analyzer) combineCharts(filenameIn, filenameOut string, errorCounts ErrorCounter) {
 	page := components.NewPage()
 
-	bar := a.PlotCipherCountsFromCSV(filenameIn)
-	pie := a.PlotErrorCountsToPieChart(errorCounts) // Now returns *charts.Pie
+	bar := a.plotCipherCountsFromCSV(filenameIn)
+	pie := a.plotErrorCountsToPieChart(errorCounts) // Now returns *charts.Pie
 
 	page.AddCharts(bar, pie)
 
