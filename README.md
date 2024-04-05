@@ -63,6 +63,7 @@ This example scans two specified domains and saves the results in the default fo
 ```
 
 ### HTML Plot
+![ExamplePlot](https://github.com/TeoLj/TLSscanner_FP/assets/16741630/5797aadb-c4d0-4d8c-8613-fecef2c53482)
 
 
 ## Features 
