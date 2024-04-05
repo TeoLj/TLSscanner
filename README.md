@@ -62,7 +62,8 @@ This example scans two specified domains and saves the results in the default fo
  go run . -domains=www.tum.de,www.google.com
 ```
 
-- Plot:
+### HTML Plot
+![Scan results of 500 entries](\home\teodora\Desktop\ExamplePlot.jpeg)
 
 
 ## Features 
