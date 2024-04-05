@@ -69,6 +69,6 @@ Scan results of 500 entries from *api_urls.csv*
 
 ## Features 
 - Support for scanning TLS 1.2 and TLS 1.3 cipher suites.
-- Options for concurrent scanning to improve speed.
+- Option for concurrent scanning to improve speed.
 - Ability to handle and categorize various connection errors.
 - Generation of an HTML report summarizing the scan results.
