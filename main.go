@@ -90,7 +90,6 @@ func readCSV(filePath string, entriesToScan int) ([]string, error) {
 	return domains, nil
 }
 
-
 // Extracts the domain from a given field.
 // It supports extracting domains from URLs with "http://" or "https://" prefixes,
 // as well as domains with "www." prefix or ".com" suffix.

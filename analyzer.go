@@ -28,7 +28,7 @@ type Analyzer struct {
 func newAnalyzer(scanner Scanner) *Analyzer {
 	return &Analyzer{
 		ScannedCiphers:       scanner.ScannedCiphers,
-		ScanAndSaveDirectory: scanner.opts.ScanAndSaveDirectory,
+		ScanAndSaveDirectory: scanner.opts.SaveDir,
 		CSVFilePath:          scanner.opts.CSVFilePath,
 		DomainsList:          scanner.opts.DomainsList,
 		cipherCount:          make(map[string]int),
@@ -340,7 +340,6 @@ func (a *Analyzer) plotErrorCountsToPieChart(errorCounts ErrorCounter) *charts.P
 	)
 	return pie
 }
-
 
 // Combines the cipher counts from a CSV file and the error counts
 // into a single page with bar and pie charts. The resulting page is then rendered

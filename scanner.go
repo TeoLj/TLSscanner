@@ -47,9 +47,9 @@ func newScanner(domains []string, opts *Options) *Scanner {
 func (s *Scanner) startScanner() {
 
 	/* Create an output folder to save the results */
-	if s.opts.ScanAndSaveDirectory != "" {
+	if s.opts.SaveDir != "" {
 		// Create a folder called output to save the results if it doesn't exist
-		os.Chdir(s.opts.ScanAndSaveDirectory)
+		os.Chdir(s.opts.SaveDir)
 	} else {
 		// Create a folder called output to save the results if it doesn't exist
 		if _, err := os.Stat("output"); err == nil {
@@ -61,8 +61,8 @@ func (s *Scanner) startScanner() {
 	/* Create a file to save the error logs */
 	var logFileName string
 
-	if s.opts.ScanAndSaveDirectory != "" {
-		logFileName = s.opts.ScanAndSaveDirectory + "/errorLog.txt"
+	if s.opts.SaveDir != "" {
+		logFileName = s.opts.SaveDir + "/errorLog.txt"
 	} else {
 		logFileName = "./output/errorLog.txt"
 	}
@@ -105,15 +105,15 @@ func (s *Scanner) startScanner() {
 	fileName := strings.TrimSuffix(strings.TrimPrefix(s.opts.CSVFilePath, "./"), ".csv")
 
 	if s.opts.CSVFilePath != "" { // Result file takes the name of the input file
-		if s.opts.ScanAndSaveDirectory != "" {
-			s.saveResultsToCSV(s.opts.ScanAndSaveDirectory + "/" + fileName + "_cipherScan.csv")
+		if s.opts.SaveDir != "" {
+			s.saveResultsToCSV(s.opts.SaveDir + "/" + fileName + "_cipherScan.csv")
 		} else {
 			s.saveResultsToCSV("./output/" + fileName + "_cipherScan.csv")
 		}
 	}
 	if s.opts.DomainsList != "" {
-		if s.opts.ScanAndSaveDirectory != "" {
-			s.saveResultsToCSV(s.opts.ScanAndSaveDirectory + "/cipherScan.csv")
+		if s.opts.SaveDir != "" {
+			s.saveResultsToCSV(s.opts.SaveDir + "/cipherScan.csv")
 		} else {
 			s.saveResultsToCSV("./output/cipherScan.csv")
 		}
