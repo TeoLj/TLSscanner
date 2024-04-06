@@ -69,19 +69,24 @@ func readCSV(filePath string, entriesToScan int) ([]string, error) {
 			break
 		}
 		line := scanner.Text()
-		record := strings.Split(line, ",")
-
-		for _, field := range record {
-			domain, err := extractDomain(field)
-			if err != nil {
-				fmt.Println("Error", err, " while extracting domain:", domain)
-			}
-
-			if domain != "" {
-				domains = append(domains, domain)
-			}
-		}
-	}
+        record := strings.Split(line, ",")
+        
+        // Assuming the format is always number,domain and the domain is the second element.
+        if len(record) >= 2 { // Check if the line has at least two elements
+            domain := record[1] // Directly access the domain part
+            
+            // Assuming extractDomain function validates or processes the domain further.
+            validatedDomain, err := extractDomain(domain)
+            if err != nil {
+                fmt.Println("Error", err, " while extracting domain:", validatedDomain)
+                continue // Skip this entry on error, but continue with the next
+            }
+            
+            if validatedDomain != "" {
+                domains = append(domains, validatedDomain)
+            }
+        }
+    }
 	if err := scanner.Err(); err != nil {
 		fmt.Println("Error reading CSV file:", err)
 		return nil, err

@@ -28,42 +28,42 @@ To install the TLS scanner, follow these steps:
 This will download the necessary Go modules as specified in `go.mod` and update `go.sum` accordingly. The Go version is **go1.22.0**.
 
 ## Usage
-The scanner's repository includes *api_urls.csv* which contains 1427 of the most popular public api urls. 
+The scanner's repository includes *top-1m.csv* which contains 1427 of the most popular public api urls. 
 To use the TLS scanner, navigate to the project directory and run:
 
 ```shell
 go run . [options]
 ```
 Options include:
-- **-domains** to specify domains for scanning
-- **-csv to** specify a path to a csv-file containing a list of domains (one per line) to scan.
-- **-entries** to set the number of entries to scan from the CSV file (default set to -1 to scan all entries)
-- **-timeout** to set the timeout for each scan attempt of a domain (default 3s)
-- **-naive** to scan sequentially without concurrency feature
-- **-concurrency** to set the number of concurrent scans (default set to maximum number of logical CPUs )
-- **-saveDir** to specify the directory to save the scan results
+- **-domains (STRING)** to specify domains for scanning
+- **-csv (STRING)** to specify a path to a csv-file containing a list of domains (one per line) to scan.
+- **-entries (NT)** to set the number of entries to scan from the CSV file (default set to -1 to scan all entries)
+- **-timeout (INT)** to set the timeout for each scan attempt of a domain (default 3s)
+- **-naive (BOOL)** to scan sequentially without concurrency feature
+- **-concurrency (INT)** to set the number of concurrent scans (default set to maximum number of logical CPUs ). Default mode.
+- **-saveDir (STRING)** to specify the directory to save the scan results
  
 
 ## Example
-This example scans 30 entries of the file *api_urls.csv*. The scan results are saved in a default *output* folder within the same directory as the scanner.
+This example scans 30 entries of the file *top-1m.csv*. The scan results are saved in a default *output* folder within the same directory as the scanner.
 
 ```shell
-go run . -csv= api_urls.csv -entries=30 
+go run . -csv= top-1m.csv -entries= 30 
 ```
 
 This example does the same as above but saves the output files in the specified *saveDir* directory.
 
 ``` shell
-go run . -csv=api_urls.csv -entries=30 -saveDir="/home/teodora/Desktop"
+go run . -csv= top-1m.csv -entries= 30 -saveDir="/home/teodora/Desktop"
 ```
 
 This example scans two specified domains and saves the results in the default folder called *output* within the scanner's directory.
 ``` shell
- go run . -domains=www.tum.de,www.google.com
+ go run . -domains= www.tum.de,www.google.com
 ```
 
 ### HTML Plot
-Scan results of 500 entries from *api_urls.csv*
+Scan results of 500 entries from *top-1m.csv*
 ![ExamplePlot](https://github.com/TeoLj/TLSscanner_FP/assets/16741630/5797aadb-c4d0-4d8c-8613-fecef2c53482)
 
 
