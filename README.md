@@ -37,9 +37,9 @@ go run . [options]
 Options include:
 - **-domains (STRING)** to specify domains for scanning
 - **-csv (STRING)** to specify a path to a csv-file containing a list of domains (one per line) to scan.
-- **-entries (NT)** to set the number of entries to scan from the CSV file (default set to -1 to scan all entries)
+- **-entries (INT)** to set the number of entries to scan from the CSV file (default set to -1 to scan all entries)
 - **-timeout (INT)** to set the timeout for each scan attempt of a domain (default 3s)
-- **-naive (BOOL)** to scan sequentially without concurrency feature
+- **-naive (BOOL)** to scan sequentially without concurrency feature (default false)
 - **-concurrency (INT)** to set the number of concurrent scans (default set to maximum number of logical CPUs ). Default mode.
 - **-saveDir (STRING)** to specify the directory to save the scan results
  
@@ -48,18 +48,18 @@ Options include:
 This example scans 30 entries of the file *top-1m.csv*. The scan results are saved in a default *output* folder within the same directory as the scanner.
 
 ```shell
-go run . -csv= top-1m.csv -entries= 30 
+go run . -csv= top-1m.csv -entries=30 
 ```
 
-This example does the same as above but saves the output files in the specified *saveDir* directory.
+This example does the same as above but saves the output files in the specified *saveDir* directory. The naive scanner runs.
 
 ``` shell
-go run . -csv= top-1m.csv -entries= 30 -saveDir="/home/teodora/Desktop"
+go run . -csv= top-1m.csv -entries=30 -naive -saveDir="/home/teodora/Desktop"
 ```
 
-This example scans two specified domains and saves the results in the default folder called *output* within the scanner's directory.
+This example scans two specified domains and saves the results in the default folder called *output* within the scanner's directory. Do not use blank spaces to separate the domains! Just use comma separation.
 ``` shell
- go run . -domains= www.tum.de,www.google.com
+ go run . -domains=www.tum.de,www.google.com
 ```
 
 ### HTML Plot
