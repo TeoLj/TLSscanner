@@ -189,7 +189,7 @@ func (s *Scanner) scanDomain(domain string, file *os.File) {
 				s.ErrorCounts.OtherErrors["timeout related"]++
 				s.logError(domain, errMsg, cipher.Name, file)
 				s.Mutex.Unlock()
-				continue
+				return
 
 			// Not specific to the cipher suite but rather indicates a broader connectivity issue
 			case strings.Contains(err.Error(), "connection refused"):
