@@ -4,7 +4,7 @@ import (
 	"bufio"
 	"flag"
 	"fmt"
-	"net/url"
+	//"net/url"
 	"os"
 	"strings"
 	"time"
@@ -25,11 +25,20 @@ func main() {
 		domains, err = readCSV(opts.CSVFilePath, opts.EntriesToScan)
 
 		if err != nil {
-			fmt.Println("Error reading CSV file:", err)
+			//fmt.Println("Error reading CSV file:", err)
 			return
 		}
 	} else if opts.DomainsList != "" {
-		domains = strings.Split(opts.DomainsList, ",")
+		domainsPrepared := strings.Split(opts.DomainsList, ",")
+		domains = make([]string, 0, len(domainsPrepared)) // Initialize with capacity, not fixed length
+
+		for _, domain := range domainsPrepared {
+ 		   domain = strings.TrimSpace(domain) // Trim whitespace
+ 		   extractedDomain := extractDomain(domain) // Extract the domain
+   		   if extractedDomain != "" { // Ensure the domain is not empty
+      		  domains = append(domains, extractedDomain) // Add to the list
+  			}	
+		}
 	}
 
 	scanner := newScanner(domains, opts)
@@ -76,12 +85,8 @@ func readCSV(filePath string, entriesToScan int) ([]string, error) {
             domain := record[1] // Directly access the domain part
             
             // Assuming extractDomain function validates or processes the domain further.
-            validatedDomain, err := extractDomain(domain)
-            if err != nil {
-                fmt.Println("Error", err, " while extracting domain:", validatedDomain)
-                continue // Skip this entry on error, but continue with the next
-            }
-            
+            validatedDomain:= extractDomain(domain)
+           
             if validatedDomain != "" {
                 domains = append(domains, validatedDomain)
             }
@@ -96,21 +101,14 @@ func readCSV(filePath string, entriesToScan int) ([]string, error) {
 }
 
 // Extracts the domain from a given field.
-// It supports extracting domains from URLs with "http://" or "https://" prefixes,
-// as well as domains with "www." prefix or ".com" suffix.
-// If the field does not match any of the supported formats, it returns an error.
-func extractDomain(field string) (string, error) {
+// The dial function is used to establish a lower-level TCP connection, 
+// and it requires just the domain name (or IP address) and the port number, without the scheme (http or https).
+func extractDomain(field string) (string) {
 
 	field = strings.TrimSpace(field)
-	if strings.HasPrefix(field, "http://") || strings.HasPrefix(field, "https://") {
-		u, err := url.Parse(field)
-		if err != nil {
-			return "", fmt.Errorf("invalid URL format")
-		}
+	domain := strings.TrimPrefix(field, "https://")
+	domain = strings.TrimPrefix(domain, "http://")
+	domain = strings.TrimPrefix(domain, "www.")
 
-		return u.Hostname(), nil
-	} else if strings.HasPrefix(field, "www.") || strings.HasSuffix(field, ".com") {
-		return field, nil
-	}
-	return field, fmt.Errorf("invalid domain format")
+	return domain
 }

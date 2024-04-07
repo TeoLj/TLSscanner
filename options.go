@@ -30,7 +30,8 @@ func ParseFlags() *Options {
 	flag.IntVar(&opts.EntriesToScan, "entries", -1, "Number of entries from the CSV file to scan; -1 for all")
 	flag.IntVar(&opts.Concurrency, "concurrency", runtime.GOMAXPROCS(0), "Number of concurrent connections")
 
-	flag.Bool("naive", false, "Use a naive scanner that scans sequentially")
+
+	flag.BoolVar(&opts.Naive,"naive",false, "Use a naive scanner that scans sequentially")
 
 	timeout := flag.Int("timeout", 3000, "Connection timeout in milliseconds")
 	flag.Parse()

@@ -28,7 +28,7 @@ To install the TLS scanner, follow these steps:
 This will download the necessary Go modules as specified in `go.mod` and update `go.sum` accordingly. The Go version is **go1.22.0**.
 
 ## Usage
-The scanner's repository includes *top-1m.csv* which contains 1427 of the most popular public api urls. 
+The scanner's repository includes *top-1m.csv* which contains 1 million of the most popular public api urls. 
 To use the TLS scanner, navigate to the project directory and run:
 
 ```shell

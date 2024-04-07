@@ -93,12 +93,17 @@ func (s *Scanner) startScanner() {
 		}
 
 		wg.Wait() // wait for all goroutines to complete
+		close(sem) // close the channel
+		fmt.Println("\033[38;5;208mUsing concurrent scanner\033[0m")
+		fmt.Println("\033[38;5;208mScanning complete\033[0m")
 	} else {
-
+		
 		/* Naive scanner scans sequentially */
 		for _, domain := range s.Domains {
 			s.scanDomain(domain, file)
 		}
+		fmt.Println("\033[38;5;208mUsing naive scanner\033[0m")
+		fmt.Println("\033[38;5;208mScanning complete\033[0m")
 	}
 
 	/* Save the cipher scan results to a CSV file*/
