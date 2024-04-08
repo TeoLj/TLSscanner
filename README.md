@@ -6,7 +6,7 @@ The scan results are saved in a default output folder which consists of:
 - a csv file containing the ciphers and how often they occured
 - a text file containing the reported errors per domain
 - a html report containing an error plot and a plot of cipher occurences
-- 
+  
 The HTML page is saved in the output folder and by double-clicking it, the plots are visible in a browser's tab. Another option to open the HTML page is through the following command in the terminal:
 ```shell
     open output/top-1m_plot.html
