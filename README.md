@@ -60,7 +60,7 @@ go run . -csv=top-1m.csv -entries=30
 This example does the same as above but saves the output files in the specified *saveDir* directory. The naive scanner runs.
 
 ``` shell
-go run . -csv=top-1m.csv -entries=30 -naive -saveDir="/home/teodora/Desktop"
+go run . -csv=top-1m.csv -entries=30 -naive -saveDir="/home/user_name/Desktop"
 ```
 
 This example scans two specified domains and saves the results in the default folder called *output* within the scanner's directory. Do not use blank spaces to separate the domains! Just use comma separation.
