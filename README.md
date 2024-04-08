@@ -1,29 +1,34 @@
 # TLSscanner
 This is a TLS scanner tool that allows you to scan for TLS 1.2 and TLS 1.3 supported ciphers of domains. It provides various options that can be used through the terminal to customize the scanning process, including a HTML report containing plots of the results.
 
-The scan results consist of:
+The scan results are saved in a default output folder which consists of:
 - a csv file containing the domain names and their supported ciphers
 - a csv file containing the ciphers and how often they occured
 - a text file containing the reported errors per domain
 - a html report containing an error plot and a plot of cipher occurences
+- 
+The HTML page is saved in the output folder and by double-clicking it, the plots are visible in a browser's tab. Another option to open the HTML page is through the following command in the terminal:
+```shell
+    open output/top-1m_plot.html
+```
 
 ## Installation
 To install the TLS scanner, follow these steps:
 
 1. Clone the repository:
     ```shell
-    git clone https://github.com/your-username/TLSscanner.git
+    git clone https://github.com/your-username/TLSscanner_FP.git
     ```
 
 2.  Navigate to the TLSscanner directory:
     ```shell
-    cd TLSscanner
+    cd TLSscanner_FP
     ```
 
 
 3. Install the required dependencies by running the following command:
     ```shell
-    go mod 
+    go mod tidy
     ```
 This will download the necessary Go modules as specified in `go.mod` and update `go.sum` accordingly. The Go version is **go1.22.0**.
 
@@ -35,14 +40,15 @@ To use the TLS scanner, navigate to the project directory and run:
 go run . [options]
 ```
 Options include:
-- **-domains (STRING)** to specify domains for scanning
+- **-domains (STRING)** to specify domains for scanning.
 - **-csv (STRING)** to specify a path to a csv-file containing a list of domains (one per line) to scan. The format of the csv file should be *number,domain name*.
-- **-entries (INT)** to set the number of entries to scan from the CSV file (default set to -1 to scan all entries)
-- **-timeout (INT)** to set the timeout for each scan attempt of a domain (default 3s)
-- **-naive (BOOL)** to scan sequentially without concurrency feature (default false)
+- **-entries (INT)** to set the number of entries to scan from the CSV file (default set to -1 to scan all entries).
+- **-timeout (INT)** to set the timeout for each scan attempt of a domain (default 3s).
+- **-naive (BOOL)** to scan sequentially without concurrency feature (default false).
 - **-concurrency (INT)** to set the number of concurrent scans (default set to maximum number of logical CPUs). Default mode.
-- **-saveDir (STRING)** to specify the directory to save the scan results
- 
+- **-saveDir (STRING)** to specify the directory to save the scan results.
+
+Only **-domains** OR **-csv** can be used, not both. 
 
 ## Example
 This example scans 30 entries of the file *top-1m.csv*. The scan results are saved in a default *output* folder within the same directory as the scanner.
