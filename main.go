@@ -4,7 +4,6 @@ import (
 	"bufio"
 	"flag"
 	"fmt"
-	//"net/url"
 	"os"
 	"strings"
 	"time"
