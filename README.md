@@ -51,6 +51,7 @@ Options include:
 Only **-domains** OR **-csv** can be used, not both. 
 
 ## Examples
+The input csv file corresponds to the top 1 million APIs from: https://github.com/PeterDaveHello/top-1m-domains. 
 1) This example scans 30 entries of the file *top-1m.csv*. The scan results are saved in a default *output* folder within the same directory as the scanner.
 
 ```shell
